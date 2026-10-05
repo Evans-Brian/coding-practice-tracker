@@ -70,3 +70,12 @@ Alien Dictionary|alien-dictionary|Topological sorting`
 ];
 let order=0;
 export const questions=groups.flatMap((group,bucket)=>group.split('\n').map(line=>{const [name,slug,theme]=line.split('|');return {name,slug,theme,bucket,order:++order};}));
+
+// Official default Grind 75 (8 weeks, 8 hours), checked October 5, 2026.
+// Only prune the existing catalog; Simplify Path is a custom addition.
+const grindOverlap=new Set(`valid-anagram valid-parentheses contains-duplicate two-sum longest-substring-without-repeating-characters minimum-window-substring best-time-to-buy-and-sell-stock maximum-subarray product-of-array-except-self 3sum container-with-most-water merge-intervals insert-interval task-scheduler search-in-rotated-sorted-array reverse-linked-list linked-list-cycle invert-binary-tree maximum-depth-of-binary-tree binary-tree-level-order-traversal validate-binary-search-tree lowest-common-ancestor-of-a-binary-search-tree kth-smallest-element-in-a-bst number-of-islands clone-graph climbing-stairs coin-change unique-paths word-break combination-sum implement-trie-prefix-tree construct-binary-tree-from-preorder-and-inorder-traversal serialize-and-deserialize-binary-tree merge-k-sorted-lists find-median-from-data-stream`.split(' '));
+export const isCurrentQuestion=(slug:string)=>slug==='simplify-path'||grindOverlap.has(slug);
+const easy=new Set(`valid-anagram valid-parentheses contains-duplicate two-sum best-time-to-buy-and-sell-stock meeting-rooms reverse-linked-list linked-list-cycle invert-binary-tree maximum-depth-of-binary-tree same-tree subtree-of-another-tree climbing-stairs`.split(' '));
+const hard=new Set(`minimum-window-substring word-search-ii serialize-and-deserialize-binary-tree binary-tree-maximum-path-sum merge-k-sorted-lists find-median-from-data-stream alien-dictionary`.split(' '));
+export const difficulty=(slug:string)=>easy.has(slug)?'Easy':hard.has(slug)?'Hard':'Medium';
+
