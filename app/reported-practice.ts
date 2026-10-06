@@ -6,11 +6,11 @@ export type QuestionDefinition = {
 };
 // Report dates fall within Oct 5, 2025–Oct 5, 2026. Edited accounts are
 // supplementary evidence, not independent confirmations or screen-only reports.
-const november:ReportSource={label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1153027-1-1.html',date:'November 5, 2025',edited:false};
-const january:ReportSource={label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1161825-1-1.html',date:'January 19, 2026',edited:false};
-const march:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-four-oa-problems-not-enough-time',date:'March 2026 interview',edited:true};
-const julyFour:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-recalling-all-5-online-assessment-questions',date:'July 2026 interview',edited:true};
-const julySix:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-six-oa-questions-buried-in-walls-of-text',date:'July 2026 interview',edited:true};
+const november:ReportSource={label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1153027-1-1.html',date:'Post: Nov 5, 2025',edited:false};
+const january:ReportSource={label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1161825-1-1.html',date:'Post: Jan 19, 2026',edited:false};
+const march:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-four-oa-problems-not-enough-time',date:'Interview month: Mar 2026',edited:true};
+const julyFour:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-recalling-all-5-online-assessment-questions',date:'Interview month: Jul 2026',edited:true};
+const julySix:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-six-oa-questions-buried-in-walls-of-text',date:'Interview month: Jul 2026',edited:true};
 
 export const reportedPractice:QuestionDefinition[]=[
  {name:'Decode an anagram sentence',slug:'upstart-anagram-sentence',theme:'Character counts · dictionary lookup',difficulty:'Medium',grind75:false,kind:'custom',matchLabel:'Reported task',source:november,

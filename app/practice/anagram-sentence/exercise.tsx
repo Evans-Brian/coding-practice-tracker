@@ -1,5 +1,6 @@
 'use client';
 import {useEffect, useRef, useState} from 'react';
+import AskedDate from '../../asked-date';
 
 const problemId='upstart-anagram-sentence';
 const draftKey='upstart:anagram-sentence:python:v1';
@@ -81,6 +82,7 @@ export default function AnagramExercise(){
  return <main className="exercise-page">
   <a className="exercise-back" href="/#bucket-1">Back to your tracker</a>
   <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>Decode an anagram sentence</h1><p className="intro">Python · Medium, estimated · 24 tests</p></div><a className="exercise-download" href={assets+'anagram-sentence-practice.zip'} download>Download practice pack</a></header>
+  <AskedDate question={{slug:problemId,source:{label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1153027-1-1.html',date:'Post: Nov 5, 2025',edited:false}}}/>
   <div className="exercise-workspace">
    <section className="exercise-prompt" aria-labelledby="problem-heading"><h2 id="problem-heading">Your task</h2>
     <p>Given a vocabulary and a sentence of scrambled words, restore each word and return the decoded sentence in the same order.</p>
