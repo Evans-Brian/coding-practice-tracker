@@ -1,0 +1,452 @@
+[
+  {
+    "name": "Two Sum",
+    "slug": "two-sum",
+    "difficulty": "Easy",
+    "theme": "Array"
+  },
+  {
+    "name": "Valid Parentheses",
+    "slug": "valid-parentheses",
+    "difficulty": "Easy",
+    "theme": "Stack"
+  },
+  {
+    "name": "Merge Two Sorted Lists",
+    "slug": "merge-two-sorted-lists",
+    "difficulty": "Easy",
+    "theme": "Linked List"
+  },
+  {
+    "name": "Best Time to Buy and Sell Stock",
+    "slug": "best-time-to-buy-and-sell-stock",
+    "difficulty": "Easy",
+    "theme": "Array"
+  },
+  {
+    "name": "Valid Palindrome",
+    "slug": "valid-palindrome",
+    "difficulty": "Easy",
+    "theme": "String"
+  },
+  {
+    "name": "Invert Binary Tree",
+    "slug": "invert-binary-tree",
+    "difficulty": "Easy",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Valid Anagram",
+    "slug": "valid-anagram",
+    "difficulty": "Easy",
+    "theme": "String"
+  },
+  {
+    "name": "Binary Search",
+    "slug": "binary-search",
+    "difficulty": "Easy",
+    "theme": "Binary Search"
+  },
+  {
+    "name": "Flood Fill",
+    "slug": "flood-fill",
+    "difficulty": "Easy",
+    "theme": "Graph"
+  },
+  {
+    "name": "Lowest Common Ancestor of a Binary Search Tree",
+    "slug": "lowest-common-ancestor-of-a-binary-search-tree",
+    "difficulty": "Medium",
+    "theme": "Binary Search Tree"
+  },
+  {
+    "name": "Balanced Binary Tree",
+    "slug": "balanced-binary-tree",
+    "difficulty": "Easy",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Linked List Cycle",
+    "slug": "linked-list-cycle",
+    "difficulty": "Easy",
+    "theme": "Linked List"
+  },
+  {
+    "name": "Implement Queue using Stacks",
+    "slug": "implement-queue-using-stacks",
+    "difficulty": "Easy",
+    "theme": "Stack"
+  },
+  {
+    "name": "First Bad Version",
+    "slug": "first-bad-version",
+    "difficulty": "Easy",
+    "theme": "Binary Search"
+  },
+  {
+    "name": "Ransom Note",
+    "slug": "ransom-note",
+    "difficulty": "Easy",
+    "theme": "Hash Table"
+  },
+  {
+    "name": "Climbing Stairs",
+    "slug": "climbing-stairs",
+    "difficulty": "Easy",
+    "theme": "Dynamic Programming"
+  },
+  {
+    "name": "Longest Palindrome",
+    "slug": "longest-palindrome",
+    "difficulty": "Easy",
+    "theme": "String"
+  },
+  {
+    "name": "Reverse Linked List",
+    "slug": "reverse-linked-list",
+    "difficulty": "Easy",
+    "theme": "Linked List"
+  },
+  {
+    "name": "Majority Element",
+    "slug": "majority-element",
+    "difficulty": "Easy",
+    "theme": "Array"
+  },
+  {
+    "name": "Add Binary",
+    "slug": "add-binary",
+    "difficulty": "Easy",
+    "theme": "Binary"
+  },
+  {
+    "name": "Diameter of Binary Tree",
+    "slug": "diameter-of-binary-tree",
+    "difficulty": "Easy",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Middle of the Linked List",
+    "slug": "middle-of-the-linked-list",
+    "difficulty": "Easy",
+    "theme": "Linked List"
+  },
+  {
+    "name": "Maximum Depth of Binary Tree",
+    "slug": "maximum-depth-of-binary-tree",
+    "difficulty": "Easy",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Contains Duplicate",
+    "slug": "contains-duplicate",
+    "difficulty": "Easy",
+    "theme": "Array"
+  },
+  {
+    "name": "Maximum Subarray",
+    "slug": "maximum-subarray",
+    "difficulty": "Medium",
+    "theme": "Dynamic Programming"
+  },
+  {
+    "name": "Insert Interval",
+    "slug": "insert-interval",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "01 Matrix",
+    "slug": "01-matrix",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "K Closest Points to Origin",
+    "slug": "k-closest-points-to-origin",
+    "difficulty": "Medium",
+    "theme": "Heap"
+  },
+  {
+    "name": "Longest Substring Without Repeating Characters",
+    "slug": "longest-substring-without-repeating-characters",
+    "difficulty": "Medium",
+    "theme": "String"
+  },
+  {
+    "name": "3Sum",
+    "slug": "3sum",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Binary Tree Level Order Traversal",
+    "slug": "binary-tree-level-order-traversal",
+    "difficulty": "Medium",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Clone Graph",
+    "slug": "clone-graph",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Evaluate Reverse Polish Notation",
+    "slug": "evaluate-reverse-polish-notation",
+    "difficulty": "Medium",
+    "theme": "Stack"
+  },
+  {
+    "name": "Course Schedule",
+    "slug": "course-schedule",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Implement Trie (Prefix Tree)",
+    "slug": "implement-trie-prefix-tree",
+    "difficulty": "Medium",
+    "theme": "Trie"
+  },
+  {
+    "name": "Coin Change",
+    "slug": "coin-change",
+    "difficulty": "Medium",
+    "theme": "Dynamic Programming"
+  },
+  {
+    "name": "Product of Array Except Self",
+    "slug": "product-of-array-except-self",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Min Stack",
+    "slug": "min-stack",
+    "difficulty": "Medium",
+    "theme": "Stack"
+  },
+  {
+    "name": "Validate Binary Search Tree",
+    "slug": "validate-binary-search-tree",
+    "difficulty": "Medium",
+    "theme": "Binary Search Tree"
+  },
+  {
+    "name": "Number of Islands",
+    "slug": "number-of-islands",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Rotting Oranges",
+    "slug": "rotting-oranges",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Search in Rotated Sorted Array",
+    "slug": "search-in-rotated-sorted-array",
+    "difficulty": "Medium",
+    "theme": "Binary Search"
+  },
+  {
+    "name": "Combination Sum",
+    "slug": "combination-sum",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Permutations",
+    "slug": "permutations",
+    "difficulty": "Medium",
+    "theme": "Recursion"
+  },
+  {
+    "name": "Merge Intervals",
+    "slug": "merge-intervals",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Lowest Common Ancestor of a Binary Tree",
+    "slug": "lowest-common-ancestor-of-a-binary-tree",
+    "difficulty": "Medium",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Time Based Key-Value Store",
+    "slug": "time-based-key-value-store",
+    "difficulty": "Medium",
+    "theme": "Binary Search"
+  },
+  {
+    "name": "Accounts Merge",
+    "slug": "accounts-merge",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Sort Colors",
+    "slug": "sort-colors",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Word Break",
+    "slug": "word-break",
+    "difficulty": "Medium",
+    "theme": "Trie"
+  },
+  {
+    "name": "Partition Equal Subset Sum",
+    "slug": "partition-equal-subset-sum",
+    "difficulty": "Medium",
+    "theme": "Dynamic Programming"
+  },
+  {
+    "name": "String to Integer (atoi)",
+    "slug": "string-to-integer-atoi",
+    "difficulty": "Medium",
+    "theme": "String"
+  },
+  {
+    "name": "Spiral Matrix",
+    "slug": "spiral-matrix",
+    "difficulty": "Medium",
+    "theme": "Matrix"
+  },
+  {
+    "name": "Subsets",
+    "slug": "subsets",
+    "difficulty": "Medium",
+    "theme": "Recursion"
+  },
+  {
+    "name": "Binary Tree Right Side View",
+    "slug": "binary-tree-right-side-view",
+    "difficulty": "Medium",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Longest Palindromic Substring",
+    "slug": "longest-palindromic-substring",
+    "difficulty": "Medium",
+    "theme": "String"
+  },
+  {
+    "name": "Unique Paths",
+    "slug": "unique-paths",
+    "difficulty": "Medium",
+    "theme": "Dynamic Programming"
+  },
+  {
+    "name": "Construct Binary Tree from Preorder and Inorder Traversal",
+    "slug": "construct-binary-tree-from-preorder-and-inorder-traversal",
+    "difficulty": "Medium",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Container With Most Water",
+    "slug": "container-with-most-water",
+    "difficulty": "Medium",
+    "theme": "Array"
+  },
+  {
+    "name": "Letter Combinations of a Phone Number",
+    "slug": "letter-combinations-of-a-phone-number",
+    "difficulty": "Medium",
+    "theme": "Recursion"
+  },
+  {
+    "name": "Word Search",
+    "slug": "word-search",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Find All Anagrams in a String",
+    "slug": "find-all-anagrams-in-a-string",
+    "difficulty": "Medium",
+    "theme": "String"
+  },
+  {
+    "name": "Minimum Height Trees",
+    "slug": "minimum-height-trees",
+    "difficulty": "Medium",
+    "theme": "Graph"
+  },
+  {
+    "name": "Task Scheduler",
+    "slug": "task-scheduler",
+    "difficulty": "Medium",
+    "theme": "Heap"
+  },
+  {
+    "name": "LRU Cache",
+    "slug": "lru-cache",
+    "difficulty": "Medium",
+    "theme": "Linked List"
+  },
+  {
+    "name": "Kth Smallest Element in a BST",
+    "slug": "kth-smallest-element-in-a-bst",
+    "difficulty": "Medium",
+    "theme": "Binary Search Tree"
+  },
+  {
+    "name": "Minimum Window Substring",
+    "slug": "minimum-window-substring",
+    "difficulty": "Hard",
+    "theme": "String"
+  },
+  {
+    "name": "Serialize and Deserialize Binary Tree",
+    "slug": "serialize-and-deserialize-binary-tree",
+    "difficulty": "Hard",
+    "theme": "Binary Tree"
+  },
+  {
+    "name": "Trapping Rain Water",
+    "slug": "trapping-rain-water",
+    "difficulty": "Hard",
+    "theme": "Stack"
+  },
+  {
+    "name": "Find Median from Data Stream",
+    "slug": "find-median-from-data-stream",
+    "difficulty": "Hard",
+    "theme": "Heap"
+  },
+  {
+    "name": "Word Ladder",
+    "slug": "word-ladder",
+    "difficulty": "Hard",
+    "theme": "Graph"
+  },
+  {
+    "name": "Basic Calculator",
+    "slug": "basic-calculator",
+    "difficulty": "Hard",
+    "theme": "Stack"
+  },
+  {
+    "name": "Maximum Profit in Job Scheduling",
+    "slug": "maximum-profit-in-job-scheduling",
+    "difficulty": "Hard",
+    "theme": "Binary Search"
+  },
+  {
+    "name": "Merge k Sorted Lists",
+    "slug": "merge-k-sorted-lists",
+    "difficulty": "Hard",
+    "theme": "Heap"
+  },
+  {
+    "name": "Largest Rectangle in Histogram",
+    "slug": "largest-rectangle-in-histogram",
+    "difficulty": "Hard",
+    "theme": "Stack"
+  }
+]

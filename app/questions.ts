@@ -1,81 +1,42 @@
-export const buckets=[
- {title:'Start here',description:'Strings, hash maps, sets, and stacks. Closest to the reported screen themes.'},
- {title:'Build fluency',description:'Useful extensions, array processing, intervals, and state tracking.'},
- {title:'Broaden coverage',description:'Common interview fundamentals once the priority questions feel comfortable.'},
- {title:'Leave until last',description:'More specialized techniques with less supporting evidence for this screen.'}
-];
-const groups=[
-`Simplify Path|simplify-path|Stack · path parsing
-Valid Anagram|valid-anagram|Character counts
-Group Anagrams|group-anagrams|Hash-map grouping
-Valid Parentheses|valid-parentheses|Stack · parsing
-Contains Duplicate|contains-duplicate|Set membership
-Two Sum|two-sum|Hash-map lookup
-Encode and Decode Strings|encode-and-decode-strings|String encoding · parsing
-Longest Substring Without Repeating Characters|longest-substring-without-repeating-characters|Sliding window · sets
-Top K Frequent Elements|top-k-frequent-elements|Frequency counting
-Longest Consecutive Sequence|longest-consecutive-sequence|Sets`,
-`Longest Repeating Character Replacement|longest-repeating-character-replacement|Sliding window · counts
-Minimum Window Substring|minimum-window-substring|Sliding window · strings
-Palindromic Substrings|palindromic-substrings|String indexing
-Best Time to Buy and Sell Stock|best-time-to-buy-and-sell-stock|One-pass state
-Maximum Subarray|maximum-subarray|Running state
-Product of Array Except Self|product-of-array-except-self|Prefix · suffix
-3Sum|3sum|Sorting · two pointers
-Container With Most Water|container-with-most-water|Two pointers
-Merge Intervals|merge-intervals|Sorting · merging
-Insert Interval|insert-interval|Interval boundaries
-Non-overlapping Intervals|non-overlapping-intervals|Intervals · greedy
-Meeting Rooms|meeting-rooms|Interval validation
-Meeting Rooms II|meeting-rooms-ii|Concurrent events
-Task Scheduler|task-scheduler|Counts · scheduling`,
-`Search in Rotated Sorted Array|search-in-rotated-sorted-array|Binary search
-Find Minimum in Rotated Sorted Array|find-minimum-in-rotated-sorted-array|Binary search
-Reverse Linked List|reverse-linked-list|Linked lists
-Linked List Cycle|linked-list-cycle|Fast · slow pointers
-Remove Nth Node From End of List|remove-nth-node-from-end-of-list|Linked lists
-Invert Binary Tree|invert-binary-tree|Basic trees
-Maximum Depth of Binary Tree|maximum-depth-of-binary-tree|Basic trees
-Same Tree|same-tree|Basic trees
-Subtree of Another Tree|subtree-of-another-tree|Basic trees
-Binary Tree Level Order Traversal|binary-tree-level-order-traversal|Breadth-first search
-Validate Binary Search Tree|validate-binary-search-tree|BSTs
-Lowest Common Ancestor of a BST|lowest-common-ancestor-of-a-binary-search-tree|BSTs
-Kth Smallest Element in a BST|kth-smallest-element-in-a-bst|BST traversal
-Number of Islands|number-of-islands|Graph traversal
-Clone Graph|clone-graph|Graph traversal
-Graph Valid Tree|graph-valid-tree|Graphs
-Number of Connected Components|number-of-connected-components-in-an-undirected-graph|Graphs
-Climbing Stairs|climbing-stairs|Dynamic programming
-House Robber|house-robber|Dynamic programming
-Coin Change|coin-change|Dynamic programming
-Jump Game|jump-game|Greedy`,
-`Maximum Product Subarray|maximum-product-subarray|Dynamic programming
-Longest Increasing Subsequence|longest-increasing-subsequence|Dynamic programming
-House Robber II|house-robber-ii|Dynamic programming
-Decode Ways|decode-ways|Dynamic programming
-Unique Paths|unique-paths|Dynamic programming
-Word Break|word-break|Dynamic programming
-Combination Sum|combination-sum|Backtracking
-Implement Trie|implement-trie-prefix-tree|Tries
-Add and Search Word|design-add-and-search-words-data-structure|Tries · backtracking
-Word Search II|word-search-ii|Tries · backtracking
-Construct Binary Tree from Preorder and Inorder Traversal|construct-binary-tree-from-preorder-and-inorder-traversal|Tree construction
-Serialize and Deserialize Binary Tree|serialize-and-deserialize-binary-tree|Tree serialization
-Binary Tree Maximum Path Sum|binary-tree-maximum-path-sum|Trees · recursion
-Merge K Sorted Lists|merge-k-sorted-lists|Heaps
-Find Median from Data Stream|find-median-from-data-stream|Heaps
-Pacific Atlantic Water Flow|pacific-atlantic-water-flow|Graph traversal
-Alien Dictionary|alien-dictionary|Topological sorting`
-];
-let order=0;
-export const questions=groups.flatMap((group,bucket)=>group.split('\n').map(line=>{const [name,slug,theme]=line.split('|');return {name,slug,theme,bucket,order:++order};}));
+import grind75 from './grind75-source.json' with {type:'json'};
+import {questions as legacy,difficulty as legacyDifficulty} from './legacy-questions';
 
-// Official default Grind 75 (8 weeks, 8 hours), checked October 5, 2026.
-// Only prune the existing catalog; Simplify Path is a custom addition.
-const grindOverlap=new Set(`valid-anagram valid-parentheses contains-duplicate two-sum longest-substring-without-repeating-characters minimum-window-substring best-time-to-buy-and-sell-stock maximum-subarray product-of-array-except-self 3sum container-with-most-water merge-intervals insert-interval task-scheduler search-in-rotated-sorted-array reverse-linked-list linked-list-cycle invert-binary-tree maximum-depth-of-binary-tree binary-tree-level-order-traversal validate-binary-search-tree lowest-common-ancestor-of-a-binary-search-tree kth-smallest-element-in-a-bst number-of-islands clone-graph climbing-stairs coin-change unique-paths word-break combination-sum implement-trie-prefix-tree construct-binary-tree-from-preorder-and-inorder-traversal serialize-and-deserialize-binary-tree merge-k-sorted-lists find-median-from-data-stream`.split(' '));
-export const isCurrentQuestion=(slug:string)=>slug==='simplify-path'||grindOverlap.has(slug);
-const easy=new Set(`valid-anagram valid-parentheses contains-duplicate two-sum best-time-to-buy-and-sell-stock meeting-rooms reverse-linked-list linked-list-cycle invert-binary-tree maximum-depth-of-binary-tree same-tree subtree-of-another-tree climbing-stairs`.split(' '));
-const hard=new Set(`minimum-window-substring word-search-ii serialize-and-deserialize-binary-tree binary-tree-maximum-path-sum merge-k-sorted-lists find-median-from-data-stream alien-dictionary`.split(' '));
-export const difficulty=(slug:string)=>easy.has(slug)?'Easy':hard.has(slug)?'Hard':'Medium';
+export const buckets=[
+ {title:'Direct Upstart matches',description:'Questions appearing in your logged-in Upstart company filter. Tags can cover multiple interview stages.'},
+ {title:'Closely related techniques',description:'Strings, hash maps, stacks, array scans, and intervals that transfer directly to the tagged problems.'},
+ {title:'Useful supporting practice',description:'Related grid, backtracking, DP, design, and array techniques, plus basic search and linked lists.'},
+ {title:'Broader coverage',description:'Trees, BSTs, tries, advanced graphs, and heaps with less direct support in the observed Upstart tags.'}
+];
+// Observed in the user's logged-in LeetCode problemset Companies=Upstart filter,
+// October 5, 2026. The pinned daily question is excluded. This is evidence of
+// a company association, not frequency, recency, or a screen-only question bank.
+export const upstartTags=new Set(`next-permutation valid-sudoku group-anagrams maximum-subarray merge-intervals simplify-path word-search pascals-triangle triangle best-time-to-buy-and-sell-stock best-time-to-buy-and-sell-stock-iii factorial-trailing-zeroes minimum-size-subarray-sum contains-duplicate range-sum-query-2d-immutable range-sum-query-2d-mutable design-tic-tac-toe display-table-of-food-orders-in-a-restaurant maximum-number-of-words-you-can-type decode-the-message distribute-money-to-maximum-children sum-multiples find-the-peaks`.split(' '));
+const close=new Set(`two-sum valid-parentheses valid-palindrome valid-anagram ransom-note longest-palindrome majority-element add-binary implement-queue-using-stacks evaluate-reverse-polish-notation min-stack product-of-array-except-self insert-interval longest-substring-without-repeating-characters string-to-integer-atoi spiral-matrix sort-colors find-all-anagrams-in-a-string minimum-window-substring basic-calculator encode-and-decode-strings top-k-frequent-elements longest-consecutive-sequence`.split(' '));
+const supporting=new Set(`climbing-stairs coin-change partition-equal-subset-sum word-break unique-paths combination-sum permutations subsets letter-combinations-of-a-phone-number longest-palindromic-substring container-with-most-water 3sum trapping-rain-water maximum-profit-in-job-scheduling largest-rectangle-in-histogram task-scheduler lru-cache time-based-key-value-store accounts-merge k-closest-points-to-origin flood-fill 01-matrix number-of-islands rotting-oranges search-in-rotated-sorted-array binary-search first-bad-version reverse-linked-list merge-two-sorted-lists middle-of-the-linked-list linked-list-cycle`.split(' '));
+const extraSlugs=['simplify-path','group-anagrams','encode-and-decode-strings','top-k-frequent-elements','longest-consecutive-sequence'];
+const extras=extraSlugs.map(slug=>{const q=legacy.find(q=>q.slug===slug)!;return {name:q.name,slug,theme:q.theme,difficulty:legacyDifficulty(slug)};});
+const active=[...grind75.map(q=>({...q,grind75:true})),...extras.map(q=>({...q,grind75:false}))];
+const activeSlugs=new Set(active.map(q=>q.slug));
+export const isCurrentQuestion=(slug:string)=>activeSlugs.has(slug);
+const directOrder=['maximum-subarray','simplify-path','group-anagrams','merge-intervals','best-time-to-buy-and-sell-stock','contains-duplicate','word-search'];
+function bucket(slug:string){return upstartTags.has(slug)?0:close.has(slug)?1:supporting.has(slug)?2:3;}
+function relevance(slug:string,theme:string){
+ if(upstartTags.has(slug))return 'Direct Upstart tag';
+ if(slug==='valid-anagram'||slug==='find-all-anagrams-in-a-string'||slug==='ransom-note')return 'Related to Group Anagrams: character counts';
+ if(slug==='insert-interval')return 'Related to Merge Intervals';
+ if(slug==='product-of-array-except-self')return 'Related to range-sum queries: prefix/suffix accumulation';
+ if(slug==='minimum-window-substring'||slug==='longest-substring-without-repeating-characters')return 'Related to Minimum Size Subarray Sum: sliding windows';
+ if(/parentheses|calculator|stack|notation/.test(slug))return 'Related to Simplify Path: stacks and parsing';
+ if(slug==='combination-sum'||slug==='permutations'||slug==='subsets'||slug==='letter-combinations-of-a-phone-number')return 'Related to Word Search: backtracking';
+ if(bucket(slug)===1)return 'Related string, counting, or array processing technique';
+ if(bucket(slug)===2)return theme==='Dynamic Programming'?'Related to Triangle and stock variants: DP practice':'Supporting interview technique; indirect tag overlap';
+ return 'General interview coverage; limited direct tag overlap';
+}
+// Keep legacy IDs valid so saved progress is never deleted or orphaned.
+// Hidden legacy questions are still shown if retained/completed in the database.
+const archived=legacy.filter(q=>!activeSlugs.has(q.slug)).map(q=>({...q,difficulty:legacyDifficulty(q.slug),grind75:false}));
+export const questions=[...active,...archived].map(q=>({...q,bucket:bucket(q.slug),upstartTagged:upstartTags.has(q.slug),relevance:relevance(q.slug,q.theme)})).sort((a,b)=>a.bucket-b.bucket||(a.bucket===0?directOrder.indexOf(a.slug)-directOrder.indexOf(b.slug):0)).map((q,i)=>({...q,order:i+1}));
+export const difficulty=(slug:string)=>questions.find(q=>q.slug===slug)?.difficulty??'Medium';
+export const grind75Count=grind75.length;
+
 
