@@ -3,6 +3,7 @@ export type QuestionDefinition = {
  name:string; slug:string; theme:string; difficulty:string; grind75:boolean;
  kind:'leetcode'|'custom'; matchLabel?:string; source?:ReportSource;
  reportedTask?:string; relationship?:string; practicePrompt?:string;
+ reportedVariationSlug?:string; leetcodeFoundationSlug?:string;
 };
 // Report dates fall within Oct 5, 2025–Oct 5, 2026. Edited accounts are
 // supplementary evidence, not independent confirmations or screen-only reports.
@@ -17,11 +18,11 @@ export const reportedPractice:QuestionDefinition[]=[
  reportedTask:'Restore scrambled words using a vocabulary and their first/last letters.',
  relationship:'Extension of Group Anagrams. The original post is partly restricted; its visible text supports vocabulary lookup and first/last-letter disambiguation. A March 2026 edited account describes the same pattern.',
  practicePrompt:'Practice reconstruction: given a vocabulary and a sentence of scrambled words, restore the sentence. Each scrambled word preserves its original first and last characters. Assume there is exactly one matching vocabulary word. Preserve word order.\nExample: vocabulary = ["pears", "spear", "something"], sentence = "seapr sothinmeg" → "spear something".\nLeetCode foundation: Group Anagrams (linked in the first section).'},
- {name:'Decode the Message',slug:'decode-the-message',theme:'Substitution maps · strings',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:march,
+ {name:'Decode the Message',slug:'decode-the-message',theme:'Substitution maps · strings',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:march,reportedVariationSlug:'upstart-double-substitution-decoding',
  reportedTask:'Infer two substitution keys from known message pairs and undo double encryption.',
  relationship:'LeetCode uses one substitution table derived from a key. The report uses two inferred keys; practice the extra step below.',
  practicePrompt:'After the LeetCode problem: accept plaintext/ciphertext pairs for A→B and B→C, infer their inverse maps, and undo B→C followed by A→B on a doubly encrypted message. Assume consistent one-to-one mappings and that every needed character is covered.\nExample: abc→bcd and bcd→def; encrypted "def" → "abc".'},
- {name:'Minimum Absolute Difference',slug:'minimum-absolute-difference',theme:'Sorting · adjacent differences',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julyFour,
+ {name:'Minimum Absolute Difference',slug:'minimum-absolute-difference',theme:'Sorting · adjacent differences',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julyFour,reportedVariationSlug:'upstart-minimum-difference-value',
  reportedTask:'Find the smallest absolute difference between two array values.',
  relationship:'The reported task returns the minimum value. LeetCode returns every pair attaining it and assumes distinct integers.',
  practicePrompt:'After LeetCode: return just the minimum difference and allow duplicate inputs.\nExample: [1, 20, 100, 3] → 2; [5, 5, 9] → 0.'},
@@ -33,15 +34,15 @@ export const reportedPractice:QuestionDefinition[]=[
  reportedTask:'Deduplicate a list of integers.',
  relationship:'Use the order-preserving interpretation in the edited report. Contains Duplicate is related set practice, but does not return the deduplicated list.',
  practicePrompt:'Given an unsorted integer list, keep only each value’s first occurrence without changing the order.\nExample: [3, 5, 3, 7, 5] → [3, 5, 7].\nTest negative values, empty input, and an all-duplicate list.'},
- {name:'Merge Strings Alternately',slug:'merge-strings-alternately',theme:'String indexing · implementation',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julySix,
+ {name:'Merge Strings Alternately',slug:'merge-strings-alternately',theme:'String indexing · implementation',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julySix,reportedVariationSlug:'upstart-interleave-three-strings',
  reportedTask:'Interleave three equal-length strings.',
  relationship:'LeetCode interleaves two strings and handles unequal lengths. Extend it to three equal-length strings to match the report.',
  practicePrompt:'Interleave corresponding characters from three equal-length strings.\nExample: "abc", "def", "ghi" → "adgbehcfi".\nTest empty strings and one-character strings.'},
- {name:'Jewels and Stones',slug:'jewels-and-stones',theme:'Set membership · string filtering',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Technique proxy',source:january,
+ {name:'Jewels and Stones',slug:'jewels-and-stones',theme:'Set membership · string filtering',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Technique proxy',source:january,reportedVariationSlug:'upstart-filter-words-by-characters',
  reportedTask:'Keep words that share at least one character with a given string.',
  relationship:'LeetCode counts matching characters. The report returns matching words; use the same membership check, then adapt it below.',
  practicePrompt:'Given words and a string of allowed characters, return the words containing at least one allowed character. Preserve their original order.\nExample: words = ["cat", "dog", "sky"], allowed = "ao" → ["cat", "dog"].\nMatching is case-sensitive for this practice reconstruction.'},
- {name:'Sum Multiples',slug:'sum-multiples',theme:'Loops · divisibility',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julyFour,
+ {name:'Sum Multiples',slug:'sum-multiples',theme:'Loops · divisibility',difficulty:'Easy',grind75:false,kind:'leetcode',matchLabel:'Close proxy',source:julyFour,reportedVariationSlug:'upstart-sum-multiples-below-limit',
  reportedTask:'Sum multiples of 3, 5, or 7 below a limit.',
  relationship:'LeetCode includes the upper bound; the edited report describes an exclusive limit. Clarify the boundary and whether overlaps count once.',
  practicePrompt:'Practice variant: sum each positive integer smaller than n that is divisible by 3, 5, or 7, counting it once.\nExample: n = 12 → 40.\nTest n = 3 and a number divisible by more than one divisor.'},

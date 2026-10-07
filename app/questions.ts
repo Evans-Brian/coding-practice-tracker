@@ -1,10 +1,11 @@
 import grind75 from './grind75-source.json' with {type:'json'};
 import {questions as legacy,difficulty as legacyDifficulty} from './legacy-questions';
 import {reportedPractice,type QuestionDefinition} from './reported-practice';
+import {reportedVariations} from './reported-variations';
 
 export const buckets=[
  {title:'Upstart company-list matches',description:'The six questions in LeetCode’s Upstart company list with All selected. Company association does not establish recency or interview stage.'},
- {title:'Recent reports & close proxies',description:'Practice from reports dated Oct 5, 2025–Oct 5, 2026. Mostly OA tasks; edited accounts receive supplementary weight. Each card explains the match and links its source.'},
+ {title:'Recent reports & close proxies',description:'Practice from reports dated Oct 5, 2025–Oct 5, 2026. Reported variations are separate questions beside their LeetCode foundations. Mostly OA tasks; edited accounts receive supplementary weight. Each card explains the match and links its source.'},
  {title:'Strong transferable practice',description:'Hash maps, character counts, stacks, string parsing, array scans, prefix/suffix state, and basic DP. Priorities reflect technique overlap, not reported exact questions.'},
  {title:'Useful general coverage',description:'Sliding windows, intervals, basic binary search, linked lists, grid traversal, backtracking, and additional DP after the higher-priority sections.'},
  {title:'Later if time permits',description:'Trees, BSTs, tries, advanced graphs, heaps, and specialized hard problems with less direct support in this evidence.'}
@@ -14,7 +15,8 @@ export const buckets=[
 // October 5, 2026. The broader 23-question Companies filter is not used here.
 export const upstartTags=new Set('group-anagrams simplify-path maximum-subarray valid-sudoku range-sum-query-2d-immutable triangle'.split(' '));
 const companyOrder=['group-anagrams','simplify-path','maximum-subarray','valid-sudoku','range-sum-query-2d-immutable','triangle'];
-const reportSlugs=new Set(reportedPractice.map(q=>q.slug));
+const reportsWithVariations=reportedPractice.flatMap(q=>[q,...reportedVariations.filter(variation=>variation.leetcodeFoundationSlug===q.slug)]);
+const reportSlugs=new Set(reportsWithVariations.map(q=>q.slug));
 const strong=new Set('two-sum valid-anagram ransom-note longest-palindrome contains-duplicate valid-parentheses min-stack evaluate-reverse-polish-notation implement-queue-using-stacks valid-palindrome string-to-integer-atoi add-binary encode-and-decode-strings best-time-to-buy-and-sell-stock product-of-array-except-self majority-element sort-colors spiral-matrix climbing-stairs unique-paths top-k-frequent-elements longest-consecutive-sequence'.split(' '));
 const general=new Set('longest-substring-without-repeating-characters find-all-anagrams-in-a-string minimum-window-substring insert-interval merge-intervals binary-search first-bad-version search-in-rotated-sorted-array reverse-linked-list merge-two-sorted-lists middle-of-the-linked-list linked-list-cycle flood-fill 01-matrix number-of-islands rotting-oranges word-search combination-sum permutations subsets letter-combinations-of-a-phone-number coin-change partition-equal-subset-sum word-break longest-palindromic-substring container-with-most-water 3sum lru-cache time-based-key-value-store basic-calculator'.split(' '));
 const existingExtras=['simplify-path','group-anagrams','encode-and-decode-strings','top-k-frequent-elements','longest-consecutive-sequence'].map(slug=>{
@@ -26,7 +28,7 @@ const companyExtras:QuestionDefinition[]=[
  {name:'Range Sum Query 2D - Immutable',slug:'range-sum-query-2d-immutable',theme:'2D prefix sums',difficulty:'Medium',grind75:false,kind:'leetcode'},
  {name:'Triangle',slug:'triangle',theme:'Dynamic Programming',difficulty:'Medium',grind75:false,kind:'leetcode'}
 ];
-const active:QuestionDefinition[]=[...grind75.map(q=>({...q,grind75:true,kind:'leetcode' as const})),...existingExtras,...companyExtras,...reportedPractice];
+const active:QuestionDefinition[]=[...grind75.map(q=>({...q,grind75:true,kind:'leetcode' as const})),...existingExtras,...companyExtras,...reportsWithVariations];
 const activeSlugs=new Set(active.map(q=>q.slug));
 export const isCurrentQuestion=(slug:string)=>activeSlugs.has(slug);
 function bucket(slug:string){return upstartTags.has(slug)?0:reportSlugs.has(slug)?1:strong.has(slug)?2:general.has(slug)?3:4;}
