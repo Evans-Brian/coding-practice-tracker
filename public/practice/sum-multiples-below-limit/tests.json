@@ -1,0 +1,188 @@
+{
+  "functionName": "sum_multiples_below",
+  "arguments": [
+    "n"
+  ],
+  "cases": [
+    {
+      "id": "case-01",
+      "name": "Exclusive limit 12",
+      "args": [
+        12
+      ],
+      "expected": 40,
+      "sample": true
+    },
+    {
+      "id": "case-02",
+      "name": "Exclusive limit 3",
+      "args": [
+        3
+      ],
+      "expected": 0,
+      "sample": true
+    },
+    {
+      "id": "case-03",
+      "name": "Exclusive limit 16",
+      "args": [
+        16
+      ],
+      "expected": 81,
+      "sample": true
+    },
+    {
+      "id": "case-04",
+      "name": "Exclusive limit 0",
+      "args": [
+        0
+      ],
+      "expected": 0,
+      "sample": false
+    },
+    {
+      "id": "case-05",
+      "name": "Exclusive limit 1",
+      "args": [
+        1
+      ],
+      "expected": 0,
+      "sample": false
+    },
+    {
+      "id": "case-06",
+      "name": "Exclusive limit 2",
+      "args": [
+        2
+      ],
+      "expected": 0,
+      "sample": false
+    },
+    {
+      "id": "case-07",
+      "name": "Exclusive limit 4",
+      "args": [
+        4
+      ],
+      "expected": 3,
+      "sample": false
+    },
+    {
+      "id": "case-08",
+      "name": "Exclusive limit 5",
+      "args": [
+        5
+      ],
+      "expected": 3,
+      "sample": false
+    },
+    {
+      "id": "case-09",
+      "name": "Exclusive limit 7",
+      "args": [
+        7
+      ],
+      "expected": 14,
+      "sample": false
+    },
+    {
+      "id": "case-10",
+      "name": "Exclusive limit 8",
+      "args": [
+        8
+      ],
+      "expected": 21,
+      "sample": false
+    },
+    {
+      "id": "case-11",
+      "name": "Exclusive limit 15",
+      "args": [
+        15
+      ],
+      "expected": 66,
+      "sample": false
+    },
+    {
+      "id": "case-12",
+      "name": "Exclusive limit 21",
+      "args": [
+        21
+      ],
+      "expected": 119,
+      "sample": false
+    },
+    {
+      "id": "case-13",
+      "name": "Exclusive limit 22",
+      "args": [
+        22
+      ],
+      "expected": 140,
+      "sample": false
+    },
+    {
+      "id": "case-14",
+      "name": "Exclusive limit 35",
+      "args": [
+        35
+      ],
+      "expected": 307,
+      "sample": false
+    },
+    {
+      "id": "case-15",
+      "name": "Exclusive limit 36",
+      "args": [
+        36
+      ],
+      "expected": 342,
+      "sample": false
+    },
+    {
+      "id": "case-16",
+      "name": "Exclusive limit 105",
+      "args": [
+        105
+      ],
+      "expected": 2940,
+      "sample": false
+    },
+    {
+      "id": "case-17",
+      "name": "Exclusive limit 106",
+      "args": [
+        106
+      ],
+      "expected": 3045,
+      "sample": false
+    },
+    {
+      "id": "case-18",
+      "name": "Exclusive limit 1,000",
+      "args": [
+        1000
+      ],
+      "expected": 271066,
+      "sample": false
+    },
+    {
+      "id": "case-19",
+      "name": "Exclusive limit 999,999",
+      "args": [
+        999999
+      ],
+      "expected": 271426928570,
+      "sample": false
+    },
+    {
+      "id": "case-20",
+      "name": "Exclusive limit 1,000,000",
+      "args": [
+        1000000
+      ],
+      "expected": 271427928569,
+      "sample": false
+    }
+  ]
+}

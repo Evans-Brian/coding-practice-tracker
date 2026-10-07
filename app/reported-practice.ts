@@ -3,7 +3,7 @@ export type QuestionDefinition = {
  name:string; slug:string; theme:string; difficulty:string; grind75:boolean;
  kind:'leetcode'|'custom'; matchLabel?:string; source?:ReportSource;
  reportedTask?:string; relationship?:string; practicePrompt?:string;
- reportedVariationSlug?:string; leetcodeFoundationSlug?:string;
+ reportedVariationSlug?:string; leetcodeFoundationSlug?:string; exercisePath?:string;
 };
 // Report dates fall within Oct 5, 2025–Oct 5, 2026. Edited accounts are
 // supplementary evidence, not independent confirmations or screen-only reports.

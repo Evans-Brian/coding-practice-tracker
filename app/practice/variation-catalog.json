@@ -1,0 +1,271 @@
+[
+  {
+    "slug": "double-substitution-decoding",
+    "problemId": "upstart-double-substitution-decoding",
+    "functionName": "decode_double",
+    "arguments": [
+      "known_ab",
+      "known_bc",
+      "encrypted"
+    ],
+    "starter": "def decode_double(known_ab, known_bc, encrypted) -> str:\n    \"\"\"Undo two inferred substitution maps; preserve spaces.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement decode_double\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Undo both substitutions",
+        "args": [
+          [
+            [
+              "abc",
+              "bcd"
+            ]
+          ],
+          [
+            [
+              "bcd",
+              "def"
+            ]
+          ],
+          "fed def"
+        ],
+        "expected": "cba abc",
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Preserve repeated letters and spaces",
+        "args": [
+          [
+            [
+              "abc",
+              "bcd"
+            ]
+          ],
+          [
+            [
+              "bcd",
+              "def"
+            ]
+          ],
+          "ddd  f"
+        ],
+        "expected": "aaa  c",
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Empty message",
+        "args": [
+          [],
+          [],
+          ""
+        ],
+        "expected": "",
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "minimum-difference-value",
+    "problemId": "upstart-minimum-difference-value",
+    "functionName": "minimum_difference",
+    "arguments": [
+      "nums"
+    ],
+    "starter": "def minimum_difference(nums) -> int:\n    \"\"\"Return the minimum difference between two distinct indexes.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement minimum_difference\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Return just the minimum value",
+        "args": [
+          [
+            1,
+            20,
+            100,
+            3
+          ]
+        ],
+        "expected": 2,
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Duplicates give zero",
+        "args": [
+          [
+            5,
+            5,
+            9
+          ]
+        ],
+        "expected": 0,
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Negative values",
+        "args": [
+          [
+            -8,
+            -2,
+            4
+          ]
+        ],
+        "expected": 6,
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "interleave-three-strings",
+    "problemId": "upstart-interleave-three-strings",
+    "functionName": "interleave_three",
+    "arguments": [
+      "a",
+      "b",
+      "c"
+    ],
+    "starter": "def interleave_three(a: str, b: str, c: str) -> str:\n    \"\"\"Interleave equal-length inputs in a, b, c order.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement interleave_three\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Interleave three strings",
+        "args": [
+          "abc",
+          "def",
+          "ghi"
+        ],
+        "expected": "adgbehcfi",
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "One character each",
+        "args": [
+          "x",
+          "y",
+          "z"
+        ],
+        "expected": "xyz",
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Empty strings",
+        "args": [
+          "",
+          "",
+          ""
+        ],
+        "expected": "",
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "filter-words-by-characters",
+    "problemId": "upstart-filter-words-by-characters",
+    "functionName": "filter_words",
+    "arguments": [
+      "words",
+      "allowed"
+    ],
+    "starter": "def filter_words(words, allowed) -> list[str]:\n    \"\"\"Keep words sharing at least one character; preserve order and duplicates.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement filter_words\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Match any allowed character",
+        "args": [
+          [
+            "cat",
+            "dog",
+            "sky"
+          ],
+          "ao"
+        ],
+        "expected": [
+          "cat",
+          "dog"
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Case-sensitive matches",
+        "args": [
+          [
+            "A",
+            "a",
+            "aba",
+            ""
+          ],
+          "a"
+        ],
+        "expected": [
+          "a",
+          "aba"
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Keep duplicate words",
+        "args": [
+          [
+            "cat",
+            "cat"
+          ],
+          "t"
+        ],
+        "expected": [
+          "cat",
+          "cat"
+        ],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "sum-multiples-below-limit",
+    "problemId": "upstart-sum-multiples-below-limit",
+    "functionName": "sum_multiples_below",
+    "arguments": [
+      "n"
+    ],
+    "starter": "def sum_multiples_below(n: int) -> int:\n    \"\"\"Sum positive multiples of 3, 5, or 7 strictly below n, counting each once.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement sum_multiples_below\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Exclusive limit 12",
+        "args": [
+          12
+        ],
+        "expected": 40,
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Exclusive limit 3",
+        "args": [
+          3
+        ],
+        "expected": 0,
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Exclusive limit 16",
+        "args": [
+          16
+        ],
+        "expected": 81,
+        "sample": true
+      }
+    ]
+  }
+]

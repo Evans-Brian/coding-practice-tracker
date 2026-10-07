@@ -97,6 +97,7 @@ export const reportedVariations:QuestionDefinition[]=variations.map(variation=>{
   difficulty:variation.difficulty,grind75:false,kind:'custom',matchLabel:'Reported variation',
   source:foundation.source,reportedTask:foundation.reportedTask,
   relationship:variation.relationship,practicePrompt:variation.prompt,
-  leetcodeFoundationSlug:foundation.slug
+  leetcodeFoundationSlug:foundation.slug,
+  exercisePath:'/practice/'+foundation.reportedVariationSlug.slice('upstart-'.length)
  };
 });
