@@ -1,7 +1,10 @@
 // Isolate Python from the page; terminating this worker also stops endless loops.
 const runtimeURL = 'https://cdn.jsdelivr.net/pyodide/v314.0.7/full/';
 const exercises = new Set(['double-substitution-decoding', 'minimum-difference-value',
-  'interleave-three-strings', 'filter-words-by-characters', 'sum-multiples-below-limit']);
+  'interleave-three-strings', 'filter-words-by-characters', 'sum-multiples-below-limit',
+  'alphabetical-word-count', 'deduplicate-integers', 'punctuation-transform',
+  'reverse-even-numbers', 'bounding-rectangle', 'scale-ingredients',
+  'value-position-flags', 'buffet-revenue']);
 let python;
 let initialization;
 

@@ -62,8 +62,129 @@ WRONG = {
 }
 
 
+REFERENCES.update({
+    "alphabetical-word-count": '''def count_words(words):
+    from itertools import groupby
+    return [[word, sum(1 for _ in group)] for word, group in groupby(sorted(words))]
+''',
+    "deduplicate-integers": '''def deduplicate(nums):
+    return list(dict.fromkeys(nums))
+''',
+    "punctuation-transform": '''def rewrite_punctuation(text):
+    pieces = []
+    i = 0
+    while i < len(text):
+        char = text[i]
+        if char == '!':
+            end = i
+            while end < len(text) and text[end] == '!':
+                end += 1
+            pieces.append('!' * (end - i + 1))
+            i = end
+        else:
+            pieces.append('!' if char == '.' else char)
+            i += 1
+    return ''.join(pieces)
+''',
+    "reverse-even-numbers": '''def reverse_evens(nums):
+    return [value for value in reversed(nums) if value % 2 == 0]
+''',
+    "bounding-rectangle": '''def bounding_rectangle(points):
+    xs, ys = zip(*points)
+    return [min(xs), min(ys), max(xs) - min(xs), max(ys) - min(ys)]
+''',
+    "scale-ingredients": '''def scale_ingredients(ingredients, multiplier):
+    result = []
+    for ingredient in ingredients:
+        quantity, separator, rest = ingredient.partition(' ')
+        result.append(str(int(quantity) * multiplier) + separator + rest)
+    return result
+''',
+    "value-position-flags": '''def position_flags(target, nums, flags):
+    answer = [0, 0, 0, 0]
+    half = len(nums) // 2
+    for i, value in enumerate(nums):
+        if value == target:
+            answer[i % 2] = 1
+            answer[2 if i < half else 3] = 1
+    return [value * enabled for value, enabled in zip(answer, flags)]
+''',
+    "buffet-revenue": '''def buffet_revenue(prices, capacity, events):
+    state = [0] * len(prices)  # 0 absent, 1 seated, 2 waiting
+    paid = [False] * len(prices)
+    occupied = total = 0
+    for customer in events:
+        if state[customer] == 0:
+            if occupied < capacity:
+                state[customer] = 1
+                occupied += 1
+                if not paid[customer]:
+                    total += prices[customer]
+                    paid[customer] = True
+            else:
+                state[customer] = 2
+        else:
+            if state[customer] == 1:
+                occupied -= 1
+            state[customer] = 0
+    return total
+''',
+})
+WRONG.update({
+    "alphabetical-word-count": '''def count_words(words):
+    from collections import Counter
+    return [[word, count] for word, count in sorted(Counter(words).items(), key=lambda pair: (-pair[1], pair[0]))]
+''',
+    "deduplicate-integers": '''def deduplicate(nums):
+    return sorted(set(nums))
+''',
+    "punctuation-transform": '''def rewrite_punctuation(text):
+    import re
+    return re.sub(r'!+', lambda m: m[0] + '!', text.replace('.', '!'))
+''',
+    "reverse-even-numbers": '''def reverse_evens(nums):
+    return sorted([x for x in nums if x % 2 == 0], reverse=True)
+''',
+    "bounding-rectangle": '''def bounding_rectangle(points):
+    xs, ys = zip(*points)
+    return [min(xs), min(ys), max(xs) - min(xs) + 1, max(ys) - min(ys) + 1]
+''',
+    "scale-ingredients": '''def scale_ingredients(ingredients, multiplier):
+    return [' '.join([str(int(row.split()[0]) * multiplier)] + row.split()[1:]) for row in ingredients]
+''',
+    "value-position-flags": '''def position_flags(target, nums, flags):
+    return [int(any(value == target and i % 2 == 0 for i, value in enumerate(nums))),
+            int(any(value == target and i % 2 == 1 for i, value in enumerate(nums))),
+            int(target in nums[:len(nums)//2]), int(target in nums[len(nums)//2:])]
+''',
+    "buffet-revenue": '''def buffet_revenue(prices, capacity, events):
+    present, seated = set(), set()
+    total = 0
+    for customer in events:
+        if customer in present:
+            present.remove(customer)
+            seated.discard(customer)
+        else:
+            present.add(customer)
+            if len(seated) < capacity:
+                seated.add(customer)
+                total += prices[customer]
+    return total
+''',
+})
+
+
 def main():
     catalog = json.loads((ROOT / "app" / "practice" / "variation-catalog.json").read_text(encoding="utf-8"))
+    definitions = json.loads((ROOT / "app" / "practice" / "reported-task-definitions.json").read_text(encoding="utf-8"))
+    assert len({entry["problemId"] for entry in catalog}) == len(catalog)
+    assert len({entry["slug"] for entry in catalog}) == len(catalog)
+    assert {entry["slug"] for entry in catalog} == set(REFERENCES) == set(WRONG)
+    for task in definitions:
+        entry = next(entry for entry in catalog if entry["problemId"] == task["problemId"])
+        assert entry["slug"] == task["slug"]
+        assert entry["functionName"] == task["functionName"]
+        assert task["prompt"] in (PUBLIC / task["slug"] / "README.md").read_text(encoding="utf-8")
     count = 0
     for exercise in catalog:
         slug = exercise["slug"]
@@ -98,7 +219,7 @@ def main():
     assert runner.run_cases("x = 1", integer_case, "f")["error"]
     printed = runner.run_cases("def f(n):\n print('x' * 100000)\n return n", integer_case, "f")
     assert len(printed["console"]) == 4000 and printed["results"][0]["passed"]
-    print(f"Verified {count} tests, five practice packs, and harness error handling.")
+    print(f"Verified {count} tests, {len(catalog)} practice packs, complete task coverage, and harness error handling.")
 
 
 if __name__ == "__main__":

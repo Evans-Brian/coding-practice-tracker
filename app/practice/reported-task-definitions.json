@@ -1,0 +1,74 @@
+[
+  {
+    "slug": "alphabetical-word-count",
+    "problemId": "upstart-alphabetical-word-count",
+    "functionName": "count_words",
+    "arguments": ["words"],
+    "signature": "count_words(words: list[str]) -> list[list]",
+    "docstring": "Return [word, count] pairs sorted by word, not by frequency.",
+    "prompt": "Implement count_words(words) -> list[list].\n\nGiven a list of words, count how many times each distinct word occurs. Return a list of two-element lists [word, count], sorted in ascending lexicographical order by word. Counts must be integers. Each distinct word appears exactly once in the result.\n\nPractice rules: matching is case-sensitive. Use Python's default string ordering: uppercase letters sort before lowercase letters. Words contain only ASCII letters and may be empty strings; an empty string is a valid word and sorts first. An empty input list returns []. Do not modify words. Handle up to 100,000 entries and 200,000 total characters.\n\nExample 1: [\"pear\", \"apple\", \"pear\"] → [[\"apple\", 1], [\"pear\", 2]].\nExample 2: [\"b\", \"a\", \"b\", \"a\", \"b\"] → [[\"a\", 2], [\"b\", 3]].\nExample 3: [] → [].\n\nTest empty words, mixed case, equal counts, and a common word that sorts after a less frequent word. Return lists rather than tuples."
+  },
+  {
+    "slug": "deduplicate-integers",
+    "problemId": "upstart-deduplicate-integers",
+    "functionName": "deduplicate",
+    "arguments": ["nums"],
+    "signature": "deduplicate(nums: list[int]) -> list[int]",
+    "docstring": "Keep each integer's first occurrence in the original order.",
+    "prompt": "Implement deduplicate(nums) -> list[int].\n\nReturn a new list containing each distinct integer from nums exactly once. Keep the first occurrence of each value and preserve the order of those first occurrences. The input is not necessarily sorted. Do not modify nums.\n\nPractice constraints: 0 <= len(nums) <= 100,000 and -1,000,000,000 <= nums[i] <= 1,000,000,000. Empty input returns []. Zero and negative integers are valid.\n\nExample 1: [3, 5, 3, 7, 5] → [3, 5, 7].\nExample 2: [-2, 0, -2, -1, 0] → [-2, 0, -1].\nExample 3: [] → [].\n\nTest duplicates separated by other values, all-identical values, and an already unique list. Sorting the answer would change the required order."
+  },
+  {
+    "slug": "punctuation-transform",
+    "problemId": "upstart-punctuation-transform",
+    "functionName": "rewrite_punctuation",
+    "arguments": ["text"],
+    "signature": "rewrite_punctuation(text: str) -> str",
+    "docstring": "Replace original periods and extend each original exclamation run once.",
+    "prompt": "Implement rewrite_punctuation(text) -> str.\n\nApply two rules to the original text: replace every period (.) with one exclamation mark (!), and append one extra ! to every maximal consecutive run of existing ! characters. Preserve all other characters exactly, including whitespace. Return the transformed string.\n\nA maximal run is a consecutive group of ! characters that cannot be extended to the left or right in the original input. Each run receives just one additional !, regardless of its length. Exclamation marks created by replacing periods do not receive an additional mark. Apply the rules once; do not repeatedly transform newly created characters.\n\nPractice constraints: 0 <= len(text) <= 100,000; text contains ASCII characters. Empty input returns \"\".\n\nExample 1: \"Hello. Nice to meet you!!\" → \"Hello! Nice to meet you!!!\".\nExample 2: \".!..!!\" → \"!!!!!!!!\" (one converted period, a two-mark extended run, two converted periods, and a three-mark extended run).\nExample 3: \"\" → \"\".\n\nTest punctuation-only text, adjacent periods and exclamation runs, and whitespace between runs."
+  },
+  {
+    "slug": "reverse-even-numbers",
+    "problemId": "upstart-reverse-even-numbers",
+    "functionName": "reverse_evens",
+    "arguments": ["nums"],
+    "signature": "reverse_evens(nums: list[int]) -> list[int]",
+    "docstring": "Return even integers in reverse order of appearance; preserve duplicates.",
+    "prompt": "Implement reverse_evens(nums) -> list[int].\n\nReturn only the even integers from nums, in the reverse of their original order of appearance. Preserve repeated values. Zero and negative even integers count as even. Return a new list without modifying nums.\n\nPractice constraints: 0 <= len(nums) <= 100,000 and -1,000,000,000 <= nums[i] <= 1,000,000,000. Return [] when the input is empty or contains no even values.\n\nExample 1: [2, 3, 4] → [4, 2].\nExample 2: [-2, 1, 0, -4, -2] → [-2, -4, 0, -2].\nExample 3: [1, 3, 5] → [].\n\nTest all-even input, all-odd input, duplicates, zero, and negative values. Reversing is different from sorting in descending order."
+  },
+  {
+    "slug": "bounding-rectangle",
+    "problemId": "upstart-bounding-rectangle",
+    "functionName": "bounding_rectangle",
+    "arguments": ["points"],
+    "signature": "bounding_rectangle(points: list[list[int]]) -> list[int]",
+    "docstring": "Return [min_x, min_y, width, height] for a nonempty point list.",
+    "prompt": "Implement bounding_rectangle(points) -> list[int].\n\nGiven a nonempty list of coordinate pairs [x, y], return the smallest axis-aligned rectangle containing every point. Represent the result as a four-element list [min_x, min_y, width, height], where width = max_x - min_x and height = max_y - min_y. These are geometric distances: do not add one to either dimension. Do not modify points.\n\nPractice constraints: 1 <= len(points) <= 100,000. Coordinates are integers between -1,000,000,000 and 1,000,000,000. Repeated points are allowed. A single point produces zero width and zero height. Empty input is outside this practice contract.\n\nExample 1: [[1, 4], [-2, 8], [3, 2]] → [-2, 2, 5, 6].\nExample 2: [[5, -3]] → [5, -3, 0, 0].\nExample 3: [[-4, -7], [-2, -3]] → [-4, -7, 2, 4].\n\nTest all-negative coordinates, horizontal or vertical lines, and extrema found at different points. Return a list rather than a tuple."
+  },
+  {
+    "slug": "scale-ingredients",
+    "problemId": "upstart-scale-ingredients",
+    "functionName": "scale_ingredients",
+    "arguments": ["ingredients", "multiplier"],
+    "signature": "scale_ingredients(ingredients: list[str], multiplier: int) -> list[str]",
+    "docstring": "Multiply each leading integer and preserve the remaining ingredient text exactly.",
+    "prompt": "Implement scale_ingredients(ingredients, multiplier) -> list[str].\n\nEach ingredient string starts with a nonnegative integer quantity, followed by at least one ASCII space, then a unit and an ingredient name. Multiply the leading quantity by multiplier. Return the updated strings in their original order, preserving every character after the original quantity exactly, including repeated spaces, capitalization, and the full ingredient name. Do not modify ingredients.\n\nPractice rules: quantities are decimal integers between 0 and 1,000,000,000, with no leading zeros except the quantity 0. The multiplier is a positive integer between 1 and 1,000. Inputs are valid and contain ASCII text. Empty ingredient lists are allowed; an individual ingredient string is never empty. Handle up to 100,000 ingredients and 300,000 total input characters.\n\nExample 1: ingredients = [\"100 g flour\", \"50 g water\"], multiplier = 8 → [\"800 g flour\", \"400 g water\"].\nExample 2: ingredients = [\"0 tsp salt\", \"2 tbsp olive oil\"], multiplier = 3 → [\"0 tsp salt\", \"6 tbsp olive oil\"].\nExample 3: ingredients = [\"12  g  brown sugar\"], multiplier = 2 → [\"24  g  brown sugar\"].\n\nTest zero quantities, multiplier 1, multiword names, repeated spaces, and numbers elsewhere in ingredient names."
+  },
+  {
+    "slug": "value-position-flags",
+    "problemId": "upstart-value-position-flags",
+    "functionName": "position_flags",
+    "arguments": ["target", "nums", "flags"],
+    "signature": "position_flags(target: int, nums: list[int], flags: list[int]) -> list[int]",
+    "docstring": "Return enabled occurrence checks for even indexes, odd indexes, first half, second half.",
+    "prompt": "Implement position_flags(target, nums, flags) -> list[int].\n\nReturn four integer 0/1 results in this exact order: whether target appears at an even index, at an odd index, in the first half of nums, and in the second half of nums. Indexes are zero-based. nums has even length; the first half contains indexes below len(nums) // 2, and the second half contains the rest.\n\nflags contains exactly four integers, each 0 or 1, in the same order as the four checks. A disabled check (flag 0) must return 0 even if a matching value exists. An enabled check returns 1 if at least one matching occurrence satisfies it. Different occurrences may satisfy different checks. Return integers rather than Boolean values. Do not modify nums or flags.\n\nPractice constraints: 0 <= len(nums) <= 100,000, with even length. Values and target are integers between -1,000,000,000 and 1,000,000,000. Empty input is valid and returns [0, 0, 0, 0].\n\nExample 1: target = 5, nums = [5, 1, 2, 5], flags = [1, 1, 1, 1] → [1, 1, 1, 1].\nExample 2: target = 7, nums = [0, 0, 7, 0], flags = [1, 1, 1, 1] → [1, 0, 0, 1].\nExample 3: target = 5, nums = [5, 1, 2, 5], flags = [0, 1, 0, 1] → [0, 1, 0, 1].\n\nTest the exact half boundary, odd indexes, disabled checks, repeated matches, and a missing target."
+  },
+  {
+    "slug": "buffet-revenue",
+    "problemId": "upstart-buffet-revenue",
+    "functionName": "buffet_revenue",
+    "arguments": ["prices", "capacity", "events"],
+    "signature": "buffet_revenue(prices: list[int], capacity: int, events: list[int]) -> int",
+    "docstring": "Simulate admissions and departures; charge each admitted customer at most once.",
+    "prompt": "Implement buffet_revenue(prices, capacity, events) -> int.\n\nA restaurant starts empty. prices[id] is the nonnegative integer price for customer id. Process events in order; each event contains one customer ID. Each customer's first, third, fifth, and subsequent odd-numbered events are arrivals. Their second, fourth, sixth, and subsequent even-numbered events are departures. A customer can return after leaving.\n\nOn arrival, admit the customer if fewer than capacity customers are seated; otherwise they wait outside. On departure, a seated customer leaves and frees a seat; a waiting customer simply leaves the waiting area. Waiting customers are never automatically admitted when a seat opens, and do not retry admission until they have departed and arrived again. Charge a customer only on their first successful admission, at their listed price; later admissions earn no additional revenue. Return total revenue as an integer. Do not modify any inputs.\n\nPractice constraints: 0 <= len(prices) <= 100,000, 0 <= prices[id] <= 1,000,000,000, 1 <= capacity <= 100,000, and 0 <= len(events) <= 100,000. Every event ID is a valid index in prices. Empty events return 0; if prices is empty then events is also empty. Events may end with customers still seated or waiting.\n\nExample 1: prices = [10, 20, 30], capacity = 2, events = [0, 1, 2, 0, 2, 0] → 30. Customer 2 waits and later leaves without admission; customer 0's return is free.\nExample 2: prices = [10, 20], capacity = 1, events = [0, 1, 0, 1, 1] → 30. Customer 1 is admitted only after leaving the waiting area and returning.\nExample 3: prices = [10, 20], capacity = 1, events = [] → 0.\n\nTest full capacity, waiting departures, return visits, zero-price customers, and seats opening while somebody waits. These waiting and charging rules are explicit practice assumptions for the reported task."
+  }
+]

@@ -267,5 +267,533 @@
         "sample": true
       }
     ]
+  },
+  {
+    "slug": "alphabetical-word-count",
+    "problemId": "upstart-alphabetical-word-count",
+    "functionName": "count_words",
+    "arguments": [
+      "words"
+    ],
+    "starter": "def count_words(words: list[str]) -> list[list]:\n    \"\"\"Return [word, count] pairs sorted by word, not by frequency.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement count_words\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Alphabetical order, not frequency",
+        "args": [
+          [
+            "pear",
+            "apple",
+            "pear"
+          ]
+        ],
+        "expected": [
+          [
+            "apple",
+            1
+          ],
+          [
+            "pear",
+            2
+          ]
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Unequal counts",
+        "args": [
+          [
+            "b",
+            "a",
+            "b",
+            "a",
+            "b"
+          ]
+        ],
+        "expected": [
+          [
+            "a",
+            2
+          ],
+          [
+            "b",
+            3
+          ]
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Empty list",
+        "args": [
+          []
+        ],
+        "expected": [],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "deduplicate-integers",
+    "problemId": "upstart-deduplicate-integers",
+    "functionName": "deduplicate",
+    "arguments": [
+      "nums"
+    ],
+    "starter": "def deduplicate(nums: list[int]) -> list[int]:\n    \"\"\"Keep each integer's first occurrence in the original order.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement deduplicate\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Keep first occurrences",
+        "args": [
+          [
+            3,
+            5,
+            3,
+            7,
+            5
+          ]
+        ],
+        "expected": [
+          3,
+          5,
+          7
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Negative values and zero",
+        "args": [
+          [
+            -2,
+            0,
+            -2,
+            -1,
+            0
+          ]
+        ],
+        "expected": [
+          -2,
+          0,
+          -1
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Empty list",
+        "args": [
+          []
+        ],
+        "expected": [],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "punctuation-transform",
+    "problemId": "upstart-punctuation-transform",
+    "functionName": "rewrite_punctuation",
+    "arguments": [
+      "text"
+    ],
+    "starter": "def rewrite_punctuation(text: str) -> str:\n    \"\"\"Replace original periods and extend each original exclamation run once.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement rewrite_punctuation\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Periods and existing run",
+        "args": [
+          "Hello. Nice to meet you!!"
+        ],
+        "expected": "Hello! Nice to meet you!!!",
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Adjacent original runs and periods",
+        "args": [
+          ".!..!!"
+        ],
+        "expected": "!!!!!!!!",
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Empty text",
+        "args": [
+          ""
+        ],
+        "expected": "",
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "reverse-even-numbers",
+    "problemId": "upstart-reverse-even-numbers",
+    "functionName": "reverse_evens",
+    "arguments": [
+      "nums"
+    ],
+    "starter": "def reverse_evens(nums: list[int]) -> list[int]:\n    \"\"\"Return even integers in reverse order of appearance; preserve duplicates.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement reverse_evens\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Reverse filtered order",
+        "args": [
+          [
+            2,
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          4,
+          2
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Negative values, zero, and duplicates",
+        "args": [
+          [
+            -2,
+            1,
+            0,
+            -4,
+            -2
+          ]
+        ],
+        "expected": [
+          -2,
+          -4,
+          0,
+          -2
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "No even values",
+        "args": [
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "expected": [],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "bounding-rectangle",
+    "problemId": "upstart-bounding-rectangle",
+    "functionName": "bounding_rectangle",
+    "arguments": [
+      "points"
+    ],
+    "starter": "def bounding_rectangle(points: list[list[int]]) -> list[int]:\n    \"\"\"Return [min_x, min_y, width, height] for a nonempty point list.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement bounding_rectangle\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Extrema at different points",
+        "args": [
+          [
+            [
+              1,
+              4
+            ],
+            [
+              -2,
+              8
+            ],
+            [
+              3,
+              2
+            ]
+          ]
+        ],
+        "expected": [
+          -2,
+          2,
+          5,
+          6
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Single point",
+        "args": [
+          [
+            [
+              5,
+              -3
+            ]
+          ]
+        ],
+        "expected": [
+          5,
+          -3,
+          0,
+          0
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "All negative coordinates",
+        "args": [
+          [
+            [
+              -4,
+              -7
+            ],
+            [
+              -2,
+              -3
+            ]
+          ]
+        ],
+        "expected": [
+          -4,
+          -7,
+          2,
+          4
+        ],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "scale-ingredients",
+    "problemId": "upstart-scale-ingredients",
+    "functionName": "scale_ingredients",
+    "arguments": [
+      "ingredients",
+      "multiplier"
+    ],
+    "starter": "def scale_ingredients(ingredients: list[str], multiplier: int) -> list[str]:\n    \"\"\"Multiply each leading integer and preserve the remaining ingredient text exactly.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement scale_ingredients\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Scale two ingredients",
+        "args": [
+          [
+            "100 g flour",
+            "50 g water"
+          ],
+          8
+        ],
+        "expected": [
+          "800 g flour",
+          "400 g water"
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Zero and multiword name",
+        "args": [
+          [
+            "0 tsp salt",
+            "2 tbsp olive oil"
+          ],
+          3
+        ],
+        "expected": [
+          "0 tsp salt",
+          "6 tbsp olive oil"
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Preserve repeated spaces",
+        "args": [
+          [
+            "12  g  brown sugar"
+          ],
+          2
+        ],
+        "expected": [
+          "24  g  brown sugar"
+        ],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "value-position-flags",
+    "problemId": "upstart-value-position-flags",
+    "functionName": "position_flags",
+    "arguments": [
+      "target",
+      "nums",
+      "flags"
+    ],
+    "starter": "def position_flags(target: int, nums: list[int], flags: list[int]) -> list[int]:\n    \"\"\"Return enabled occurrence checks for even indexes, odd indexes, first half, second half.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement position_flags\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Different occurrences satisfy all checks",
+        "args": [
+          5,
+          [
+            5,
+            1,
+            2,
+            5
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Match at exact half boundary",
+        "args": [
+          7,
+          [
+            0,
+            0,
+            7,
+            0
+          ],
+          [
+            1,
+            1,
+            1,
+            1
+          ]
+        ],
+        "expected": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "Disable some matching checks",
+        "args": [
+          5,
+          [
+            5,
+            1,
+            2,
+            5
+          ],
+          [
+            0,
+            1,
+            0,
+            1
+          ]
+        ],
+        "expected": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "sample": true
+      }
+    ]
+  },
+  {
+    "slug": "buffet-revenue",
+    "problemId": "upstart-buffet-revenue",
+    "functionName": "buffet_revenue",
+    "arguments": [
+      "prices",
+      "capacity",
+      "events"
+    ],
+    "starter": "def buffet_revenue(prices: list[int], capacity: int, events: list[int]) -> int:\n    \"\"\"Simulate admissions and departures; charge each admitted customer at most once.\"\"\"\n    # Return the answer; do not print it.\n    raise NotImplementedError(\"Implement buffet_revenue\")\n",
+    "testCount": 20,
+    "examples": [
+      {
+        "id": "case-01",
+        "name": "Waiting and free return visit",
+        "args": [
+          [
+            10,
+            20,
+            30
+          ],
+          2,
+          [
+            0,
+            1,
+            2,
+            0,
+            2,
+            0
+          ]
+        ],
+        "expected": 30,
+        "sample": true
+      },
+      {
+        "id": "case-02",
+        "name": "Waiting customer leaves and retries",
+        "args": [
+          [
+            10,
+            20
+          ],
+          1,
+          [
+            0,
+            1,
+            0,
+            1,
+            1
+          ]
+        ],
+        "expected": 30,
+        "sample": true
+      },
+      {
+        "id": "case-03",
+        "name": "No events",
+        "args": [
+          [
+            10,
+            20
+          ],
+          1,
+          []
+        ],
+        "expected": 0,
+        "sample": true
+      }
+    ]
   }
 ]

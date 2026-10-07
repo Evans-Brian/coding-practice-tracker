@@ -80,7 +80,7 @@ export default function VariationExercise({exercise}:{exercise:VariationExercise
     <h3>Examples</h3>{examples.map((sample,index)=><div className="exercise-example" key={sample.id}><strong>Example {index+1}</strong><pre>{sample.args.map((value,i)=>argumentNames[i]+' = '+JSON.stringify(value)).join('\n')}{'\n'}returns {JSON.stringify(sample.expected)}</pre></div>)}
     <p className="exercise-provenance">Practice reconstruction inspired by the <a href={question.source!.url} target="_blank" rel="noopener noreferrer">reported Upstart task</a>. The precise rules and tests here were created for practice; they are not Upstart’s original test suite.</p>
     <p className="exercise-files"><a href={assets+'tests.json'} download>Test data</a><a href="/practice/variation-runner.py" download="run_tests.py">Python test runner</a><a href={assets+'README.md'} download>Local instructions</a></p>
-    <p><a href={'https://leetcode.com/problems/'+question.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>
+    {question.leetcodeFoundationSlug&&<p><a href={'https://leetcode.com/problems/'+question.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>}
    </section>
    <div className="exercise-code-column">
     <section className="exercise-editor" aria-labelledby="editor-heading"><div className="exercise-panel-heading"><h2 id="editor-heading">Your solution</h2><button className="save" onClick={downloadCode}>Download code</button></div>

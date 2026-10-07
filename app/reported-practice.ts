@@ -1,3 +1,5 @@
+import taskDefinitions from './practice/reported-task-definitions.json';
+
 export type ReportSource = {label:string; url:string; date:string; edited:boolean};
 export type QuestionDefinition = {
  name:string; slug:string; theme:string; difficulty:string; grind75:boolean;
@@ -13,7 +15,7 @@ const march:ReportSource={label:'PracHub edited OA account',url:'https://prachub
 const julyFour:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-recalling-all-5-online-assessment-questions',date:'Interview month: Jul 2026',edited:true};
 const julySix:ReportSource={label:'PracHub edited OA account',url:'https://prachub.com/interview-experiences/upstart-software-engineer-interview-experience-six-oa-questions-buried-in-walls-of-text',date:'Interview month: Jul 2026',edited:true};
 
-export const reportedPractice:QuestionDefinition[]=[
+const reportedQuestions:QuestionDefinition[]=[
  {name:'Decode an anagram sentence',slug:'upstart-anagram-sentence',theme:'Character counts · dictionary lookup',difficulty:'Medium',grind75:false,kind:'custom',matchLabel:'Reported task',source:november,
  reportedTask:'Restore scrambled words using a vocabulary and their first/last letters.',
  relationship:'Extension of Group Anagrams. The original post is partly restricted; its visible text supports vocabulary lookup and first/last-letter disambiguation. A March 2026 edited account describes the same pattern.',
@@ -71,3 +73,8 @@ export const reportedPractice:QuestionDefinition[]=[
  relationship:'There is no sufficiently close single LeetCode match. This practice reconstruction states the waiting rules, which should be clarified in an interview.',
  practicePrompt:'Given prices indexed by customer ID, a positive capacity, and an event list, alternate each customer’s events between arrival and departure. Seat an arrival if a seat is free. Otherwise mark them waiting outside; for this drill, waiting customers are not automatically seated when a seat opens. Remove them on departure. Add their price only the first time they are admitted. Assume the restaurant starts empty.\nExample: prices = [10, 20, 30], capacity = 2, events = [0, 1, 2, 0, 2, 0] → 30.\nClarify automatic seating, charging on admission, and return visits before solving a different version.'}
 ];
+
+export const reportedPractice:QuestionDefinition[]=reportedQuestions.map(question=>{
+ const exercise=taskDefinitions.find(entry=>entry.problemId===question.slug);
+ return exercise?{...question,practicePrompt:exercise.prompt,exercisePath:'/practice/'+exercise.slug}:question;
+});

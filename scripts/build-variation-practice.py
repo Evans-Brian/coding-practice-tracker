@@ -5,6 +5,7 @@ import re
 import string
 import zipfile
 from pathlib import Path
+from reported_task_fixtures import build_fixtures
 
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC = ROOT / "public" / "practice"
@@ -13,7 +14,7 @@ PROMPTS = re.findall(r'prompt:`([\s\S]*?)`', (ROOT / "app" / "reported-variation
 assert len(PROMPTS) == 5
 
 
-def write_exercise(slug, function_name, arguments, signature, docstring, fixtures):
+def write_exercise(slug, function_name, arguments, signature, docstring, fixtures, prompt=None):
     cases = [{"id": f"case-{i + 1:02}", "name": name, "args": args,
               "expected": expected, "sample": i < 3}
              for i, (name, args, expected) in enumerate(fixtures)]
@@ -51,7 +52,7 @@ with the editor's Stop run button, or interrupt the local Python process.
 
 ## Full practice contract
 
-{PROMPTS[len(CATALOG)]}
+{prompt if prompt is not None else PROMPTS[len(CATALOG)]}
 '''
     (folder / "README.md").write_text(instructions, encoding="utf-8")
     with zipfile.ZipFile(folder / "practice.zip", "w", zipfile.ZIP_DEFLATED) as archive:
@@ -178,6 +179,12 @@ multiples = [(f"Exclusive limit {n:,}", [n], sum(x for x in range(1, n) if x % 3
              for n in limits]
 write_exercise("sum-multiples-below-limit", "sum_multiples_below", ["n"],
                "sum_multiples_below(n: int) -> int", "Sum positive multiples of 3, 5, or 7 strictly below n, counting each once.", multiples)
+
+reported_tasks = json.loads((ROOT / "app" / "practice" / "reported-task-definitions.json").read_text(encoding="utf-8"))
+task_fixtures = build_fixtures()
+for task in reported_tasks:
+    write_exercise(task["slug"], task["functionName"], task["arguments"], task["signature"],
+                   task["docstring"], task_fixtures[task["slug"]], prompt=task["prompt"])
 
 (ROOT / "app" / "practice" / "variation-catalog.json").write_text(json.dumps(CATALOG, indent=2) + "\n", encoding="utf-8")
 print(json.dumps({"exercises": len(CATALOG), "total_tests": sum(x["testCount"] for x in CATALOG)}))
