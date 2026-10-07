@@ -34,7 +34,7 @@ export default function Tracker({view='practice'}:{view?:'practice'|'repeat'|'do
  return <main>
  {view!=='done'&&<aside className="edge-case-reminder" aria-label="Practice reminder">
    <strong>Always think about edge cases.</strong>
-   <p>Especially empty strings and empty inputs. Use any remaining time to test them.</p>
+   <p>Read the question and examples carefully. Check especially for empty strings and empty inputs. Use any remaining time to test edge cases.</p>
  </aside>}
  <header><div className="brand"><span className="logo">U</span><span>INTERVIEW PRACTICE</span></div><h1>{view==='practice'?'Upstart practice notebook':view==='repeat'?'Questions to repeat':'Completed questions'}</h1><p className="intro">{data?visible.length+' questions':'Your questions'}, organized by relevance. {view==='repeat'?'Revisit, reflect, submit another attempt.':view==='done'?'Your completed attempts, with notes for later.':'Solve, reflect, repeat.'}</p><p className="context">Start with the <a href="https://leetcode.com/company/upstart/?favoriteSlug=upstart-all" target="_blank" rel="noopener noreferrer">six-question Upstart company list</a>, then recent reports and transferable techniques. These are study priorities, not predictions of your screen.</p></header>
  <p className="catalog-summary"><strong>{grind75Count} / 75 Grind 75 questions included</strong> · {data?eligible.length-grind75Count:currentQuestionCount-grind75Count} extras ({customQuestionCount} custom drills) · {data?eligible.length:currentQuestionCount} total across Practice, Repeat, and Done.</p>
