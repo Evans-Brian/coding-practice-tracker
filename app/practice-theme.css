@@ -67,12 +67,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .random-question-controls { display: flex; align-items: flex-end; gap: 10px; }
 .random-question-controls label { display: grid; gap: 5px; color: var(--muted); font-size: 11px; }
 .random-question select { background: var(--input); border: 1px solid #45454f; border-radius: 5px; padding: 7px 10px; color: var(--text); font-size: 13px; min-height: 34px; }
-.random-question .submit { font-size: 13px; padding: 7px 12px; min-height: 34px; cursor: pointer; }
-.random-question .submit:disabled { cursor: default; }
-.random-question-result { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; flex-basis: 100%; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
-.random-question-result>a:first-child { color: var(--text); font-size: 15px; font-weight: 600; text-decoration: none; }
-.random-question-result>a:hover { color: var(--accent-soft); text-decoration: underline; }
-.random-question-jump { margin-left: auto; }
+.random-question-controls .submit { font-size: 13px; padding: 7px 12px; min-height: 34px; cursor: pointer; }
+.random-question-controls .submit:disabled { cursor: default; }
+.random-question-result { min-width: 0; flex-basis: 100%; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 12px; }
+.random-question-card { border-radius: 8px; }
+.random-question-announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .study-main .not-prioritized { margin-top: 44px; padding-top: 26px; border-top: 1px solid #54545d; }
 .not-prioritized>h2 { margin: 0; font-size: 26px; line-height: 1.4; letter-spacing: -.03em; }
 .section-heading { margin: 0; padding: 13px 16px; background: var(--panel); border: 1px solid var(--border); border-bottom: 0; border-radius: 10px 10px 0 0; gap: 10px; }
@@ -191,7 +190,6 @@ footer { color: var(--muted); border-color: var(--border); font-size: 12px; }
   .section-heading { padding: 12px; }
   .section-heading h2, .section-heading h3 { font-size: 15px; }
   .random-question-controls { flex-wrap: wrap; }
-  .random-question-jump { margin-left: 0; }
   .section-heading .total { display: block; font-size: 10px; }
   .section-heading p { font-size: 11px; }
 }
