@@ -4,6 +4,8 @@ import { isCurrentQuestion, grind75Count, currentQuestionCount, customQuestionCo
 import {eligibleQuestions, studyGroups, neetcodeQuestions, type StudyQuestion, type StudyCatalog} from './study-catalog';
 import {blankProgress as blank, isCompleted, type Progress} from './progress-state';
 import AskedDate from './asked-date';
+import RandomQuestion from './random-question';
+const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation']);
 function Question({q,initial,onSubmitted,onSaved,variationHref}:{q:StudyQuestion;initial:Progress;onSubmitted:(progress:Progress)=>void;onSaved:(progress:Progress)=>void;variationHref?:string}){
  const [value,setValue]=useState(initial),[status,setStatus]=useState(""),[busy,setBusy]=useState(false);
  const current=useRef(initial), queue=useRef(Promise.resolve()), sequence=useRef(0);
@@ -15,7 +17,7 @@ function Question({q,initial,onSubmitted,onSaved,variationHref}:{q:StudyQuestion
  function draft(next:Progress){current.current=next;setValue(next);setStatus('Unsaved changes');}
  return <article id={'question-'+q.slug} className={isCompleted(value)?'question completed':'question'}>
  <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>{q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}<p><span className={'difficulty '+q.difficulty.toLowerCase()}>{q.difficulty}{q.kind==='custom'?' · estimated':''}</span> {q.theme}</p><p className="question-source"><span>{q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>{isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}{q.upstartTagged&&<span className="tagged">Company-list match</span>}{q.matchLabel&&<span className="reported">{q.matchLabel}</span>}</p>{q.reportedTask&&<p className="reported-task">Reported: {q.reportedTask}</p>}{q.relevance&&<p className="relevance">{q.relevance}</p>}{!q.neetcode150&&<AskedDate question={q}/>} {q.source&&<p className="evidence"><a href={q.source.url} target="_blank" rel="noopener noreferrer">{q.source.label}</a> · {q.source.date}{q.source.edited?' · supplementary evidence':''}</p>}{!q.neetcode150&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}</div></div>
- <div className="fields"><div><label>Completions</label><div className="counter"><button aria-label={'Decrease completions for '+q.name} disabled={busy||submitting||value.completions===0} onClick={()=>save({...current.current,completions:Math.max(0,current.current.completions-1)})}>−</button><output aria-label={'Completion count for '+q.name}>{value.completions}</output><button aria-label={'Increase completions for '+q.name} disabled={busy||submitting} onClick={()=>save({...current.current,completions:current.current.completions+1})}>+</button></div></div>
+ <div className="fields"><div><label>Completions</label><div className="counter"><output aria-label={'Completion count for '+q.name}>{value.completions}</output></div></div>
  <div><label htmlFor={'tries-'+q.slug}>Tries on last attempt</label><input id={'tries-'+q.slug} type="number" disabled={submitting} min="0" step="1" placeholder="—" value={value.tries??''} onChange={e=>draft({...current.current,tries:e.target.value===''?null:Math.max(0,Math.floor(Number(e.target.value)))})} onBlur={()=>{if(!submitLock.current)save(current.current);}}/></div>
  <label className="repeat"><input type="checkbox" disabled={submitting} checked={value.repeat} onChange={e=>save({...current.current,repeat:e.target.checked})}/> Should repeat</label></div>
  {variationHref&&<p className="evidence"><a href={variationHref}>Open standalone reported variation</a> · tracked separately</p>}
@@ -36,6 +38,25 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const completedCount=neetcodeQuestions.filter(q=>isCompleted(data?.[q.slug]??blank)).length;
  const questionHref=(slug:string)=>{const p=data?.[slug]??blank;return (isCompleted(p)?(p.repeat?'/repeat':'/done'):'/upstart')+'#question-'+slug;};
  const setProgress=(slug:string,progress:Progress)=>setData(previous=>({...previous,[slug]:progress}));
+ const priorityGroups=groups.map((_,i)=>i).filter(i=>!isNeetcode||!notPrioritizedTopics.has(groups[i].title));
+ const laterGroups=isNeetcode?groups.map((_,i)=>i).filter(i=>notPrioritizedTopics.has(groups[i].title)):[];
+ const groupOrder=[...priorityGroups,...laterGroups];
+ const hasLaterQuestions=laterGroups.some(i=>visible.some(q=>q.bucket===i));
+ const topicLinks=(indexes:number[])=>indexes.map(i=>(!data||visible.some(q=>q.bucket===i))&&<a key={i} href={'#bucket-'+i}><span>{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span>{groups[i].title}</a>);
+ const renderGroups=(indexes:number[])=>indexes.map(i=>{
+   if(!data)return null;
+   const b=groups[i],groupQuestions=visible.filter(q=>q.bucket===i);
+   if(!groupQuestions.length)return null;
+   const allGroupQuestions=eligible.filter(q=>q.bucket===i);
+   const groupCompleted=allGroupQuestions.filter(q=>isCompleted(data[q.slug]??blank)).length;
+   const TopicHeading=isNeetcode&&notPrioritizedTopics.has(b.title)?'h3':'h2';
+   return <section id={'bucket-'+i} key={i}>
+     <div className="section-heading"><span className="bucket-no">{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span><div><TopicHeading>{b.title}</TopicHeading>{b.description&&<p>{b.description}</p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     <div className="question-list">{groupQuestions.map(q=><Question key={q.slug} q={q} initial={data[q.slug]??blank} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
+       onSaved={progress=>{if(view==='practice')setProgress(q.slug,progress);}}
+       onSubmitted={progress=>{setProgress(q.slug,progress);setNotice(q.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/>)}</div>
+   </section>;
+ });
  return <div className="study-app">
  <header className="study-topbar">
    <a className="brand" href="/"><span className="logo">N</span><span>Practice notebook</span></a>
@@ -49,7 +70,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  <div className="study-layout">
  <aside className="study-sidebar">
    <p className="sidebar-heading">{isUpstart?'Study priorities':'Topics'}</p>
-   <nav className={isUpstart?'':'topic-nav'} aria-label={isUpstart?'Question buckets':'Question topics'}>{groups.map((b,i)=>(!data||visible.some(q=>q.bucket===i))&&<a key={i} href={'#bucket-'+i}><span>{String(i+1).padStart(2,'0')}</span>{b.title}</a>)}</nav>
+   <nav className={isUpstart?'':'topic-nav'} aria-label={isUpstart?'Question buckets':'Question topics'}>{topicLinks(priorityGroups)}{laterGroups.length>0&&(!data||hasLaterQuestions)&&<span className="sidebar-divider">Not Prioritized</span>}{topicLinks(laterGroups)}</nav>
  </aside>
  <main className="study-main">
  {view!=='done'&&<aside className="edge-case-reminder" aria-label="Practice reminder">
@@ -67,18 +88,8 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  <div className="storage-note">{isUpstart?<>Includes the complete <a href="https://www.techinterviewhandbook.org/grind75/" target="_blank" rel="noopener noreferrer">default Grind 75</a>, all six company-list matches, and recent-report practice. LeetCode proxies link to their problems; custom drills include a prompt. Standalone reported variations have their own notes and progress. </>:<>List and topics follow <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noopener noreferrer">NeetCode 150</a>. Every question links to LeetCode and shows its difficulty. </>}Completed questions are in Repeat or Done. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</div>
  {isUpstart&&<p className="date-guide">Asked dates describe a documented occurrence or an estimate from a dated report. They are not a last-asked date. Dates on proxy cards apply to the reported variation; unknown means no defensible interview date. Page updates are not treated as interview dates.</p>}
  {notice&&<p className="storage-note" role="status">{notice}</p>}
- {error?<div className="error" role="alert">Your progress couldn’t load. <button onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:visible.length===0?<p className="empty">{view==='practice'?'All questions are completed. Visit Repeat to practice again.':view==='repeat'?'No completed questions to repeat yet. Check Should repeat before submitting an attempt.':'No questions here yet. Uncheck Should repeat and submit a completed attempt.'}</p>:groups.map((b,i)=>{
-   const groupQuestions=visible.filter(q=>q.bucket===i);
-   if(!groupQuestions.length)return null;
-   const allGroupQuestions=eligible.filter(q=>q.bucket===i);
-   const groupCompleted=allGroupQuestions.filter(q=>isCompleted(data[q.slug]??blank)).length;
-   return <section id={'bucket-'+i} key={i}>
-     <div className="section-heading"><span className="bucket-no">{String(i+1).padStart(2,'0')}</span><div><h2>{b.title}</h2>{b.description&&<p>{b.description}</p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
-     <div className="question-list">{groupQuestions.map(q=><Question key={q.slug} q={q} initial={data[q.slug]??blank} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
-       onSaved={progress=>{if(view==='practice')setProgress(q.slug,progress);}}
-       onSubmitted={progress=>{setProgress(q.slug,progress);setNotice(q.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/>)}</div>
-   </section>;
- })}
+ {isNeetcode&&!error&&<RandomQuestion questions={data?visible:null}/>}
+ {error?<div className="error" role="alert">Your progress couldn’t load. <button onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:visible.length===0?<p className="empty">{view==='practice'?'All questions are completed. Visit Repeat to practice again.':view==='repeat'?'No completed questions to repeat yet. Check Should repeat before submitting an attempt.':'No questions here yet. Uncheck Should repeat and submit a completed attempt.'}</p>:<>{renderGroups(priorityGroups)}{hasLaterQuestions&&<section className="not-prioritized" aria-labelledby="not-prioritized-heading"><h2 id="not-prioritized-heading">Not Prioritized</h2>{renderGroups(laterGroups)}</section>}</>}
  <footer>Practice the explanation as well as the code. Write your own tests before submitting.</footer></main></div></div>;
 }
 
