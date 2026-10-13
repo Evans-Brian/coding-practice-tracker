@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./practice-theme.css";
 
 export const metadata: Metadata = {
   title: "NeetCode 150 | Practice Notebook",
