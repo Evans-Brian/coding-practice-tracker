@@ -80,7 +80,7 @@ export default function AnagramExercise(){
  function downloadCode(){const url=URL.createObjectURL(new Blob([code],{type:'text/x-python'}));const link=document.createElement('a');link.href=url;link.download='solution.py';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 
  return <main className="exercise-page">
-  <a className="exercise-back" href="/#bucket-1">Back to your tracker</a>
+  <a className="exercise-back" href="/upstart#bucket-1">Back to Upstart prep</a>
   <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>Decode an anagram sentence</h1><p className="intro">Python · Medium, estimated · 24 tests</p></div><a className="exercise-download" href={assets+'anagram-sentence-practice.zip'} download>Download practice pack</a></header>
   <AskedDate question={{slug:problemId,source:{label:'1Point3Acres OA report',url:'https://www.1point3acres.com/bbs/thread-1153027-1-1.html',date:'Post: Nov 5, 2025',edited:false}}}/>
   <div className="exercise-workspace">

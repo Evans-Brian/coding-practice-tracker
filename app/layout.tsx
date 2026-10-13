@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Upstart Practice Notebook",
-  description: "LeetCode questions by relevance, with notes, completion counts, and repeat tracking.",
-  other: {
-    "codex-preview": "development",
-  },
+  title: "NeetCode 150 | Practice Notebook",
+  description: "NeetCode 150 by topic and difficulty, with shared notes, completion counts, repeat tracking, and Upstart preparation.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
