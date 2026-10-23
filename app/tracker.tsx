@@ -5,7 +5,7 @@ import {eligibleQuestions, studyGroups, neetcodeQuestions, dashboardQuestions, e
 import {blankProgress as blank, isCompleted, type Progress} from './progress-state';
 import Question, {QuestionProgressProvider} from './question-card';
 import RandomQuestion from './random-question';
-import BinarySearchTips from './binary-search-tips';
+import BinarySearchGuide from './binary-search-guide';
 const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation']);
 const prioritizedQuestions=dashboardQuestions.filter(q=>!notPrioritizedTopics.has(q.theme));
 const prioritizedDifficulties=(['Easy','Medium','Hard'] as const).map(name=>({name,total:prioritizedQuestions.filter(q=>q.difficulty===name).length}));
@@ -38,7 +38,8 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    const groupCompleted=allGroupQuestions.filter(q=>isCompleted(data[q.slug]??blank)).length;
    const TopicHeading=isNeetcode&&notPrioritizedTopics.has(b.title)?'h3':'h2';
    return <section id={'bucket-'+i} key={i}>
-     <div className="section-heading"><span className="bucket-no">{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span><div><TopicHeading>{b.title}</TopicHeading>{b.description&&<p>{b.description}</p>}{b.title==='Binary Search'&&<p><BinarySearchTips/></p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     <div className="section-heading"><span className="bucket-no">{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span><div><TopicHeading>{b.title}</TopicHeading>{b.description&&<p>{b.description}</p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     {b.title==='Binary Search'&&<BinarySearchGuide/>}
      <div className="question-list">{groupQuestions.map(q=>renderQuestion(q))}</div>
    </section>;
  });
