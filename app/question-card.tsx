@@ -38,13 +38,13 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
     <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>
       {q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}
       <p><span className={'difficulty '+q.difficulty.toLowerCase()}>{q.difficulty}{q.kind==='custom'?' · estimated':''}</span>{showTopic&&<> {q.theme}</>}</p>
-      <p className="question-source"><span>{q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>
+      <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
         {q.upstartTagged&&<span className="tagged">Company-list match</span>}{q.matchLabel&&<span className="reported">{q.matchLabel}</span>}</p>
       {q.reportedTask&&<p className="reported-task">Reported: {q.reportedTask}</p>}{q.relevance&&<p className="relevance">{q.relevance}</p>}
-      {!q.neetcode150&&<AskedDate question={q}/>}
+      {!q.neetcode150&&!q.dashboardExtra&&<AskedDate question={q}/>}
       {q.source&&<p className="evidence"><a href={q.source.url} target="_blank" rel="noopener noreferrer">{q.source.label}</a> · {q.source.date}{q.source.edited?' · supplementary evidence':''}</p>}
-      {!q.neetcode150&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
+      {!q.neetcode150&&!q.dashboardExtra&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
     </div></div>
     <div className="fields"><div><label>Completions</label><div className="counter"><output aria-label={'Completion count for '+q.name}>{value.completions}</output></div></div>
       <div><label htmlFor={triesId}>Tries on last attempt</label><input id={triesId} type="number" disabled={submitting} min="0" step="1" placeholder="—" value={value.tries??''}

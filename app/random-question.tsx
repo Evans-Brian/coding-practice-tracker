@@ -16,7 +16,7 @@ export default function RandomQuestion({questions,renderQuestion}:{questions:Stu
   return <section className="random-question" aria-labelledby="random-question-heading">
     <div className="random-question-heading">
       <h2 id="random-question-heading">Random question</h2>
-      <p>Pick an unfinished question from your prioritized NeetCode 150 list.</p>
+      <p>Pick an unfinished question from your prioritized practice list.</p>
     </div>
     <div className="random-question-controls">
       <label htmlFor="random-difficulty">Difficulty

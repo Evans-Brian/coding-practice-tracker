@@ -3,7 +3,7 @@ import {questions, buckets, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 
 export type StudyCatalog = 'neetcode' | 'upstart' | 'all';
-export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean};
+export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean};
 
 // Membership, titles, difficulty and within-topic order come from NeetCode's
 // official neetcode-gh/leetcode .problemSiteData.json (retrieved Oct 13, 2026).
@@ -29,20 +29,32 @@ export const neetcodeQuestions: StudyQuestion[] = source
   .sort((a, b) => a.bucket - b.bucket)
   .map((question, index) => ({...question, order: index + 1}));
 
-const neetcodeSlugs = new Set(neetcodeQuestions.map(q => q.slug));
+export const extraPracticeQuestions: StudyQuestion[] = [
+  {name:'Find First and Last Position of Element in Sorted Array',slug:'find-first-and-last-position-of-element-in-sorted-array'},
+  {name:'Find Peak Element',slug:'find-peak-element'},
+].map((question,index)=>({
+  ...question,difficulty:'Medium' as const,theme:'Binary Search',
+  kind:'leetcode' as const,grind75:false,upstartTagged:false,relevance:'',
+  bucket:neetcodeTopics.indexOf('Binary Search'),order:neetcodeQuestions.length+index+1,
+  dashboardExtra:true,
+}));
+
+export const dashboardQuestions:StudyQuestion[]=[...neetcodeQuestions,...extraPracticeQuestions]
+  .sort((a,b)=>a.bucket-b.bucket);
+const dashboardSlugs = new Set(dashboardQuestions.map(q => q.slug));
 export const allowedQuestionSlugs = new Set([
-  ...questions.map(q => q.slug), ...neetcodeSlugs,
+  ...questions.map(q => q.slug), ...dashboardSlugs,
 ]);
 
 const allQuestions: StudyQuestion[] = [
-  ...neetcodeQuestions,
-  ...questions.filter(q => !neetcodeSlugs.has(q.slug)).map((q, index) => ({
-    ...q, bucket: neetcodeTopics.length, order: neetcodeQuestions.length + index + 1,
+  ...dashboardQuestions,
+  ...questions.filter(q => !dashboardSlugs.has(q.slug)).map((q, index) => ({
+    ...q, bucket: neetcodeTopics.length, order: dashboardQuestions.length + index + 1,
   })),
 ];
 
 export function studyQuestions(catalog: StudyCatalog): StudyQuestion[] {
-  return catalog === 'neetcode' ? neetcodeQuestions : catalog === 'upstart' ? questions : allQuestions;
+  return catalog === 'neetcode' ? dashboardQuestions : catalog === 'upstart' ? questions : allQuestions;
 }
 
 export function studyGroups(catalog: StudyCatalog) {
@@ -55,6 +67,6 @@ export function studyGroups(catalog: StudyCatalog) {
 }
 
 export function eligibleQuestions(catalog: StudyCatalog, data: Record<string, Progress> | null) {
-  return studyQuestions(catalog).filter(q => q.neetcode150 || isCurrentQuestion(q.slug)
+  return studyQuestions(catalog).filter(q => q.neetcode150 || q.dashboardExtra || isCurrentQuestion(q.slug)
     || data?.[q.slug]?.retained || data?.[q.slug]?.submitted || (data?.[q.slug]?.completions ?? 0) > 0);
 }
