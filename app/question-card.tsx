@@ -6,6 +6,7 @@ import {type StudyQuestion} from './study-catalog';
 import {isCompleted,type Progress} from './progress-state';
 import {createQuestionProgress} from './question-progress';
 import AskedDate from './asked-date';
+import BinarySearchTips from './binary-search-tips';
 
 type Registry=Map<string,ReturnType<typeof createQuestionProgress>>;
 const ProgressRegistry=createContext<Registry|null>(null);
@@ -15,7 +16,7 @@ export function QuestionProgressProvider({children}:{children:ReactNode}) {
   return <ProgressRegistry.Provider value={registry.current}>{children}</ProgressRegistry.Provider>;
 }
 
-export default function Question({q,initial,onSubmitted,onSaved,variationHref,idPrefix='',showTopic=true}:{
+export default function Question({q,initial,onSubmitted,onSaved,variationHref,idPrefix='',showTopic=true,showBinarySearchTips=false}:{
   q:StudyQuestion;
   initial:Progress;
   onSubmitted:(progress:Progress)=>void;
@@ -23,6 +24,7 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
   variationHref?:string;
   idPrefix?:string;
   showTopic?:boolean;
+  showBinarySearchTips?:boolean;
 }) {
   const registry=useContext(ProgressRegistry);
   if(!registry)throw Error('Question progress provider is missing');
@@ -38,6 +40,7 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
     <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>
       {q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}
       <p><span className={'difficulty '+q.difficulty.toLowerCase()}>{q.difficulty}{q.kind==='custom'?' · estimated':''}</span>{showTopic&&<> {q.theme}</>}</p>
+      {showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
       <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
         {q.upstartTagged&&<span className="tagged">Company-list match</span>}{q.matchLabel&&<span className="reported">{q.matchLabel}</span>}</p>

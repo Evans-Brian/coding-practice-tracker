@@ -5,6 +5,7 @@ import {eligibleQuestions, studyGroups, neetcodeQuestions, dashboardQuestions, e
 import {blankProgress as blank, isCompleted, type Progress} from './progress-state';
 import Question, {QuestionProgressProvider} from './question-card';
 import RandomQuestion from './random-question';
+import BinarySearchTips from './binary-search-tips';
 const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation']);
 const prioritizedQuestions=dashboardQuestions.filter(q=>!notPrioritizedTopics.has(q.theme));
 const prioritizedDifficulties=(['Easy','Medium','Hard'] as const).map(name=>({name,total:prioritizedQuestions.filter(q=>q.difficulty===name).length}));
@@ -21,7 +22,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const prioritizedCompletedCount=prioritizedQuestions.filter(q=>isCompleted(data?.[q.slug]??blank)).length;
  const questionHref=(slug:string)=>{const p=data?.[slug]??blank;return (isCompleted(p)?(p.repeat?'/repeat':'/done'):'/upstart')+'#question-'+slug;};
  const setProgress=(slug:string,progress:Progress)=>setData(previous=>({...previous,[slug]:progress}));
- const renderQuestion=(q:StudyQuestion,options:{idPrefix?:string;showTopic?:boolean}={})=><Question key={q.slug} q={q} initial={data?.[q.slug]??blank} {...options} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
+ const renderQuestion=(q:StudyQuestion,options:{idPrefix?:string;showTopic?:boolean}={})=><Question key={q.slug} q={q} initial={data?.[q.slug]??blank} {...options} showBinarySearchTips={q.theme==='Binary Search'&&groups[q.bucket]?.title!=='Binary Search'} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
    onSaved={progress=>{if(view==='practice')setProgress(q.slug,progress);}}
    onSubmitted={progress=>{setProgress(q.slug,progress);setNotice(q.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/>;
  const priorityGroups=groups.map((_,i)=>i).filter(i=>!isNeetcode||!notPrioritizedTopics.has(groups[i].title));
@@ -37,7 +38,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    const groupCompleted=allGroupQuestions.filter(q=>isCompleted(data[q.slug]??blank)).length;
    const TopicHeading=isNeetcode&&notPrioritizedTopics.has(b.title)?'h3':'h2';
    return <section id={'bucket-'+i} key={i}>
-     <div className="section-heading"><span className="bucket-no">{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span><div><TopicHeading>{b.title}</TopicHeading>{b.description&&<p>{b.description}</p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     <div className="section-heading"><span className="bucket-no">{String(groupOrder.indexOf(i)+1).padStart(2,'0')}</span><div><TopicHeading>{b.title}</TopicHeading>{b.description&&<p>{b.description}</p>}{b.title==='Binary Search'&&<p><BinarySearchTips/></p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
      <div className="question-list">{groupQuestions.map(q=>renderQuestion(q))}</div>
    </section>;
  });
