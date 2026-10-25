@@ -61,8 +61,8 @@ export function studyGroups(catalog: StudyCatalog) {
   if (catalog === 'upstart') return buckets;
   const topics = neetcodeTopics.map(title => ({title, description: ''}));
   return catalog === 'neetcode' ? topics : [...topics, {
-    title: 'Upstart & other practice',
-    description: 'Your additional company preparation, custom drills, and completed questions outside NeetCode 150.',
+    title: 'Other practice',
+    description: 'Your custom drills and completed questions outside NeetCode 150.',
   }];
 }
 

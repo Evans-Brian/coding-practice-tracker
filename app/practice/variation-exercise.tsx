@@ -72,7 +72,7 @@ export default function VariationExercise({exercise}:{exercise:VariationExercise
  function downloadCode(){const url=URL.createObjectURL(new Blob([code],{type:'text/x-python'}));const link=document.createElement('a');link.href=url;link.download='solution.py';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
  const taskParagraphs=question.practicePrompt!.split('\n\n').filter(paragraph=>!paragraph.startsWith('Example ')&&!paragraph.startsWith('Test '));
  return <main className="exercise-page">
-  <a className="exercise-back" href="/upstart#bucket-1">Back to Upstart prep</a>
+  <a className="exercise-back" href="/">Back to practice</a>
   <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>{question.name}</h1><p className="intro">Python · <DifficultyLabel difficulty={question.difficulty} estimated/> · {testCount} tests</p></div><a className="exercise-download" href={assets+'practice.zip'} download>Download practice pack</a></header>
   <AskedDate question={question}/>
   <div className="exercise-workspace">

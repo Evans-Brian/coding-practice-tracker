@@ -6,6 +6,7 @@ import {blankProgress as blank, isCompleted, type Progress} from './progress-sta
 import Question, {QuestionProgressProvider} from './question-card';
 import RandomQuestion from './random-question';
 import BinarySearchGuide from './binary-search-guide';
+import StudyHeader from './study-header';
 const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation','Math & Geometry']);
 const isNotPrioritized=(q:StudyQuestion)=>notPrioritizedTopics.has(q.theme)
   || (q.difficulty==='Hard'&&(q.theme==='Linked List'||q.theme==='Trees'));
@@ -22,7 +23,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const count=(v:'repeat'|'done')=>allEligible.filter(q=>{const p=data?.[q.slug]??blank;return isCompleted(p)&&p.repeat===(v==='repeat');}).length;
  const completedCount=neetcodeQuestions.filter(q=>isCompleted(data?.[q.slug]??blank)).length;
  const prioritizedCompletedCount=prioritizedQuestions.filter(q=>isCompleted(data?.[q.slug]??blank)).length;
- const questionHref=(slug:string)=>{const p=data?.[slug]??blank;return (isCompleted(p)?(p.repeat?'/repeat':'/done'):'/upstart')+'#question-'+slug;};
+ const questionHref=(slug:string)=>{const p=data?.[slug]??blank;if(isCompleted(p))return (p.repeat?'/repeat':'/done')+'#question-'+slug;return allEligible.find(q=>q.slug===slug)?.exercisePath??(slug==='upstart-anagram-sentence'?'/practice/anagram-sentence':'/#question-'+slug);};
  const setProgress=(slug:string,progress:Progress)=>setData(previous=>({...previous,[slug]:progress}));
  const renderQuestion=(q:StudyQuestion,options:{idPrefix?:string;showTopic?:boolean}={})=><Question key={q.slug} q={q} initial={data?.[q.slug]??blank} {...options} showBinarySearchTips={q.theme==='Binary Search'&&groups[q.bucket]?.title!=='Binary Search'} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
    onSaved={progress=>{if(view==='practice')setProgress(q.slug,progress);}}
@@ -49,15 +50,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    </section>;
  });
  return <QuestionProgressProvider><div className="study-app">
- <header className="study-topbar">
-   <a className="brand" href="/"><span className="logo">N</span><span>Practice notebook</span></a>
-   <nav className="pages" aria-label="Study pages">
-     <a href="/" aria-current={isNeetcode?'page':undefined}>NeetCode 150{data&&<span>{completedCount}/150</span>}</a>
-     <a href="/repeat" aria-current={view==='repeat'?'page':undefined}>Repeat{data&&<span>{count('repeat')}</span>}</a>
-     <a href="/done" aria-current={view==='done'?'page':undefined}>Done{data&&<span>{count('done')}</span>}</a>
-     <a href="/upstart" aria-current={isUpstart?'page':undefined}>Upstart Prep</a>
-   </nav>
- </header>
+ <StudyHeader active={isNeetcode?'neetcode':view==='repeat'?'repeat':view==='done'?'done':undefined} counts={data?{neetcode:completedCount,repeat:count('repeat'),done:count('done')}:null}/>
  <div className="study-layout">
  <aside className="study-sidebar">
    <p className="sidebar-heading">{isUpstart?'Study priorities':'Topics'}</p>
@@ -72,7 +65,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    <div className="page-heading">
    <h1>{view==='repeat'?'Questions to repeat':view==='done'?'Completed questions':isNeetcode?'NeetCode 150':'Upstart practice notebook'}</h1>
    <p className="intro">{data?visible.length+(view==='practice'?' questions to practice':' questions'):isNeetcode?'NeetCode 150':'Your questions'}, {isUpstart?'organized by relevance':'grouped by topic'}. {view==='repeat'?'Revisit, reflect, submit another attempt.':view==='done'?'Your completed attempts, with notes for later.':'Solve, reflect, repeat.'}</p>
-   {isUpstart?<p className="context">Start with the <a href="https://leetcode.com/company/upstart/?favoriteSlug=upstart-all" target="_blank" rel="noopener noreferrer">six-question Upstart company list</a>, then recent reports and transferable techniques. These are study priorities, not predictions of your screen.</p>:<p className="context">{isNeetcode?'The complete NeetCode 150 list plus '+extraPracticeQuestions.length+' extra practice questions, organized into 18 topics.':'Your shared progress across NeetCode 150 and Upstart prep.'} Matching questions share notes, completions, tries, and repeat settings across every page.</p>}
+   {isUpstart?<p className="context">Start with the <a href="https://leetcode.com/company/upstart/?favoriteSlug=upstart-all" target="_blank" rel="noopener noreferrer">six-question Upstart company list</a>, then recent reports and transferable techniques. These are study priorities, not predictions of your screen.</p>:<p className="context">{isNeetcode?'The complete NeetCode 150 list plus '+extraPracticeQuestions.length+' extra practice questions, organized into 18 topics.':'Your shared progress across NeetCode 150 and additional practice.'} Matching questions share notes, completions, tries, and repeat settings across every page.</p>}
    </div>
    {isUpstart?<p className="catalog-summary upstart-summary"><strong>{grind75Count} / 75 Grind 75 questions included</strong> · {data?eligible.length-grind75Count:currentQuestionCount-grind75Count} extras ({customQuestionCount} custom drills) · {data?eligible.length:currentQuestionCount} total in Upstart prep.</p>:<div className="catalog-summary" aria-label="Prioritized practice progress"><span className="summary-label">Prioritized progress</span><strong>{data?prioritizedCompletedCount+' / '+prioritizedQuestions.length:prioritizedQuestions.length}</strong><span className="summary-caption">{data?'Completed':'Questions'}</span><div className="summary-difficulties">{prioritizedDifficulties.map(({name,total})=><span key={name} className={name.toLowerCase()}>{total} {name}</span>)}</div></div>}
  </header>

@@ -4,7 +4,7 @@ import "./practice-theme.css";
 
 export const metadata: Metadata = {
   title: "NeetCode 150 | Practice Notebook",
-  description: "NeetCode 150 by topic and difficulty, with shared notes, completion counts, repeat tracking, and Upstart preparation.",
+  description: "NeetCode 150 by topic and difficulty, with notes, repeat tracking, and daily practice points.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

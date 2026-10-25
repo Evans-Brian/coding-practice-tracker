@@ -15,6 +15,13 @@
       "when": 1791235137609,
       "tag": "0001_handy_richard_fisk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1792967779788,
+      "tag": "0002_rainy_cannonball",
+      "breakpoints": true
     }
   ]
 }
