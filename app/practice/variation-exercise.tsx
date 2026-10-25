@@ -1,6 +1,7 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
 import AskedDate from '../asked-date';
+import DifficultyLabel from '../difficulty-label';
 import type {PracticeCase,VariationExerciseDefinition} from './variation-definitions';
 
 type Row={id:string;name:string;passed:boolean;actual:unknown;expected:unknown;error:string|null};
@@ -72,7 +73,7 @@ export default function VariationExercise({exercise}:{exercise:VariationExercise
  const taskParagraphs=question.practicePrompt!.split('\n\n').filter(paragraph=>!paragraph.startsWith('Example ')&&!paragraph.startsWith('Test '));
  return <main className="exercise-page">
   <a className="exercise-back" href="/upstart#bucket-1">Back to Upstart prep</a>
-  <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>{question.name}</h1><p className="intro">Python · {question.difficulty}, estimated · {testCount} tests</p></div><a className="exercise-download" href={assets+'practice.zip'} download>Download practice pack</a></header>
+  <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>{question.name}</h1><p className="intro">Python · <DifficultyLabel difficulty={question.difficulty} estimated/> · {testCount} tests</p></div><a className="exercise-download" href={assets+'practice.zip'} download>Download practice pack</a></header>
   <AskedDate question={question}/>
   <div className="exercise-workspace">
    <section className="exercise-prompt" aria-labelledby="problem-heading"><h2 id="problem-heading">Your task</h2>

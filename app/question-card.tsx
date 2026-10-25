@@ -7,6 +7,7 @@ import {isCompleted,type Progress} from './progress-state';
 import {createQuestionProgress} from './question-progress';
 import AskedDate from './asked-date';
 import BinarySearchTips from './binary-search-tips';
+import DifficultyLabel from './difficulty-label';
 
 type Registry=Map<string,ReturnType<typeof createQuestionProgress>>;
 const ProgressRegistry=createContext<Registry|null>(null);
@@ -39,7 +40,7 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
   return <article id={idPrefix+'question-'+q.slug} data-question-slug={q.slug} className={isCompleted(value)?'question completed':'question'}>
     <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>
       {q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}
-      <p><span className={'difficulty '+q.difficulty.toLowerCase()}>{q.difficulty}{q.kind==='custom'?' · estimated':''}</span>{showTopic&&<> {q.theme}</>}</p>
+      <p><DifficultyLabel difficulty={q.difficulty} estimated={q.kind==='custom'}/>{showTopic&&<> {q.theme}</>}</p>
       {showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
       <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
