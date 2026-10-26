@@ -1,15 +1,13 @@
 import {reportedPractice, type QuestionDefinition} from './reported-practice';
 
-// Independent practice reconstructions, not verbatim assessment prompts.
-// Reuse the proxy's report evidence without transferring its saved progress.
+// Independent coding variations with their own saved progress.
 type Variation = {
  foundation:string; name:string; difficulty:string; theme:string;
- relationship:string; prompt:string;
+ prompt:string;
 };
 const variations:Variation[]=[
  {
   foundation:'decode-the-message',name:'Decode a doubly substituted message',difficulty:'Medium',theme:'Inverse character maps · strings',
-  relationship:'Standalone reconstruction of the reported two-key task. Decode the Message practices one substitution table; this question infers two tables from examples and reverses both. The input rules below are practice assumptions.',
   prompt:`Implement decode_double(known_ab, known_bc, encrypted) -> str.
 
 A message was encrypted twice: first with a substitution from alphabet A to B, then with another substitution from B to C. known_ab contains (original, transformed) example pairs for the first step; known_bc contains pairs for the second. Recover the original message from encrypted, which is in alphabet C.
@@ -24,7 +22,6 @@ Test repeated characters, multiple example pairs, spaces, and mappings where a l
  },
  {
   foundation:'minimum-absolute-difference',name:'Find the minimum difference value',difficulty:'Easy',theme:'Sorting · adjacent differences',
-  relationship:'Standalone reconstruction of the reported scalar-return task. Unlike Minimum Absolute Difference on LeetCode, return one integer and allow duplicate input values.',
   prompt:`Implement minimum_difference(nums) -> int.
 
 Given an integer list, return the smallest absolute difference between the values at any two distinct indexes. Return only the difference, not the pairs. Duplicate values are allowed and can produce a difference of zero. Do not mutate nums.
@@ -40,7 +37,6 @@ Test exactly two values, negative values, duplicate values, and unsorted input. 
  },
  {
   foundation:'merge-strings-alternately',name:'Interleave three equal-length strings',difficulty:'Easy',theme:'String indexing · implementation',
-  relationship:'Standalone reconstruction of the reported three-string task. Merge Strings Alternately on LeetCode has two input strings; this version has three equal-length inputs.',
   prompt:`Implement interleave_three(a, b, c) -> str.
 
 Return a string containing a[0], b[0], c[0], then a[1], b[1], c[1], and so on. The three strings are guaranteed to have equal length. Treat spaces and punctuation as ordinary characters; preserve every character exactly.
@@ -56,7 +52,6 @@ Test empty strings, single-character strings, repeated characters, and embedded 
  },
  {
   foundation:'jewels-and-stones',name:'Filter words by shared characters',difficulty:'Easy',theme:'Set membership · word filtering',
-  relationship:'Standalone reconstruction of the reported word-filter task. Jewels and Stones counts matching characters; this question returns the matching words in input order.',
   prompt:`Implement filter_words(words, allowed) -> list[str].
 
 Keep each word that contains at least one character appearing in allowed. Return the matching words in their original order, including repeated words. Matching is case-sensitive. A word is included once per occurrence in words, even if several of its characters match. Do not modify words.
@@ -72,7 +67,6 @@ Test no matches, multiple matching characters in one word, repeated allowed char
  },
  {
   foundation:'sum-multiples',name:'Sum multiples below an exclusive limit',difficulty:'Easy',theme:'Divisibility · boundary conditions',
-  relationship:'Standalone reconstruction of the reported exclusive-limit task. Sum Multiples on LeetCode includes n; this version includes only positive integers strictly smaller than n.',
   prompt:`Implement sum_multiples_below(n) -> int.
 
 Return the sum of all positive integers x such that x < n and x is divisible by 3, 5, or 7. Include each qualifying integer exactly once, even if it is divisible by more than one of these numbers. The upper bound n is excluded.
@@ -91,12 +85,10 @@ Test a limit divisible by 3, 5, or 7; overlapping multiples such as 15, 21, 35, 
 
 export const reportedVariations:QuestionDefinition[]=variations.map(variation=>{
  const foundation=reportedPractice.find(q=>q.slug===variation.foundation);
- if(!foundation?.reportedVariationSlug||!foundation.source)throw new Error('Missing report for variation: '+variation.foundation);
+ if(!foundation?.reportedVariationSlug)throw new Error('Missing foundation for variation: '+variation.foundation);
  return {
   name:variation.name,slug:foundation.reportedVariationSlug,theme:variation.theme,
-  difficulty:variation.difficulty,grind75:false,kind:'custom',matchLabel:'Reported variation',
-  source:foundation.source,reportedTask:foundation.reportedTask,
-  relationship:variation.relationship,practicePrompt:variation.prompt,
+  difficulty:variation.difficulty,grind75:false,kind:'custom',practicePrompt:variation.prompt,
   leetcodeFoundationSlug:foundation.slug,
   exercisePath:'/practice/'+foundation.reportedVariationSlug.slice('upstart-'.length)
  };

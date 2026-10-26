@@ -5,7 +5,6 @@ import {isCurrentQuestion} from './questions';
 import {type StudyQuestion} from './study-catalog';
 import {isCompleted,type Progress} from './progress-state';
 import {createQuestionProgress} from './question-progress';
-import AskedDate from './asked-date';
 import BinarySearchTips from './binary-search-tips';
 import DifficultyLabel from './difficulty-label';
 
@@ -44,10 +43,7 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
       {showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
       <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
-        {q.upstartTagged&&<span className="tagged">Company-list match</span>}{q.matchLabel&&<span className="reported">{q.matchLabel}</span>}</p>
-      {q.reportedTask&&<p className="reported-task">Reported: {q.reportedTask}</p>}{q.relevance&&<p className="relevance">{q.relevance}</p>}
-      {!q.neetcode150&&!q.dashboardExtra&&<AskedDate question={q}/>}
-      {q.source&&<p className="evidence"><a href={q.source.url} target="_blank" rel="noopener noreferrer">{q.source.label}</a> · {q.source.date}{q.source.edited?' · supplementary evidence':''}</p>}
+        </p>
       {!q.neetcode150&&!q.dashboardExtra&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
     </div></div>
     <div className="fields"><div><label>Completions</label><div className="counter"><output aria-label={'Completion count for '+q.name}>{value.completions}</output></div></div>
@@ -55,9 +51,9 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
         onChange={event=>controller.draft({...current(),tries:event.target.value===''?null:Math.max(0,Math.floor(Number(event.target.value)))})} onBlur={save}/></div>
       <label className="repeat"><input type="checkbox" disabled={submitting} checked={value.repeat} onChange={event=>controller.save({...current(),repeat:event.target.checked})}/> Should repeat</label>
     </div>
-    {variationHref&&<p className="evidence"><a href={variationHref}>Open standalone reported variation</a> · tracked separately</p>}
+    {variationHref&&<p className="evidence"><a href={variationHref}>Open related practice exercise</a> · tracked separately</p>}
     {q.leetcodeFoundationSlug&&<p className="evidence"><a href={'https://leetcode.com/problems/'+q.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>}
-    {q.practicePrompt&&<details className="practice-prompt" open={q.kind==='custom'}><summary>{q.kind==='custom'?'Practice prompt':'Practice the reported variation'}</summary><p>{q.practicePrompt}</p>
+    {q.practicePrompt&&<details className="practice-prompt" open={q.kind==='custom'}><summary>{q.kind==='custom'?'Practice prompt':'Practice a variation'}</summary><p>{q.practicePrompt}</p>
       {(q.exercisePath||q.slug==='upstart-anagram-sentence')&&<p><a className="exercise-start" href={q.exercisePath??'/practice/anagram-sentence'}>{q.exercisePath?'Solve with Python and 20 tests':'Solve with Python and 24 tests'}</a></p>}
     </details>}
     <div className="notes"><label htmlFor={notesId}>Notes</label><textarea id={notesId} disabled={submitting} placeholder="Approach, edge cases, what to revisit…" value={value.notes}

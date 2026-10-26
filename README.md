@@ -1,6 +1,46 @@
-# vinext-starter
+# Coding Practice Tracker
 
-A clean full-stack starter running on [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and Drizzle support.
+A personal coding practice app for building problem-solving skills over time.
+It includes the complete NeetCode 150, extra exercises, notes, repeat practice,
+and a daily points dashboard.
+
+## Features
+
+- Problems grouped by topic and difficulty, with links to LeetCode.
+- An unfinished-question picker that respects study priorities.
+- Shared notes, completion counts, and Repeat and Done lists.
+- Custom Python exercises with examples, runnable tests, and downloadable packs.
+- Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
+  per New York calendar day; completing it on another day earns points again.
+- Earlier completions without dates remain in the tracker as undated history.
+
+Progress and completion events are stored in Cloudflare D1. Local databases,
+environment files, and browser drafts are not included in the repository.
+Legacy record identifiers remain stable so existing progress and drafts continue
+to load after interface changes.
+
+## Development
+
+```sh
+npm ci
+npm run build
+npm run dev
+```
+
+Apply the pending local database migrations before using the tracker; see
+the Local D1 migrations section below. A fresh checkout needs all migrations
+in filename order.
+
+```sh
+node --experimental-strip-types --test tests/*.test.mjs
+npx tsc --noEmit
+python scripts/verify-variation-practice.py
+```
+
+The app uses React, TypeScript, [Vinext](https://github.com/cloudflare/vinext),
+Cloudflare Workers, and Drizzle migrations. Publishing uses the Sites workflow;
+the tracked hosting manifest identifies the existing deployment. Use your own
+Site identity when publishing a separate copy.
 
 ## Prerequisites
 
@@ -43,7 +83,7 @@ Local tool usage metrics are disabled by default. Set `WRANGLER_SEND_METRICS=tru
 - `.openai/hosting.json` declares optional Sites D1 and R2 bindings
 - `vite.config.ts` simulates declared bindings for local development
 - `db/index.ts` reads the D1 binding from the Cloudflare Worker environment
-- `db/schema.ts` starts intentionally empty
+- `db/schema.ts` defines saved progress and dated completion events
 - `@cloudflare/workers-types` provides Worker types; `cloudflare-env.d.ts` declares optional `DB`/`BUCKET` bindings—update these declarations if binding names change
 - `examples/d1/` contains an optional D1 example surface
 - `drizzle.config.ts` supports local migration generation when needed

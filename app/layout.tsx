@@ -3,7 +3,7 @@ import "./globals.css";
 import "./practice-theme.css";
 
 export const metadata: Metadata = {
-  title: "NeetCode 150 | Practice Notebook",
+  title: "Coding Practice",
   description: "NeetCode 150 by topic and difficulty, with notes, repeat tracking, and daily practice points.",
   icons: {
     icon: "/favicon.svg",

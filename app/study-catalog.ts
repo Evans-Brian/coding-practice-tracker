@@ -1,8 +1,8 @@
 import source from './neetcode150-source.json' with {type: 'json'};
-import {questions, buckets, isCurrentQuestion} from './questions';
+import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 
-export type StudyCatalog = 'neetcode' | 'upstart' | 'all';
+export type StudyCatalog = 'neetcode' | 'all';
 export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean};
 
 // Membership, titles, difficulty and within-topic order come from NeetCode's
@@ -22,8 +22,6 @@ export const neetcodeQuestions: StudyQuestion[] = source
     grind75: questions.find(q => q.slug === entry.slug)?.grind75 ?? false,
     kind: 'leetcode' as const,
     bucket: neetcodeTopics.indexOf(entry.theme),
-    upstartTagged: false,
-    relevance: '',
     neetcode150: true,
   }))
   .sort((a, b) => a.bucket - b.bucket)
@@ -34,7 +32,7 @@ export const extraPracticeQuestions: StudyQuestion[] = [
   {name:'Find Peak Element',slug:'find-peak-element'},
 ].map((question,index)=>({
   ...question,difficulty:'Medium' as const,theme:'Binary Search',
-  kind:'leetcode' as const,grind75:false,upstartTagged:false,relevance:'',
+  kind:'leetcode' as const,grind75:false,
   bucket:neetcodeTopics.indexOf('Binary Search'),order:neetcodeQuestions.length+index+1,
   dashboardExtra:true,
 }));
@@ -54,11 +52,10 @@ const allQuestions: StudyQuestion[] = [
 ];
 
 export function studyQuestions(catalog: StudyCatalog): StudyQuestion[] {
-  return catalog === 'neetcode' ? dashboardQuestions : catalog === 'upstart' ? questions : allQuestions;
+  return catalog === 'neetcode' ? dashboardQuestions : allQuestions;
 }
 
 export function studyGroups(catalog: StudyCatalog) {
-  if (catalog === 'upstart') return buckets;
   const topics = neetcodeTopics.map(title => ({title, description: ''}));
   return catalog === 'neetcode' ? topics : [...topics, {
     title: 'Other practice',

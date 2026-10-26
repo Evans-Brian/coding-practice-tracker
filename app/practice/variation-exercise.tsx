@@ -1,6 +1,5 @@
 'use client';
 import {useEffect,useRef,useState} from 'react';
-import AskedDate from '../asked-date';
 import DifficultyLabel from '../difficulty-label';
 import type {PracticeCase,VariationExerciseDefinition} from './variation-definitions';
 
@@ -73,13 +72,12 @@ export default function VariationExercise({exercise}:{exercise:VariationExercise
  const taskParagraphs=question.practicePrompt!.split('\n\n').filter(paragraph=>!paragraph.startsWith('Example ')&&!paragraph.startsWith('Test '));
  return <main className="exercise-page">
   <a className="exercise-back" href="/">Back to practice</a>
-  <header className="exercise-header"><div><div className="brand"><span className="logo">U</span><span>CUSTOM PRACTICE</span></div><h1>{question.name}</h1><p className="intro">Python · <DifficultyLabel difficulty={question.difficulty} estimated/> · {testCount} tests</p></div><a className="exercise-download" href={assets+'practice.zip'} download>Download practice pack</a></header>
-  <AskedDate question={question}/>
+  <header className="exercise-header"><div><div className="brand"><span className="logo">C</span><span>Custom practice</span></div><h1>{question.name}</h1><p className="intro">Python · <DifficultyLabel difficulty={question.difficulty} estimated/> · {testCount} tests</p></div><a className="exercise-download" href={assets+'practice.zip'} download>Download practice pack</a></header>
   <div className="exercise-workspace">
    <section className="exercise-prompt" aria-labelledby="problem-heading"><h2 id="problem-heading">Your task</h2>
     {taskParagraphs.map((paragraph,index)=><p className="exercise-contract" key={index}>{paragraph}</p>)}
     <h3>Examples</h3>{examples.map((sample,index)=><div className="exercise-example" key={sample.id}><strong>Example {index+1}</strong><pre>{sample.args.map((value,i)=>argumentNames[i]+' = '+JSON.stringify(value)).join('\n')}{'\n'}returns {JSON.stringify(sample.expected)}</pre></div>)}
-    <p className="exercise-provenance">Practice reconstruction inspired by the <a href={question.source!.url} target="_blank" rel="noopener noreferrer">reported Upstart task</a>. The precise rules and tests here were created for practice; they are not Upstart’s original test suite.</p>
+    <p className="exercise-provenance">This custom exercise includes explicit rules, examples, and 20 tests. Use the practice contract above to guide your solution.</p>
     <p className="exercise-files"><a href={assets+'tests.json'} download>Test data</a><a href="/practice/variation-runner.py" download="run_tests.py">Python test runner</a><a href={assets+'README.md'} download>Local instructions</a></p>
     {question.leetcodeFoundationSlug&&<p><a href={'https://leetcode.com/problems/'+question.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>}
    </section>

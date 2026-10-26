@@ -1,8 +1,7 @@
 # Decode an anagram sentence
 
-This is a practice reconstruction inspired by an Upstart OA report:
-https://www.1point3acres.com/bbs/thread-1153027-1-1.html
-These rules and tests were created for practice, not supplied by Upstart.
+Practice vocabulary lookup, character counting, and string reconstruction.
+The rules and tests below were created for this coding exercise.
 
 Implement `decode_sentence(vocabulary: List[str], sentence: str) -> str`.
 
@@ -40,5 +39,5 @@ You can also test a different file:
     python run_tests.py my_solution.py
 
 All cases and expected answers are visible in tests.json. Try writing your own
-edge cases before reviewing the suite. A pass checks this practice contract,
-not whether an answer would pass Upstart's actual assessment.
+edge cases before reviewing the suite. A pass checks the practice contract
+described above.

@@ -27,8 +27,8 @@ def write_exercise(slug, function_name, arguments, signature, docstring, fixture
     (folder / "solution.py").write_text(starter, encoding="utf-8")
     instructions = f'''# {slug.replace('-', ' ').title()}
 
-This is a practice reconstruction of a reported Upstart variation. The rules
-and tests are original practice material, not Upstart's assessment test suite.
+This is a standalone coding exercise. Its rules and tests were created
+for practice.
 Read the full prompt in the tracker. All inputs and expected outputs are in
 tests.json; the first three tests are examples. Do not mutate input arguments.
 

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import { grind75Count, currentQuestionCount, customQuestionCount } from "./questions";
 import {eligibleQuestions, studyGroups, neetcodeQuestions, dashboardQuestions, extraPracticeQuestions, type StudyQuestion, type StudyCatalog} from './study-catalog';
 import {blankProgress as blank, isCompleted, type Progress} from './progress-state';
 import Question, {QuestionProgressProvider} from './question-card';
@@ -16,7 +15,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const [data,setData]=useState<Record<string,Progress>|null>(null),[error,setError]=useState(false),[notice,setNotice]=useState('');
  async function load(){setError(false);try{const res=await fetch('/api/progress',{cache:'no-store'});if(!res.ok)throw Error();setData(await res.json());}catch{setError(true);}}
  useEffect(()=>{load();},[]);
- const isNeetcode=catalog==='neetcode',isUpstart=catalog==='upstart';
+ const isNeetcode=catalog==='neetcode';
  const groups=studyGroups(catalog),eligible=eligibleQuestions(catalog,data);
  const allEligible=eligibleQuestions('all',data);
  const visible=eligible.filter(q=>{const p=data?.[q.slug]??blank;return view==='practice'?!isCompleted(p):isCompleted(p)&&p.repeat===(view==='repeat');});
@@ -53,8 +52,8 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  <StudyHeader active={isNeetcode?'neetcode':view==='repeat'?'repeat':view==='done'?'done':undefined} counts={data?{neetcode:completedCount,repeat:count('repeat'),done:count('done')}:null}/>
  <div className="study-layout">
  <aside className="study-sidebar">
-   <p className="sidebar-heading">{isUpstart?'Study priorities':'Topics'}</p>
-   <nav className={isUpstart?'':'topic-nav'} aria-label={isUpstart?'Question buckets':'Question topics'}>{topicLinks(priorityGroups)}{laterGroups.length>0&&(!data||hasLaterQuestions)&&<span className="sidebar-divider">Not Prioritized</span>}{topicLinks(laterGroups,true)}</nav>
+   <p className="sidebar-heading">Topics</p>
+   <nav className="topic-nav" aria-label="Question topics">{topicLinks(priorityGroups)}{laterGroups.length>0&&(!data||hasLaterQuestions)&&<span className="sidebar-divider">Not Prioritized</span>}{topicLinks(laterGroups,true)}</nav>
  </aside>
  <main className="study-main">
  {view!=='done'&&<aside className="edge-case-reminder" aria-label="Practice reminder">
@@ -63,14 +62,13 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  </aside>}
  <header className="page-header">
    <div className="page-heading">
-   <h1>{view==='repeat'?'Questions to repeat':view==='done'?'Completed questions':isNeetcode?'NeetCode 150':'Upstart practice notebook'}</h1>
-   <p className="intro">{data?visible.length+(view==='practice'?' questions to practice':' questions'):isNeetcode?'NeetCode 150':'Your questions'}, {isUpstart?'organized by relevance':'grouped by topic'}. {view==='repeat'?'Revisit, reflect, submit another attempt.':view==='done'?'Your completed attempts, with notes for later.':'Solve, reflect, repeat.'}</p>
-   {isUpstart?<p className="context">Start with the <a href="https://leetcode.com/company/upstart/?favoriteSlug=upstart-all" target="_blank" rel="noopener noreferrer">six-question Upstart company list</a>, then recent reports and transferable techniques. These are study priorities, not predictions of your screen.</p>:<p className="context">{isNeetcode?'The complete NeetCode 150 list plus '+extraPracticeQuestions.length+' extra practice questions, organized into 18 topics.':'Your shared progress across NeetCode 150 and additional practice.'} Matching questions share notes, completions, tries, and repeat settings across every page.</p>}
+   <h1>{view==='repeat'?'Questions to repeat':view==='done'?'Completed questions':isNeetcode?'NeetCode 150':'Coding practice'}</h1>
+   <p className="intro">{data?visible.length+(view==='practice'?' questions to practice':' questions'):isNeetcode?'NeetCode 150':'Your questions'}, grouped by topic. {view==='repeat'?'Revisit, reflect, submit another attempt.':view==='done'?'Your completed attempts, with notes for later.':'Solve, reflect, repeat.'}</p>
+   <p className="context">{isNeetcode?'The complete NeetCode 150 list plus '+extraPracticeQuestions.length+' extra practice questions, organized into 18 topics.':'Your shared progress across NeetCode 150 and additional practice.'} Matching questions share notes, completions, tries, and repeat settings across every page.</p>
    </div>
-   {isUpstart?<p className="catalog-summary upstart-summary"><strong>{grind75Count} / 75 Grind 75 questions included</strong> · {data?eligible.length-grind75Count:currentQuestionCount-grind75Count} extras ({customQuestionCount} custom drills) · {data?eligible.length:currentQuestionCount} total in Upstart prep.</p>:<div className="catalog-summary" aria-label="Prioritized practice progress"><span className="summary-label">Prioritized progress</span><strong>{data?prioritizedCompletedCount+' / '+prioritizedQuestions.length:prioritizedQuestions.length}</strong><span className="summary-caption">{data?'Completed':'Questions'}</span><div className="summary-difficulties">{prioritizedDifficulties.map(({name,total})=><span key={name} className={name.toLowerCase()}>{total} {name}</span>)}</div></div>}
+   <div className="catalog-summary" aria-label="Prioritized practice progress"><span className="summary-label">Prioritized progress</span><strong>{data?prioritizedCompletedCount+' / '+prioritizedQuestions.length:prioritizedQuestions.length}</strong><span className="summary-caption">{data?'Completed':'Questions'}</span><div className="summary-difficulties">{prioritizedDifficulties.map(({name,total})=><span key={name} className={name.toLowerCase()}>{total} {name}</span>)}</div></div>
  </header>
- <div className="storage-note">{isUpstart?<>Includes the complete <a href="https://www.techinterviewhandbook.org/grind75/" target="_blank" rel="noopener noreferrer">default Grind 75</a>, all six company-list matches, and recent-report practice. LeetCode proxies link to their problems; custom drills include a prompt. Standalone reported variations have their own notes and progress. </>:<>List and topics follow <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noopener noreferrer">NeetCode 150</a>. Every question links to LeetCode and shows its difficulty. </>}Completed questions are in Repeat or Done. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</div>
- {isUpstart&&<p className="date-guide">Asked dates describe a documented occurrence or an estimate from a dated report. They are not a last-asked date. Dates on proxy cards apply to the reported variation; unknown means no defensible interview date. Page updates are not treated as interview dates.</p>}
+ <div className="storage-note">List and topics follow <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noopener noreferrer">NeetCode 150</a>. LeetCode questions link to their problems; custom drills include a practice prompt. Completed questions are in Repeat or Done. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</div>
  {notice&&<p className="storage-note" role="status">{notice}</p>}
  {isNeetcode&&!error&&<RandomQuestion questions={data?visible.filter(q=>!isNotPrioritized(q)):null} renderQuestion={q=>renderQuestion(q,{idPrefix:'random-',showTopic:false})}/>}
  {error?<div className="error" role="alert">Your progress couldn’t load. <button onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:visible.length===0?<p className="empty">{view==='practice'?'All questions are completed. Visit Repeat to practice again.':view==='repeat'?'No completed questions to repeat yet. Check Should repeat before submitting an attempt.':'No questions here yet. Uncheck Should repeat and submit a completed attempt.'}</p>:<>{renderGroups(priorityGroups)}{hasLaterQuestions&&<section className="not-prioritized" aria-labelledby="not-prioritized-heading"><h2 id="not-prioritized-heading">Not Prioritized</h2>{renderGroups(laterGroups,true)}</section>}</>}

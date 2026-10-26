@@ -9,7 +9,7 @@ function loadModule(entry) {
 const catalog = await loadModule('app/study-catalog.ts');
 const {questions: originalQuestions, isCurrentQuestion} = await loadModule('app/questions.ts');
 const {blankProgress, isCompleted} = await loadModule('app/progress-state.ts');
-const {neetcodeQuestions, neetcodeTopics, allowedQuestionSlugs, studyQuestions, studyGroups, eligibleQuestions} = catalog;
+const {neetcodeQuestions, neetcodeTopics, dashboardQuestions, extraPracticeQuestions, allowedQuestionSlugs, studyQuestions, studyGroups, eligibleQuestions} = catalog;
 
 assert.equal(neetcodeQuestions.length, 150);
 assert.equal(new Set(neetcodeQuestions.map(q => q.slug)).size, 150);
@@ -29,14 +29,13 @@ assert(originalQuestions.every(q => allowedQuestionSlugs.has(q.slug)));
 const all = studyQuestions('all');
 assert.equal(new Set(all.map(q => q.slug)).size, all.length);
 assert.equal(studyGroups('all').length, 19);
-assert.equal(studyGroups('upstart').length, 5);
-assert.equal(studyQuestions('upstart').length, originalQuestions.length);
+assert(originalQuestions.every(q=>all.some(candidate=>candidate.slug===q.slug)));
+assert.equal(dashboardQuestions.length,150+extraPracticeQuestions.length);
 
 const saved = {...blankProgress, notes: 'Existing notes', completions: 3, tries: 2, repeat: true, submitted: true, retained: true};
 const data = {'group-anagrams': saved};
-assert.equal(eligibleQuestions('neetcode', data).length, 150);
+assert.equal(eligibleQuestions('neetcode', data).length, dashboardQuestions.length);
 assert.equal(eligibleQuestions('neetcode', data).filter(q => isCompleted(data[q.slug] ?? blankProgress)).length, 1);
-assert.equal(studyQuestions('upstart').find(q => q.slug === 'group-anagrams').slug, 'group-anagrams');
 assert.equal(studyQuestions('all').filter(q => q.slug === 'group-anagrams').length, 1);
 assert(isCompleted({...blankProgress, completions: 1}));
 assert(isCompleted({...blankProgress, submitted: true}));
@@ -45,7 +44,6 @@ assert(!isCompleted(blankProgress));
 const archived = originalQuestions.find(q => !isCurrentQuestion(q.slug));
 if (archived) {
   const historical = {[archived.slug]: saved};
-  assert(eligibleQuestions('upstart', historical).some(q => q.slug === archived.slug));
   assert(eligibleQuestions('all', historical).some(q => q.slug === archived.slug));
 }
 

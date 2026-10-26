@@ -8,7 +8,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
  const {exercise}=await params;
  const definition=variationExercises.find(item=>item.slug===exercise);
  return definition?{
-  title:definition.question.name+' · Upstart Practice',
+  title:definition.question.name+' | Coding Practice',
   description:'Solve this Python practice reconstruction with examples, 20 runnable tests, and completion tracking.'
  }:{};
 }
