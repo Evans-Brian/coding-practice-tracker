@@ -17,6 +17,9 @@ and a daily points dashboard.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
   per New York calendar day; completing it on another day earns points again.
 - Earlier completions without dates remain in the tracker as undated history.
+- Extra study entries add 0.5 or 1 point for today, with an optional note. They
+  appear in daily totals and can be removed without changing problem progress.
+- Trees sections include a reference for inorder, preorder, and postorder traversal.
 
 Progress and completion events are stored in Cloudflare D1. Local databases,
 environment files, and browser drafts are not included in the repository.

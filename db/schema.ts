@@ -10,3 +10,10 @@ export const completionEvents=sqliteTable('completion_events',{
  completedAt:text('completed_at').notNull(),
  completedDay:text('completed_day').notNull(),
 },table=>[index('completion_events_day_question_idx').on(table.completedDay,table.questionId)]);
+export const studyCredits=sqliteTable('study_credits',{
+ id:text('id').primaryKey(),
+ pointUnits:integer('point_units').notNull(),
+ note:text('note').notNull().default(''),
+ earnedDay:text('earned_day').notNull(),
+ createdAt:text('created_at').notNull(),
+},table=>[index('study_credits_day_idx').on(table.earnedDay)]);

@@ -45,3 +45,28 @@
 .points-undated p { margin: 4px 0 0; }
 @media(max-width:800px) { .points-heading { align-items: flex-start; flex-direction: column; gap: 16px; } .points-summary>div { padding: 0 18px; } .points-summary dd { font-size: 30px; } }
 @media(max-width:540px) { .points-main { padding: 24px 14px 36px; } .points-heading h1 { font-size: 30px; } .points-summary { grid-template-columns: minmax(0,1fr); padding: 0 18px; } .points-summary>div { padding: 18px 0; } .points-summary>div+div { border-left: 0; border-top: 1px solid var(--border); } .points-summary dd { font-size: 32px; } .points-undated { grid-template-columns: minmax(0,1fr); gap: 6px; } .points-panel-heading,.points-table-note { padding-left: 16px; padding-right: 16px; } .points-weights { gap: 8px 16px; } }
+.points-extra-form { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 18px; align-items: end; padding: 20px 22px 14px; }
+.points-extra-form>p { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.points-extra-form fieldset { padding: 0; margin: 0; border: 0; }
+.points-extra-form legend,.points-extra-note { color: #d4d4db; font-size: 12px; line-height: 1.6; }
+.points-extra-form legend { margin-bottom: 8px; }
+.points-extra-amounts { display: flex; gap: 8px; }
+.points-extra-amounts label { display: flex; gap: 7px; align-items: center; white-space: nowrap; padding: 10px; border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-size: 12px; cursor: pointer; }
+.points-extra-amounts label:has(input:checked) { border-color: var(--accent-soft); background: var(--surface); }
+.points-extra-amounts input { margin: 0; accent-color: #8172ff; }
+.points-extra-note { display: flex; flex-direction: column; gap: 8px; }
+.points-extra-note>span>span { color: var(--muted); }
+.points-extra-note input { width: 100%; min-width: 0; min-height: 40px; box-sizing: border-box; padding: 10px 12px; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; font: inherit; }
+.points-extra-form button { min-height: 40px; white-space: nowrap; }
+.points-extra-form :focus-visible,.points-extra-history button:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+.points-extra-help { color: var(--muted); font-size: 11px; line-height: 1.6; margin: 0; padding: 0 22px 20px; }
+.points-action-notice { color: #34d3a4; font-size: 13px; line-height: 1.6; }
+.points-extra-history { list-style: none; padding: 0; margin: 0; }
+.points-extra-history li { display: flex; align-items: center; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--border); }
+.points-extra-history li:last-child { border-bottom: 0; }
+.points-extra-history li>div { flex: 1; min-width: 0; }
+.points-extra-history strong { display: block; font-size: 13px; font-weight: 500; color: var(--text); overflow-wrap: anywhere; }
+.points-extra-history li>div>span { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+.points-extra-history b { color: var(--accent-soft); font-size: 15px; }
+.points-extra-history button { font-size: 12px; }
+@media(max-width:800px) { .points-extra-form { grid-template-columns: minmax(0,1fr); } .points-extra-form>button { justify-self: start; } }

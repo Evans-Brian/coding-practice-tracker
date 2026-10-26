@@ -41,6 +41,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    return <section id={section.id} key={section.id} data-study-tier={section.tier}>
      <div className="section-heading"><span className="bucket-no">{groupNumber(section)}</span><div className="section-title"><TopicHeading>{section.title}</TopicHeading>{section.description&&<p>{section.description}</p>}</div>{section.relevance!==undefined&&<span className="section-relevance">Relevance <strong>{section.relevance}/100</strong></span>}<span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
      {section.theme==='Binary Search'&&<BinarySearchGuide/>}
+     {section.theme==='Trees'&&<p className="tree-traversal-reference">Study reference: <a href="https://www.geeksforgeeks.org/dsa/tree-traversals-inorder-preorder-and-postorder/" target="_blank" rel="noopener noreferrer">Tree traversals: inorder, preorder &amp; postorder</a></p>}
      <div className="question-list">{groupQuestions.map(q=>renderQuestion(q))}</div>
    </section>;
  };
