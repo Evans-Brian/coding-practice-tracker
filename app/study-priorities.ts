@@ -85,3 +85,8 @@ export function sectionForQuestion(question: StudyQuestion): NeetcodeSection | u
 export function classifyQuestionTier(question: StudyQuestion): StudyTier | undefined {
   return sectionForQuestion(question)?.tier;
 }
+
+export type PracticePage='main'|'not-prioritized';
+export function sectionsForPracticePage(page:PracticePage):readonly NeetcodeSection[]{
+  return neetcodeSections.filter(section=>page==='not-prioritized'?section.tier==='not-prioritized':section.tier!=='not-prioritized');
+}

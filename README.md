@@ -10,6 +10,8 @@ and a daily points dashboard.
 - An unfinished-question picker that respects study priorities.
 - Three study tiers, with LRU Cache first in Medium Priority and only the
   Prioritized tier included in the random picker and prioritized progress.
+- Not Prioritized has its own page between Done and Daily points. The main page
+  shows Prioritized and Medium Priority; completed problems still use Repeat or Done.
 - Section relevance scores plus question relevance and expandable company-list
   evidence, with the reporting window and limitations shown in the interface.
 - Shared notes, completion counts, and Repeat and Done lists.

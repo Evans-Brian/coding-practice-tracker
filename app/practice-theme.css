@@ -26,8 +26,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .study-topbar .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; color: var(--text); font-size: 15px; letter-spacing: -.025em; font-weight: 650; text-decoration: none; }
 .logo { background: var(--accent); border-radius: 7px; width: 29px; height: 29px; font-size: 18px; color: white; }
 .brand { color: var(--muted); letter-spacing: .03em; font-size: 12px; }
-.study-topbar .pages { display: flex; align-items: center; gap: 6px; margin: 0; }
-.study-topbar .pages a { display: flex; justify-content: center; gap: 9px; padding: 8px 12px; border: 1px solid transparent; background: transparent; color: var(--muted); border-radius: 7px; font-weight: 550; font-size: 13px; white-space: nowrap; }
+.study-topbar .pages { display: flex; align-items: center; gap: 6px; margin: 0; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.study-topbar .pages a { display: flex; flex-shrink: 0; justify-content: center; gap: 9px; padding: 8px 12px; border: 1px solid transparent; background: transparent; color: var(--muted); border-radius: 7px; font-weight: 550; font-size: 13px; white-space: nowrap; }
 .study-topbar .pages a:hover { background: var(--panel); color: var(--text); }
 .study-topbar .pages a[aria-current=page] { background: #313137; color: var(--text); border-color: #404047; }
 .study-topbar .pages a span, .study-topbar .pages a[aria-current=page] span { color: var(--accent-soft); font-size: 12px; }
