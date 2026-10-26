@@ -8,6 +8,10 @@ and a daily points dashboard.
 
 - Problems grouped by topic and difficulty, with links to LeetCode.
 - An unfinished-question picker that respects study priorities.
+- Three study tiers, with LRU Cache first in Medium Priority and only the
+  Prioritized tier included in the random picker and prioritized progress.
+- Section relevance scores plus question relevance and expandable company-list
+  evidence, with the reporting window and limitations shown in the interface.
 - Shared notes, completion counts, and Repeat and Done lists.
 - Custom Python exercises with examples, runnable tests, and downloadable packs.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
@@ -34,6 +38,9 @@ in filename order.
 ```sh
 node --experimental-strip-types --test tests/*.test.mjs
 npx tsc --noEmit
+node scripts/verify-neetcode150.mjs
+node scripts/verify-study-priorities.mjs
+node scripts/verify-question-relevance.mjs
 python scripts/verify-variation-practice.py
 ```
 
@@ -41,6 +48,34 @@ The app uses React, TypeScript, [Vinext](https://github.com/cloudflare/vinext),
 Cloudflare Workers, and Drizzle migrations. Publishing uses the Sites workflow;
 the tracked hosting manifest identifies the existing deployment. Use your own
 Site identity when publishing a separate copy.
+
+## Relevance scores
+
+`app/study-priorities.ts` keeps display tiers and relevance separate from the
+original catalog buckets and saved question IDs. The current dashboard contains
+112 prioritized, 20 medium-priority, and 20 not-prioritized questions. Hard trees
+are in the middle tier; hard linked lists remain in the last tier. LRU Cache has
+its own first section in Medium Priority.
+
+`app/question-relevance-data.json` contains only matching question metadata from
+25 company six-month lists in the public
+[liquidslr company collection](https://github.com/liquidslr/leetcode-company-wise-problems),
+pinned to commit `2b71796266751b4736a7ef180efb6847879166ee` (October 21,
+snapshot labeled October 20, 2026). The approximate window is April 20–October 20.
+The source has no per-interview dates, role filters, report-count denominators,
+or documented frequency normalization. Twelve lists have fewer than ten eligible
+questions. Raw values are therefore used only for within-company relative ranks.
+Coverage is not an interview probability; acceptance rate is excluded.
+
+Question relevance uses 45% topic value, 20% curated-list coverage, and up to 35%
+recent evidence. Curation values are 95 for Grind 75 membership, 70 for NeetCode
+150, and 60 for dashboard extras. Hard-only sections describe incremental study
+depth, so individual hard questions use the parent topic's baseline. Recent
+evidence combines 65% mean within-company percentile with 35% logarithmically
+scaled company breadth. The recent weight shrinks linearly below four matching
+company lists. Missing evidence uses only the renormalized topic/curation prior;
+it never becomes zero relevance. Tiers are user-selected and are not reassigned
+by question scores. Custom drills are outside this scoring model.
 
 ## Prerequisites
 

@@ -1,0 +1,4854 @@
+{
+  "schemaVersion": 1,
+  "metadata": {
+    "title": "Recent company-list evidence for the 152-question study tracker",
+    "retrievedOn": "2026-10-26",
+    "repository": "liquidslr/leetcode-company-wise-problems",
+    "repositoryUrl": "https://github.com/liquidslr/leetcode-company-wise-problems",
+    "commit": "2b71796266751b4736a7ef180efb6847879166ee",
+    "commitUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/commit/2b71796266751b4736a7ef180efb6847879166ee",
+    "committedAt": "2026-10-21T01:30:33Z",
+    "snapshotDate": "2026-10-20",
+    "snapshotDateBasis": "Pinned commit message: Update Problem [Oct 20]; commit timestamp is October 21, 2026. The repository README and description retain older dates.",
+    "recencyWindow": "Last 6 months",
+    "approximateWindowStart": "2026-04-20",
+    "approximateWindowEnd": "2026-10-20",
+    "recencyCaveat": "The source provides rolling six-month company lists, not individual interview or report timestamps. This is a snapshot ending around October 20, not a continuously updated window ending today.",
+    "sourceFilePattern": "<Company>/3. Six Months.csv",
+    "sourceColumns": [
+      "Difficulty",
+      "Title",
+      "Frequency",
+      "Acceptance Rate",
+      "Link",
+      "Topics"
+    ],
+    "sampleDesign": "A fixed, deliberately varied set of 25 named technology, finance and enterprise employers, chosen before examining tracked-question matches. Each company list counts once; TikTok is the sole ByteDance-family representative.",
+    "roleScope": "The source does not expose role, level, location or interview stage. Software-engineering-only eligibility cannot be verified.",
+    "questionScope": "Only the 150 canonical NeetCode tracker slugs and two Binary Search extras are retained. Explicit Database-tagged rows are excluded from the within-company ranking universe. No problem statements or solutions are copied.",
+    "trackedQuestionCount": 152,
+    "trackedQuestionsWithEvidence": 147,
+    "sampleCompanyCount": 25,
+    "sparseCompanyCount": 12,
+    "sparseCoverageThreshold": 10,
+    "totalSourceCompanyQuestionRecords": 2939,
+    "eligibleCompanyQuestionRecords": 2780,
+    "sourceFrequencyMeaning": "The source's Frequency field is a relative 0–100 value whose normalization and underlying report counts are undocumented. It is used only for ranking questions within the same company's six-month list; it is not an interview probability.",
+    "withinCompanyPercentileMethod": "100 × (number of eligible distinct questions with lower Frequency + 0.5 × number with equal Frequency) / number with a valid Frequency, rounded to two decimals. Ties receive the same midpoint percentile; a one-question list receives 50.",
+    "meanWithinCompanyPercentileMethod": "Arithmetic mean across only company lists in which the tracked question appears and has a valid Frequency. Nonappearance is missing evidence, not a zero percentile.",
+    "coverageMeaning": "companyCount counts appearances in these selected company lists. It is neither a count of interview reports nor a percentage chance of an interview question.",
+    "missingEvidenceMeaning": "Zero companyCount means no matching slug was found in the selected available lists. It does not mean the question was never asked or has zero study value.",
+    "sourceDataLicense": "No explicit LICENSE file is present at the pinned repository root; the dataset's reuse license is not specified there.",
+    "originalCompanyTagMethodologyUrl": "https://support.leetcode.com/hc/en-us/articles/360011985113-How-does-grouping-questions-by-company-work",
+    "originalCompanyTagMethodology": "LeetCode states that company question lists are compiled from user surveys about questions seen in real interviews.",
+    "excludedSourceColumns": [
+      "Acceptance Rate"
+    ],
+    "excludedSourceColumnsReason": "Acceptance Rate is unrelated to interview prevalence and appears to use an inconsistent scale in this snapshot.",
+    "requestedCompaniesUnavailable": [
+      {
+        "name": "Dropbox",
+        "reason": "The pinned six-month CSV is header-only; no question records are available.",
+        "sourcePath": "Dropbox/3. Six Months.csv",
+        "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Dropbox/3.%20Six%20Months.csv",
+        "replacedBy": "Workday"
+      }
+    ],
+    "excludedRelatedCompanyLists": [
+      {
+        "name": "ByteDance",
+        "representedBy": "TikTok",
+        "reason": "Only one list from the ByteDance/TikTok corporate family is counted. TikTok has the fuller six-month list."
+      }
+    ],
+    "limitations": [
+      "This is a community company-tag snapshot, not employer-verified or randomly sampled interview data.",
+      "Company coverage is unequal; 12 of the 25 selected lists contain fewer than 10 eligible questions.",
+      "No underlying report counts or sampling denominators are available, so no statistical confidence intervals or interview probabilities are calculated.",
+      "Question identities are matched by canonical LeetCode URL slug. An unmatched slug may reflect missing reports, source coverage or naming changes.",
+      "Repeated or related questions can span topics. Topic membership comes from the tracker rather than being inferred from these company counts.",
+      "Study-relevance scores must combine this limited recent evidence with transferable pattern value and broader preparation evidence; absence must not automatically suppress a question."
+    ]
+  },
+  "companies": [
+    {
+      "name": "Amazon",
+      "sourcePath": "Amazon/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Amazon/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 733,
+      "eligibleQuestions": 692,
+      "trackedQuestions": 140,
+      "databaseQuestionsExcluded": 41,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Google",
+      "sourcePath": "Google/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Google/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 793,
+      "eligibleQuestions": 748,
+      "trackedQuestions": 140,
+      "databaseQuestionsExcluded": 45,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Meta",
+      "sourcePath": "Meta/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Meta/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 353,
+      "eligibleQuestions": 329,
+      "trackedQuestions": 103,
+      "databaseQuestionsExcluded": 24,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Microsoft",
+      "sourcePath": "Microsoft/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Microsoft/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 382,
+      "eligibleQuestions": 358,
+      "trackedQuestions": 111,
+      "databaseQuestionsExcluded": 24,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Apple",
+      "sourcePath": "Apple/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Apple/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 64,
+      "eligibleQuestions": 64,
+      "trackedQuestions": 30,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Bloomberg",
+      "sourcePath": "Bloomberg/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Bloomberg/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 405,
+      "eligibleQuestions": 382,
+      "trackedQuestions": 111,
+      "databaseQuestionsExcluded": 23,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Uber",
+      "sourcePath": "Uber/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Uber/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 33,
+      "eligibleQuestions": 33,
+      "trackedQuestions": 7,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Airbnb",
+      "sourcePath": "Airbnb/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Airbnb/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 8,
+      "eligibleQuestions": 8,
+      "trackedQuestions": 1,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "LinkedIn",
+      "sourcePath": "LinkedIn/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/LinkedIn/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 19,
+      "eligibleQuestions": 19,
+      "trackedQuestions": 7,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Salesforce",
+      "sourcePath": "Salesforce/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Salesforce/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 33,
+      "eligibleQuestions": 33,
+      "trackedQuestions": 9,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Adobe",
+      "sourcePath": "Adobe/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Adobe/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 15,
+      "eligibleQuestions": 14,
+      "trackedQuestions": 7,
+      "databaseQuestionsExcluded": 1,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Oracle",
+      "sourcePath": "Oracle/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Oracle/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 14,
+      "eligibleQuestions": 14,
+      "trackedQuestions": 10,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "PayPal",
+      "sourcePath": "PayPal/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/PayPal/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 2,
+      "eligibleQuestions": 2,
+      "trackedQuestions": 1,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Stripe",
+      "sourcePath": "Stripe/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Stripe/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 1,
+      "eligibleQuestions": 1,
+      "trackedQuestions": 1,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "DoorDash",
+      "sourcePath": "DoorDash/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/DoorDash/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 1,
+      "eligibleQuestions": 1,
+      "trackedQuestions": 0,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Databricks",
+      "sourcePath": "Databricks/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Databricks/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 3,
+      "eligibleQuestions": 3,
+      "trackedQuestions": 0,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Capital One",
+      "sourcePath": "Capital One/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Capital%20One/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 14,
+      "eligibleQuestions": 14,
+      "trackedQuestions": 1,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "TikTok",
+      "sourcePath": "TikTok/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/TikTok/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 36,
+      "eligibleQuestions": 36,
+      "trackedQuestions": 16,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": false
+    },
+    {
+      "name": "Netflix",
+      "sourcePath": "Netflix/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Netflix/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 3,
+      "eligibleQuestions": 3,
+      "trackedQuestions": 2,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Atlassian",
+      "sourcePath": "Atlassian/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Atlassian/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 7,
+      "eligibleQuestions": 7,
+      "trackedQuestions": 2,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Intuit",
+      "sourcePath": "Intuit/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Intuit/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 7,
+      "eligibleQuestions": 6,
+      "trackedQuestions": 4,
+      "databaseQuestionsExcluded": 1,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Spotify",
+      "sourcePath": "Spotify/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Spotify/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 5,
+      "eligibleQuestions": 5,
+      "trackedQuestions": 3,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Snap",
+      "sourcePath": "Snap/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Snap/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 6,
+      "eligibleQuestions": 6,
+      "trackedQuestions": 2,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Instacart",
+      "sourcePath": "Instacart/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Instacart/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 1,
+      "eligibleQuestions": 1,
+      "trackedQuestions": 0,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    },
+    {
+      "name": "Workday",
+      "sourcePath": "Workday/3. Six Months.csv",
+      "sourceUrl": "https://github.com/liquidslr/leetcode-company-wise-problems/blob/2b71796266751b4736a7ef180efb6847879166ee/Workday/3.%20Six%20Months.csv",
+      "totalSourceQuestions": 1,
+      "eligibleQuestions": 1,
+      "trackedQuestions": 1,
+      "databaseQuestionsExcluded": 0,
+      "duplicateRowsRemoved": 0,
+      "invalidRowsExcluded": 0,
+      "sourceModifiedAt": "2026-10-21T01:30:33Z",
+      "sparseCoverage": true
+    }
+  ],
+  "questions": {
+    "contains-duplicate": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 88.71,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 56.5,
+          "withinCompanyPercentile": 93.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 57.1,
+          "withinCompanyPercentile": 97.06
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 58.8,
+          "withinCompanyPercentile": 93.16
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "valid-anagram": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 93.37,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 59.2,
+          "withinCompanyPercentile": 94.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 57.6,
+          "withinCompanyPercentile": 97.26
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 60.6,
+          "withinCompanyPercentile": 93.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 58.3,
+          "withinCompanyPercentile": 88.61
+        }
+      ]
+    },
+    "two-sum": {
+      "companyCount": 8,
+      "meanWithinCompanyPercentile": 90.33,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 99.93
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 99.93
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 99.85
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 99.86
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 68.6,
+          "withinCompanyPercentile": 74.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 99.87
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 93.7,
+          "withinCompanyPercentile": 89.29
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 62.1,
+          "withinCompanyPercentile": 59.72
+        }
+      ]
+    },
+    "group-anagrams": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 85.27,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 75.5,
+          "withinCompanyPercentile": 98.99
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 60,
+          "withinCompanyPercentile": 97.73
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 63.8,
+          "withinCompanyPercentile": 95.44
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 55.2,
+          "withinCompanyPercentile": 90.64
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 76.5,
+          "withinCompanyPercentile": 89.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 68.3,
+          "withinCompanyPercentile": 95.68
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 74.2,
+          "withinCompanyPercentile": 28.57
+        }
+      ]
+    },
+    "top-k-frequent-elements": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 79.89,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 68.5,
+          "withinCompanyPercentile": 97.47
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 50.2,
+          "withinCompanyPercentile": 94.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 64.8,
+          "withinCompanyPercentile": 93.19
+        }
+      ]
+    },
+    "product-of-array-except-self": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 89.51,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 59.2,
+          "withinCompanyPercentile": 94.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 43.7,
+          "withinCompanyPercentile": 88.57
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 56.8,
+          "withinCompanyPercentile": 91.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "valid-sudoku": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 56.2,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 52.2,
+          "withinCompanyPercentile": 89.67
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "encode-and-decode-strings": {
+      "companyCount": 0,
+      "meanWithinCompanyPercentile": null,
+      "companies": []
+    },
+    "longest-consecutive-sequence": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 82.33,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 65,
+          "withinCompanyPercentile": 96.46
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 66.7,
+          "withinCompanyPercentile": 98.73
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 52.3,
+          "withinCompanyPercentile": 86.78
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 62.9,
+          "withinCompanyPercentile": 95.53
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 62.8,
+          "withinCompanyPercentile": 92.28
+        }
+      ]
+    },
+    "valid-palindrome": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 79.61,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 57.5,
+          "withinCompanyPercentile": 93.71
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 46.8,
+          "withinCompanyPercentile": 91.58
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 60.6,
+          "withinCompanyPercentile": 93.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 46.7,
+          "withinCompanyPercentile": 79.75
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 66.6,
+          "withinCompanyPercentile": 94.5
+        }
+      ]
+    },
+    "two-sum-ii-input-array-is-sorted": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 78.88,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 52.2,
+          "withinCompanyPercentile": 89.67
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 45.9,
+          "withinCompanyPercentile": 90.64
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        }
+      ]
+    },
+    "3sum": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 94.65,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 75.5,
+          "withinCompanyPercentile": 98.99
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 70.4,
+          "withinCompanyPercentile": 99.47
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 76.5,
+          "withinCompanyPercentile": 99.24
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 71.9,
+          "withinCompanyPercentile": 99.02
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 68.6,
+          "withinCompanyPercentile": 74.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 71.3,
+          "withinCompanyPercentile": 96.99
+        }
+      ]
+    },
+    "container-with-most-water": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 97.39,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 70,
+          "withinCompanyPercentile": 97.9
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 63.9,
+          "withinCompanyPercentile": 98.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 67.8,
+          "withinCompanyPercentile": 96.81
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 65.9,
+          "withinCompanyPercentile": 96.93
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 71.3,
+          "withinCompanyPercentile": 96.99
+        }
+      ]
+    },
+    "trapping-rain-water": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 97.66,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 84.9,
+          "withinCompanyPercentile": 99.78
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 67.6,
+          "withinCompanyPercentile": 99
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 62.2,
+          "withinCompanyPercentile": 94.53
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 65.9,
+          "withinCompanyPercentile": 96.93
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 73.9,
+          "withinCompanyPercentile": 98.04
+        }
+      ]
+    },
+    "best-time-to-buy-and-sell-stock": {
+      "companyCount": 8,
+      "meanWithinCompanyPercentile": 86.46,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 99.35
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 69.7,
+          "withinCompanyPercentile": 99.26
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 74,
+          "withinCompanyPercentile": 98.63
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 68.5,
+          "withinCompanyPercentile": 98.04
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 79.6,
+          "withinCompanyPercentile": 93.75
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 78.5,
+          "withinCompanyPercentile": 99.08
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 32.14
+        },
+        {
+          "name": "Atlassian",
+          "rawFrequency": 92.3,
+          "withinCompanyPercentile": 71.43
+        }
+      ]
+    },
+    "longest-substring-without-repeating-characters": {
+      "companyCount": 9,
+      "meanWithinCompanyPercentile": 80.06,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 80.6,
+          "withinCompanyPercentile": 99.49
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 69.2,
+          "withinCompanyPercentile": 99.13
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 74,
+          "withinCompanyPercentile": 98.63
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 70.9,
+          "withinCompanyPercentile": 98.6
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 68.6,
+          "withinCompanyPercentile": 74.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 76.3,
+          "withinCompanyPercentile": 98.56
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 74.2,
+          "withinCompanyPercentile": 28.57
+        },
+        {
+          "name": "Netflix",
+          "rawFrequency": 74.7,
+          "withinCompanyPercentile": 33.33
+        },
+        {
+          "name": "Spotify",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 90
+        }
+      ]
+    },
+    "longest-repeating-character-replacement": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 79.95,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 44.8,
+          "withinCompanyPercentile": 89.77
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 58.3,
+          "withinCompanyPercentile": 88.61
+        }
+      ]
+    },
+    "permutation-in-string": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 67.12,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 36.3,
+          "withinCompanyPercentile": 71.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 56.8,
+          "withinCompanyPercentile": 91.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        }
+      ]
+    },
+    "minimum-window-substring": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 69.53,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 62.4,
+          "withinCompanyPercentile": 95.3
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "sliding-window-maximum": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 89.41,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 58.4,
+          "withinCompanyPercentile": 94
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 50.2,
+          "withinCompanyPercentile": 94.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 62.9,
+          "withinCompanyPercentile": 95.53
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 60.7,
+          "withinCompanyPercentile": 90.84
+        }
+      ]
+    },
+    "valid-parentheses": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 85.33,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 64.4,
+          "withinCompanyPercentile": 96.1
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 62.4,
+          "withinCompanyPercentile": 98.2
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 74,
+          "withinCompanyPercentile": 98.63
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 67.2,
+          "withinCompanyPercentile": 97.63
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 64.8,
+          "withinCompanyPercentile": 93.19
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 71.4,
+          "withinCompanyPercentile": 55.26
+        },
+        {
+          "name": "Intuit",
+          "rawFrequency": 76.8,
+          "withinCompanyPercentile": 58.33
+        }
+      ]
+    },
+    "min-stack": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 71.08,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 48.2,
+          "withinCompanyPercentile": 86.27
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 46.7,
+          "withinCompanyPercentile": 79.75
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "evaluate-reverse-polish-notation": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 55.38,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "generate-parentheses": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 89.98,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 56.5,
+          "withinCompanyPercentile": 93.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 50.2,
+          "withinCompanyPercentile": 94.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 46.4,
+          "withinCompanyPercentile": 78.88
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 55.2,
+          "withinCompanyPercentile": 90.64
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 64.8,
+          "withinCompanyPercentile": 93.19
+        }
+      ]
+    },
+    "daily-temperatures": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 75.67,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 52.2,
+          "withinCompanyPercentile": 89.67
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 47.8,
+          "withinCompanyPercentile": 92.38
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "car-fleet": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 40.1,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        }
+      ]
+    },
+    "largest-rectangle-in-histogram": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 83.52,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 55.5,
+          "withinCompanyPercentile": 92.41
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 93.32
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        }
+      ]
+    },
+    "binary-search": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 87.42,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 48.6,
+          "withinCompanyPercentile": 92.78
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "search-a-2d-matrix": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 76.96,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        }
+      ]
+    },
+    "koko-eating-bananas": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 86.53,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 73.1,
+          "withinCompanyPercentile": 98.19
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 56.1,
+          "withinCompanyPercentile": 96.72
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 52.3,
+          "withinCompanyPercentile": 86.78
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "find-minimum-in-rotated-sorted-array": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 51.53,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 48.2,
+          "withinCompanyPercentile": 86.27
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 38.5,
+          "withinCompanyPercentile": 83.69
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "search-in-rotated-sorted-array": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 79.79,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 68,
+          "withinCompanyPercentile": 97.04
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 53.7,
+          "withinCompanyPercentile": 95.86
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 54.7,
+          "withinCompanyPercentile": 89.51
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 60.7,
+          "withinCompanyPercentile": 90.84
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 85.6,
+          "withinCompanyPercentile": 71.43
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 26.39
+        }
+      ]
+    },
+    "time-based-key-value-store": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 49.69,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 72.9,
+          "withinCompanyPercentile": 83.59
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        },
+        {
+          "name": "Netflix",
+          "rawFrequency": 74.7,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "median-of-two-sorted-arrays": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 98.46,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 74.3,
+          "withinCompanyPercentile": 98.63
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 70.4,
+          "withinCompanyPercentile": 99.47
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 77.3,
+          "withinCompanyPercentile": 99.54
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 64.4,
+          "withinCompanyPercentile": 96.09
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 76.3,
+          "withinCompanyPercentile": 98.56
+        }
+      ]
+    },
+    "reverse-linked-list": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 66.76,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 48.2,
+          "withinCompanyPercentile": 86.27
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 94.52
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 56.6,
+          "withinCompanyPercentile": 56.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 26.39
+        }
+      ]
+    },
+    "merge-two-sorted-lists": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 81.49,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 55.5,
+          "withinCompanyPercentile": 92.41
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 55.5,
+          "withinCompanyPercentile": 96.59
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 54.7,
+          "withinCompanyPercentile": 89.51
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 60.7,
+          "withinCompanyPercentile": 90.84
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 32.14
+        }
+      ]
+    },
+    "reorder-list": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 67.63,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 40,
+          "withinCompanyPercentile": 85.49
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "remove-nth-node-from-end-of-list": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 60.69,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 46.6,
+          "withinCompanyPercentile": 84.54
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 46.4,
+          "withinCompanyPercentile": 78.88
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "copy-list-with-random-pointer": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 69.01,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 56.5,
+          "withinCompanyPercentile": 93.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "add-two-numbers": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 99.24,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 76.5,
+          "withinCompanyPercentile": 99.21
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 75,
+          "withinCompanyPercentile": 99.8
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 73.1,
+          "withinCompanyPercentile": 98.02
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 79.7,
+          "withinCompanyPercentile": 99.58
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 80.4,
+          "withinCompanyPercentile": 99.61
+        }
+      ]
+    },
+    "linked-list-cycle": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 85.64,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 38.5,
+          "withinCompanyPercentile": 83.69
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        }
+      ]
+    },
+    "find-the-duplicate-number": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 64,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 48.2,
+          "withinCompanyPercentile": 86.27
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 44.8,
+          "withinCompanyPercentile": 89.77
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "lru-cache": {
+      "companyCount": 8,
+      "meanWithinCompanyPercentile": 85.56,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 74.7,
+          "withinCompanyPercentile": 98.77
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 50.2,
+          "withinCompanyPercentile": 94.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 64.4,
+          "withinCompanyPercentile": 96.09
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 92.8,
+          "withinCompanyPercentile": 97.66
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 66.6,
+          "withinCompanyPercentile": 94.5
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 32.14
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 98.61
+        }
+      ]
+    },
+    "merge-k-sorted-lists": {
+      "companyCount": 9,
+      "meanWithinCompanyPercentile": 57.17,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 63.1,
+          "withinCompanyPercentile": 95.66
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 85.6,
+          "withinCompanyPercentile": 71.43
+        },
+        {
+          "name": "Snap",
+          "rawFrequency": 89.1,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "reverse-nodes-in-k-group": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 70.19,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 41.3,
+          "withinCompanyPercentile": 86.56
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 68.9,
+          "withinCompanyPercentile": 75
+        }
+      ]
+    },
+    "invert-binary-tree": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 44.61,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        }
+      ]
+    },
+    "maximum-depth-of-binary-tree": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 59.12,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 41.3,
+          "withinCompanyPercentile": 86.56
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 61.8,
+          "withinCompanyPercentile": 23.68
+        }
+      ]
+    },
+    "diameter-of-binary-tree": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 76.2,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 43.1,
+          "withinCompanyPercentile": 80.85
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 40,
+          "withinCompanyPercentile": 85.49
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 46.4,
+          "withinCompanyPercentile": 78.88
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "balanced-binary-tree": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 76.43,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 43.1,
+          "withinCompanyPercentile": 80.85
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        }
+      ]
+    },
+    "same-tree": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 75.86,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 38.5,
+          "withinCompanyPercentile": 83.69
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        }
+      ]
+    },
+    "subtree-of-another-tree": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 25.85,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "lowest-common-ancestor-of-a-binary-search-tree": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 43.31,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "binary-tree-level-order-traversal": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 58.28,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 41.3,
+          "withinCompanyPercentile": 86.56
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "binary-tree-right-side-view": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 48.6,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 26.39
+        }
+      ]
+    },
+    "count-good-nodes-in-binary-tree": {
+      "companyCount": 0,
+      "meanWithinCompanyPercentile": null,
+      "companies": []
+    },
+    "validate-binary-search-tree": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 78.54,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 46.6,
+          "withinCompanyPercentile": 84.54
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 46.7,
+          "withinCompanyPercentile": 79.75
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "kth-smallest-element-in-a-bst": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 37.13,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 11.8,
+          "withinCompanyPercentile": 15.11
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 67.3,
+          "withinCompanyPercentile": 53.03
+        }
+      ]
+    },
+    "construct-binary-tree-from-preorder-and-inorder-traversal": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 55.06,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "binary-tree-maximum-path-sum": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 58.65,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 54.5,
+          "withinCompanyPercentile": 91.76
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 26.39
+        }
+      ]
+    },
+    "serialize-and-deserialize-binary-tree": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 51.33,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "implement-trie-prefix-tree": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 31.05,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        }
+      ]
+    },
+    "design-add-and-search-words-data-structure": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 51.16,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        }
+      ]
+    },
+    "word-search-ii": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 38.75,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 11.8,
+          "withinCompanyPercentile": 15.11
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 57.2,
+          "withinCompanyPercentile": 22.73
+        }
+      ]
+    },
+    "kth-largest-element-in-a-stream": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 36.89,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        }
+      ]
+    },
+    "last-stone-weight": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 31.29,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "k-closest-points-to-origin": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 39.58,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        },
+        {
+          "name": "Airbnb",
+          "rawFrequency": 81.8,
+          "withinCompanyPercentile": 25
+        }
+      ]
+    },
+    "kth-largest-element-in-an-array": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 70.02,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 49.6,
+          "withinCompanyPercentile": 87.5
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 43.7,
+          "withinCompanyPercentile": 88.57
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 63.8,
+          "withinCompanyPercentile": 95.44
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 61.8,
+          "withinCompanyPercentile": 23.68
+        },
+        {
+          "name": "Spotify",
+          "rawFrequency": 84.5,
+          "withinCompanyPercentile": 50
+        }
+      ]
+    },
+    "task-scheduler": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 61.42,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 53.4,
+          "withinCompanyPercentile": 90.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 56.6,
+          "withinCompanyPercentile": 56.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "design-twitter": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 26.58,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        }
+      ]
+    },
+    "find-median-from-data-stream": {
+      "companyCount": 9,
+      "meanWithinCompanyPercentile": 57.1,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 53.4,
+          "withinCompanyPercentile": 90.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 40,
+          "withinCompanyPercentile": 85.49
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 91.4,
+          "withinCompanyPercentile": 78.57
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 62.1,
+          "withinCompanyPercentile": 59.72
+        },
+        {
+          "name": "Intuit",
+          "rawFrequency": 76.8,
+          "withinCompanyPercentile": 58.33
+        },
+        {
+          "name": "Spotify",
+          "rawFrequency": 84.5,
+          "withinCompanyPercentile": 50
+        }
+      ]
+    },
+    "subsets": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 88.4,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 62.4,
+          "withinCompanyPercentile": 95.3
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 56.8,
+          "withinCompanyPercentile": 91.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "combination-sum": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 63.4,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 44.8,
+          "withinCompanyPercentile": 89.77
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 46.4,
+          "withinCompanyPercentile": 78.88
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "permutations": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 65.07,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        },
+        {
+          "name": "Workday",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 50
+        }
+      ]
+    },
+    "subsets-ii": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 66.6,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        }
+      ]
+    },
+    "combination-sum-ii": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 45.1,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "word-search": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 57.28,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 67.3,
+          "withinCompanyPercentile": 53.03
+        }
+      ]
+    },
+    "palindrome-partitioning": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 59.77,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 36.9,
+          "withinCompanyPercentile": 81.89
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "letter-combinations-of-a-phone-number": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 76.38,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 55.5,
+          "withinCompanyPercentile": 92.41
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 51.7,
+          "withinCompanyPercentile": 95.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 59.4,
+          "withinCompanyPercentile": 93.99
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 57.2,
+          "withinCompanyPercentile": 22.73
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 87.9,
+          "withinCompanyPercentile": 76.32
+        }
+      ]
+    },
+    "n-queens": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 86.42,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 52.2,
+          "withinCompanyPercentile": 89.67
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 51.7,
+          "withinCompanyPercentile": 95.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "number-of-islands": {
+      "companyCount": 10,
+      "meanWithinCompanyPercentile": 80.48,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 73.9,
+          "withinCompanyPercentile": 98.41
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 53.7,
+          "withinCompanyPercentile": 95.86
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 52.3,
+          "withinCompanyPercentile": 86.78
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 56.6,
+          "withinCompanyPercentile": 56.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 62.8,
+          "withinCompanyPercentile": 92.28
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 74.6,
+          "withinCompanyPercentile": 66.67
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 61.8,
+          "withinCompanyPercentile": 23.68
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 96.43
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 94.7,
+          "withinCompanyPercentile": 95.83
+        }
+      ]
+    },
+    "clone-graph": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 48.22,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        }
+      ]
+    },
+    "max-area-of-island": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 39.5,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "pacific-atlantic-water-flow": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 71.97,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        }
+      ]
+    },
+    "surrounded-regions": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 62.87,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "rotting-oranges": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 75.55,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 68.5,
+          "withinCompanyPercentile": 97.47
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 42.6,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 55.2,
+          "withinCompanyPercentile": 90.64
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "walls-and-gates": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 37.14,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        }
+      ]
+    },
+    "course-schedule": {
+      "companyCount": 8,
+      "meanWithinCompanyPercentile": 58.78,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 68.5,
+          "withinCompanyPercentile": 97.47
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 41.3,
+          "withinCompanyPercentile": 86.56
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 68.9,
+          "withinCompanyPercentile": 75
+        }
+      ]
+    },
+    "course-schedule-ii": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 64.89,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 72.9,
+          "withinCompanyPercentile": 83.59
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 71.8,
+          "withinCompanyPercentile": 77.27
+        }
+      ]
+    },
+    "redundant-connection": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 24.47,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        }
+      ]
+    },
+    "number-of-connected-components-in-an-undirected-graph": {
+      "companyCount": 0,
+      "meanWithinCompanyPercentile": null,
+      "companies": []
+    },
+    "graph-valid-tree": {
+      "companyCount": 0,
+      "meanWithinCompanyPercentile": null,
+      "companies": []
+    },
+    "word-ladder": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 64.47,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 54.5,
+          "withinCompanyPercentile": 91.76
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 76.5,
+          "withinCompanyPercentile": 89.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "reconstruct-itinerary": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 53.28,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        }
+      ]
+    },
+    "min-cost-to-connect-all-points": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 53.28,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        }
+      ]
+    },
+    "network-delay-time": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 48.1,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 36.9,
+          "withinCompanyPercentile": 81.89
+        }
+      ]
+    },
+    "swim-in-rising-water": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 48.99,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        }
+      ]
+    },
+    "alien-dictionary": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 41.45,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 74.6,
+          "withinCompanyPercentile": 66.67
+        },
+        {
+          "name": "Intuit",
+          "rawFrequency": 62.2,
+          "withinCompanyPercentile": 16.67
+        }
+      ]
+    },
+    "cheapest-flights-within-k-stops": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 48.7,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 36.3,
+          "withinCompanyPercentile": 71.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 74.2,
+          "withinCompanyPercentile": 28.57
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 68.9,
+          "withinCompanyPercentile": 75
+        }
+      ]
+    },
+    "climbing-stairs": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 87.94,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 58.4,
+          "withinCompanyPercentile": 94
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 56.6,
+          "withinCompanyPercentile": 96.86
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 54.7,
+          "withinCompanyPercentile": 89.51
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 57.4,
+          "withinCompanyPercentile": 92.6
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 69.8,
+          "withinCompanyPercentile": 96.34
+        },
+        {
+          "name": "Intuit",
+          "rawFrequency": 76.8,
+          "withinCompanyPercentile": 58.33
+        }
+      ]
+    },
+    "min-cost-climbing-stairs": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 28.85,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "house-robber": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 85.1,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 59.2,
+          "withinCompanyPercentile": 94.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 93.32
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 61.2,
+          "withinCompanyPercentile": 94.83
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 68.6,
+          "withinCompanyPercentile": 74.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 60.7,
+          "withinCompanyPercentile": 90.84
+        }
+      ]
+    },
+    "house-robber-ii": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 60.66,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "longest-palindromic-substring": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 86.67,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 73.9,
+          "withinCompanyPercentile": 98.41
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 62,
+          "withinCompanyPercentile": 97.99
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 62.2,
+          "withinCompanyPercentile": 94.53
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 74.9,
+          "withinCompanyPercentile": 99.3
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 72.7,
+          "withinCompanyPercentile": 97.64
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 32.14
+        }
+      ]
+    },
+    "palindromic-substrings": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 28.24,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 11.8,
+          "withinCompanyPercentile": 15.11
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "decode-ways": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 31.5,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        }
+      ]
+    },
+    "coin-change": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 83.16,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 53.4,
+          "withinCompanyPercentile": 90.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 42.6,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 54.7,
+          "withinCompanyPercentile": 89.51
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        }
+      ]
+    },
+    "maximum-product-subarray": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 75.89,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 52.2,
+          "withinCompanyPercentile": 89.67
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 44.8,
+          "withinCompanyPercentile": 89.77
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 71.4,
+          "withinCompanyPercentile": 55.26
+        }
+      ]
+    },
+    "word-break": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 54.3,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        }
+      ]
+    },
+    "longest-increasing-subsequence": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 61.58,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 36.3,
+          "withinCompanyPercentile": 71.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        },
+        {
+          "name": "PayPal",
+          "rawFrequency": 78.2,
+          "withinCompanyPercentile": 25
+        }
+      ]
+    },
+    "partition-equal-subset-sum": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 73.43,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 41.3,
+          "withinCompanyPercentile": 86.56
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "unique-paths": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 72.45,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 49.6,
+          "withinCompanyPercentile": 87.5
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 35.1,
+          "withinCompanyPercentile": 80.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "longest-common-subsequence": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 49.12,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 68.6,
+          "withinCompanyPercentile": 74.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "best-time-to-buy-and-sell-stock-with-cooldown": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 37.14,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        }
+      ]
+    },
+    "coin-change-ii": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 64.61,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        }
+      ]
+    },
+    "target-sum": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 33.29,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "interleaving-string": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 61.69,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 46.6,
+          "withinCompanyPercentile": 84.54
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        }
+      ]
+    },
+    "longest-increasing-path-in-a-matrix": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 26.58,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        }
+      ]
+    },
+    "distinct-subsequences": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 69.27,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 36.3,
+          "withinCompanyPercentile": 71.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 33.2,
+          "withinCompanyPercentile": 77.01
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "edit-distance": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 58.73,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        }
+      ]
+    },
+    "burst-balloons": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 65.52,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 36.9,
+          "withinCompanyPercentile": 81.89
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        }
+      ]
+    },
+    "regular-expression-matching": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 60.82,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 36.9,
+          "withinCompanyPercentile": 81.89
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "maximum-subarray": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 81.35,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 65,
+          "withinCompanyPercentile": 96.46
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 59.1,
+          "withinCompanyPercentile": 97.39
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 66.5,
+          "withinCompanyPercentile": 96.2
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 65.9,
+          "withinCompanyPercentile": 96.93
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 55.7,
+          "withinCompanyPercentile": 85.47
+        },
+        {
+          "name": "LinkedIn",
+          "rawFrequency": 78.3,
+          "withinCompanyPercentile": 68.42
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 74.2,
+          "withinCompanyPercentile": 28.57
+        }
+      ]
+    },
+    "jump-game": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 74.86,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 49.6,
+          "withinCompanyPercentile": 87.5
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 47.8,
+          "withinCompanyPercentile": 92.38
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 54.7,
+          "withinCompanyPercentile": 89.51
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 42.9,
+          "withinCompanyPercentile": 74.02
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        }
+      ]
+    },
+    "jump-game-ii": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 60.89,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 41.1,
+          "withinCompanyPercentile": 78.4
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 38.5,
+          "withinCompanyPercentile": 83.69
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 34,
+          "withinCompanyPercentile": 46.47
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        }
+      ]
+    },
+    "gas-station": {
+      "companyCount": 6,
+      "meanWithinCompanyPercentile": 48.59,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 79.4,
+          "withinCompanyPercentile": 32.14
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 26.39
+        }
+      ]
+    },
+    "hand-of-straights": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 23.87,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "merge-triplets-to-form-target-triplet": {
+      "companyCount": 0,
+      "meanWithinCompanyPercentile": null,
+      "companies": []
+    },
+    "partition-labels": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 45.97,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 25.9,
+          "withinCompanyPercentile": 51.16
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        }
+      ]
+    },
+    "valid-parenthesis-string": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 45.23,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 38.1,
+          "withinCompanyPercentile": 62.92
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 74.2,
+          "withinCompanyPercentile": 28.57
+        }
+      ]
+    },
+    "insert-interval": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 70.24,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 36.3,
+          "withinCompanyPercentile": 71.82
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        }
+      ]
+    },
+    "merge-intervals": {
+      "companyCount": 12,
+      "meanWithinCompanyPercentile": 73.78,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 71.4,
+          "withinCompanyPercentile": 98.05
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 50.2,
+          "withinCompanyPercentile": 94.05
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 52.3,
+          "withinCompanyPercentile": 86.78
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 61.2,
+          "withinCompanyPercentile": 94.83
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 87.1,
+          "withinCompanyPercentile": 96.09
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 79.5,
+          "withinCompanyPercentile": 99.35
+        },
+        {
+          "name": "Uber",
+          "rawFrequency": 57.2,
+          "withinCompanyPercentile": 22.73
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 77.1,
+          "withinCompanyPercentile": 86.36
+        },
+        {
+          "name": "Stripe",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 50
+        },
+        {
+          "name": "Capital One",
+          "rawFrequency": 58.6,
+          "withinCompanyPercentile": 10.71
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 68.9,
+          "withinCompanyPercentile": 75
+        },
+        {
+          "name": "Atlassian",
+          "rawFrequency": 92.3,
+          "withinCompanyPercentile": 71.43
+        }
+      ]
+    },
+    "non-overlapping-intervals": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 58.83,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 21.9,
+          "withinCompanyPercentile": 53.28
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        }
+      ]
+    },
+    "meeting-rooms": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 67.92,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        }
+      ]
+    },
+    "meeting-rooms-ii": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 79.13,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 54.5,
+          "withinCompanyPercentile": 91.76
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 47.8,
+          "withinCompanyPercentile": 92.38
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 58.3,
+          "withinCompanyPercentile": 88.61
+        },
+        {
+          "name": "Salesforce",
+          "rawFrequency": 55.3,
+          "withinCompanyPercentile": 33.33
+        },
+        {
+          "name": "Oracle",
+          "rawFrequency": 85.6,
+          "withinCompanyPercentile": 71.43
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 78.4,
+          "withinCompanyPercentile": 93.06
+        },
+        {
+          "name": "Snap",
+          "rawFrequency": 100,
+          "withinCompanyPercentile": 83.33
+        }
+      ]
+    },
+    "minimum-interval-to-include-each-query": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 15.11,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 11.8,
+          "withinCompanyPercentile": 15.11
+        }
+      ]
+    },
+    "rotate-image": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 85.28,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 56.5,
+          "withinCompanyPercentile": 93.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 94.52
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 64.8,
+          "withinCompanyPercentile": 93.19
+        }
+      ]
+    },
+    "spiral-matrix": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 72.21,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 51,
+          "withinCompanyPercentile": 88.44
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 53.1,
+          "withinCompanyPercentile": 95.66
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 49.9,
+          "withinCompanyPercentile": 83.24
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 62.1,
+          "withinCompanyPercentile": 59.72
+        }
+      ]
+    },
+    "set-matrix-zeroes": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 73.71,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 30.9,
+          "withinCompanyPercentile": 73.33
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        }
+      ]
+    },
+    "happy-number": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 68.85,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 46.8,
+          "withinCompanyPercentile": 91.58
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "plus-one": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 68.9,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 30,
+          "withinCompanyPercentile": 61.2
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 45.9,
+          "withinCompanyPercentile": 90.64
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "powx-n": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 71.46,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 38.9,
+          "withinCompanyPercentile": 75.29
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 48.6,
+          "withinCompanyPercentile": 92.78
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 32.4,
+          "withinCompanyPercentile": 49.7
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 49.2,
+          "withinCompanyPercentile": 76.96
+        }
+      ]
+    },
+    "multiply-strings": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 75.9,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 43.1,
+          "withinCompanyPercentile": 80.85
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        }
+      ]
+    },
+    "detect-squares": {
+      "companyCount": 1,
+      "meanWithinCompanyPercentile": 14.31,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 14.3,
+          "withinCompanyPercentile": 14.31
+        }
+      ]
+    },
+    "single-number": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 89.98,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 45,
+          "withinCompanyPercentile": 82.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 43.7,
+          "withinCompanyPercentile": 88.57
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 63.8,
+          "withinCompanyPercentile": 95.44
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 68.3,
+          "withinCompanyPercentile": 95.68
+        }
+      ]
+    },
+    "number-of-1-bits": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 49.82,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 25.4,
+          "withinCompanyPercentile": 62.5
+        }
+      ]
+    },
+    "counting-bits": {
+      "companyCount": 2,
+      "meanWithinCompanyPercentile": 28.65,
+      "companies": [
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "reverse-bits": {
+      "companyCount": 3,
+      "meanWithinCompanyPercentile": 31.48,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 17.5,
+          "withinCompanyPercentile": 38.84
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "missing-number": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 73.48,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 33.4,
+          "withinCompanyPercentile": 67.92
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 46.8,
+          "withinCompanyPercentile": 91.58
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 42.7,
+          "withinCompanyPercentile": 72.64
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 40.2,
+          "withinCompanyPercentile": 61.78
+        }
+      ]
+    },
+    "sum-of-two-integers": {
+      "companyCount": 4,
+      "meanWithinCompanyPercentile": 36.31,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 20.8,
+          "withinCompanyPercentile": 37.14
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 28.4,
+          "withinCompanyPercentile": 68.65
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 24.6,
+          "withinCompanyPercentile": 20.97
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 25.5,
+          "withinCompanyPercentile": 18.46
+        }
+      ]
+    },
+    "reverse-integer": {
+      "companyCount": 5,
+      "meanWithinCompanyPercentile": 93.05,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 62.4,
+          "withinCompanyPercentile": 95.3
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 66.1,
+          "withinCompanyPercentile": 98.53
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 58.8,
+          "withinCompanyPercentile": 93.16
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 87.43
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 60.7,
+          "withinCompanyPercentile": 90.84
+        }
+      ]
+    },
+    "find-first-and-last-position-of-element-in-sorted-array": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 72.52,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 60.1,
+          "withinCompanyPercentile": 94.8
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 43.7,
+          "withinCompanyPercentile": 88.57
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 46.4,
+          "withinCompanyPercentile": 78.88
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 32.5,
+          "withinCompanyPercentile": 47.91
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 56.6,
+          "withinCompanyPercentile": 56.25
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 52.7,
+          "withinCompanyPercentile": 81.54
+        },
+        {
+          "name": "TikTok",
+          "rawFrequency": 62.1,
+          "withinCompanyPercentile": 59.72
+        }
+      ]
+    },
+    "find-peak-element": {
+      "companyCount": 7,
+      "meanWithinCompanyPercentile": 69.81,
+      "companies": [
+        {
+          "name": "Amazon",
+          "rawFrequency": 43.1,
+          "withinCompanyPercentile": 80.85
+        },
+        {
+          "name": "Google",
+          "rawFrequency": 43.7,
+          "withinCompanyPercentile": 88.57
+        },
+        {
+          "name": "Meta",
+          "rawFrequency": 49.5,
+          "withinCompanyPercentile": 82.98
+        },
+        {
+          "name": "Microsoft",
+          "rawFrequency": 38.3,
+          "withinCompanyPercentile": 62.57
+        },
+        {
+          "name": "Apple",
+          "rawFrequency": 47.2,
+          "withinCompanyPercentile": 24.22
+        },
+        {
+          "name": "Bloomberg",
+          "rawFrequency": 45.2,
+          "withinCompanyPercentile": 70.94
+        },
+        {
+          "name": "Adobe",
+          "rawFrequency": 91.4,
+          "withinCompanyPercentile": 78.57
+        }
+      ]
+    }
+  }
+}

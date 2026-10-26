@@ -6,11 +6,10 @@ import Question, {QuestionProgressProvider} from './question-card';
 import RandomQuestion from './random-question';
 import BinarySearchGuide from './binary-search-guide';
 import StudyHeader from './study-header';
-const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation','Math & Geometry']);
-const isNotPrioritized=(q:StudyQuestion)=>notPrioritizedTopics.has(q.theme)
-  || q.slug==='lru-cache'
-  || (q.difficulty==='Hard'&&(q.theme==='Linked List'||q.theme==='Trees'));
-const prioritizedQuestions=dashboardQuestions.filter(q=>!isNotPrioritized(q));
+import {classifyQuestionTier,neetcodeSections,studyTiers,type StudyTier} from './study-priorities';
+import {RelevanceGuide} from './question-relevance-label';
+type DisplaySection={id:string;title:string;theme:string;tier:StudyTier;relevance?:number;description?:string;matches:(question:StudyQuestion)=>boolean};
+const prioritizedQuestions=dashboardQuestions.filter(q=>classifyQuestionTier(q)==='prioritized');
 const prioritizedDifficulties=(['Easy','Medium','Hard'] as const).map(name=>({name,total:prioritizedQuestions.filter(q=>q.difficulty===name).length}));
 export default function Tracker({view='practice',catalog=view==='practice'?'neetcode':'all'}:{view?:'practice'|'repeat'|'done';catalog?:StudyCatalog}){
  const [data,setData]=useState<Record<string,Progress>|null>(null),[error,setError]=useState(false),[notice,setNotice]=useState('');
@@ -28,33 +27,29 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const renderQuestion=(q:StudyQuestion,options:{idPrefix?:string;showTopic?:boolean}={})=><Question key={q.slug} q={q} initial={data?.[q.slug]??blank} {...options} showBinarySearchTips={q.theme==='Binary Search'&&groups[q.bucket]?.title!=='Binary Search'} variationHref={q.reportedVariationSlug?questionHref(q.reportedVariationSlug):undefined}
    onSaved={progress=>{if(view==='practice')setProgress(q.slug,progress);}}
    onSubmitted={progress=>{setProgress(q.slug,progress);setNotice(q.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/>;
- const priorityGroups=groups.map((_,i)=>i).filter(i=>!isNeetcode||eligible.some(q=>q.bucket===i&&!isNotPrioritized(q)));
- const laterGroups=isNeetcode?groups.map((_,i)=>i).filter(i=>eligible.some(q=>q.bucket===i&&isNotPrioritized(q))):[];
- const inGroup=(q:StudyQuestion,i:number,later:boolean)=>q.bucket===i&&(!isNeetcode||isNotPrioritized(q)===later);
- const groupId=(i:number,later:boolean)=>'bucket-'+i+(later&&priorityGroups.includes(i)?'-not-prioritized':'');
- const groupTitle=(i:number,later:boolean)=>groups[i].title+(later&&priorityGroups.includes(i)?(eligible.filter(q=>inGroup(q,i,later)).every(q=>q.difficulty==='Hard')?' · Hard':' · Low priority'):'');
- const groupNumber=(i:number,later:boolean)=>String((later?priorityGroups.length+laterGroups.indexOf(i):priorityGroups.indexOf(i))+1).padStart(2,'0');
- const hasLaterQuestions=visible.some(q=>isNeetcode&&isNotPrioritized(q));
- const topicLinks=(indexes:number[],later=false)=>indexes.map(i=>(!data||visible.some(q=>inGroup(q,i,later)))&&<a key={i} href={'#'+groupId(i,later)}><span>{groupNumber(i,later)}</span>{groupTitle(i,later)}</a>);
- const renderGroups=(indexes:number[],later=false)=>indexes.map(i=>{
+ const sections:readonly DisplaySection[]=isNeetcode?neetcodeSections:groups.map((group,i)=>({id:'bucket-'+i,title:group.title,theme:group.title,tier:'prioritized',description:group.description,matches:(q:StudyQuestion)=>q.bucket===i}));
+ const shownSections=sections.filter(section=>!data||visible.some(section.matches));
+ const groupNumber=(section:DisplaySection)=>String(sections.indexOf(section)+1).padStart(2,'0');
+ const topicLinks=(list:DisplaySection[])=>list.map(section=><a key={section.id} href={'#'+section.id}><span className="topic-number">{groupNumber(section)}</span><span className="topic-name">{section.title}</span>{section.relevance!==undefined&&<span className="topic-relevance" aria-label={'Relevance '+section.relevance+' out of 100'}>{section.relevance}</span>}</a>);
+ const renderGroup=(section:DisplaySection)=>{
    if(!data)return null;
-   const b=groups[i],groupQuestions=visible.filter(q=>inGroup(q,i,later));
+   const groupQuestions=visible.filter(section.matches);
    if(!groupQuestions.length)return null;
-   const allGroupQuestions=eligible.filter(q=>inGroup(q,i,later));
+   const allGroupQuestions=eligible.filter(section.matches);
    const groupCompleted=allGroupQuestions.filter(q=>isCompleted(data[q.slug]??blank)).length;
-   const TopicHeading=isNeetcode&&later?'h3':'h2';
-   return <section id={groupId(i,later)} key={i}>
-     <div className="section-heading"><span className="bucket-no">{groupNumber(i,later)}</span><div><TopicHeading>{groupTitle(i,later)}</TopicHeading>{b.description&&<p>{b.description}</p>}</div><span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
-     {b.title==='Binary Search'&&<BinarySearchGuide/>}
+   const TopicHeading=isNeetcode?'h3':'h2';
+   return <section id={section.id} key={section.id} data-study-tier={section.tier}>
+     <div className="section-heading"><span className="bucket-no">{groupNumber(section)}</span><div className="section-title"><TopicHeading>{section.title}</TopicHeading>{section.description&&<p>{section.description}</p>}</div>{section.relevance!==undefined&&<span className="section-relevance">Relevance <strong>{section.relevance}/100</strong></span>}<span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     {section.theme==='Binary Search'&&<BinarySearchGuide/>}
      <div className="question-list">{groupQuestions.map(q=>renderQuestion(q))}</div>
    </section>;
- });
+ };
  return <QuestionProgressProvider><div className="study-app">
  <StudyHeader active={isNeetcode?'neetcode':view==='repeat'?'repeat':view==='done'?'done':undefined} counts={data?{neetcode:completedCount,repeat:count('repeat'),done:count('done')}:null}/>
  <div className="study-layout">
  <aside className="study-sidebar">
    <p className="sidebar-heading">Topics</p>
-   <nav className="topic-nav" aria-label="Question topics">{topicLinks(priorityGroups)}{laterGroups.length>0&&(!data||hasLaterQuestions)&&<span className="sidebar-divider">Not Prioritized</span>}{topicLinks(laterGroups,true)}</nav>
+   <nav className="topic-nav" aria-label="Question topics">{isNeetcode?studyTiers.map(tier=>{const list=shownSections.filter(section=>section.tier===tier.id);return list.length>0&&<div className="sidebar-tier" key={tier.id}><span className="sidebar-divider">{tier.title}</span>{topicLinks(list)}</div>;}):topicLinks(shownSections)}</nav>
  </aside>
  <main className="study-main">
  {view!=='done'&&<aside className="edge-case-reminder" aria-label="Practice reminder">
@@ -70,9 +65,10 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    <div className="catalog-summary" aria-label="Prioritized practice progress"><span className="summary-label">Prioritized progress</span><strong>{data?prioritizedCompletedCount+' / '+prioritizedQuestions.length:prioritizedQuestions.length}</strong><span className="summary-caption">{data?'Completed':'Questions'}</span><div className="summary-difficulties">{prioritizedDifficulties.map(({name,total})=><span key={name} className={name.toLowerCase()}>{total} {name}</span>)}</div></div>
  </header>
  <div className="storage-note">List and topics follow <a href="https://neetcode.io/practice/practice/neetcode150" target="_blank" rel="noopener noreferrer">NeetCode 150</a>. LeetCode questions link to their problems; custom drills include a practice prompt. Completed questions are in Repeat or Done. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</div>
+ {isNeetcode&&<RelevanceGuide/>}
  {notice&&<p className="storage-note" role="status">{notice}</p>}
- {isNeetcode&&!error&&<RandomQuestion questions={data?visible.filter(q=>!isNotPrioritized(q)):null} renderQuestion={q=>renderQuestion(q,{idPrefix:'random-',showTopic:false})}/>}
- {error?<div className="error" role="alert">Your progress couldn’t load. <button onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:visible.length===0?<p className="empty">{view==='practice'?'All questions are completed. Visit Repeat to practice again.':view==='repeat'?'No completed questions to repeat yet. Check Should repeat before submitting an attempt.':'No questions here yet. Uncheck Should repeat and submit a completed attempt.'}</p>:<>{renderGroups(priorityGroups)}{hasLaterQuestions&&<section className="not-prioritized" aria-labelledby="not-prioritized-heading"><h2 id="not-prioritized-heading">Not Prioritized</h2>{renderGroups(laterGroups,true)}</section>}</>}
+ {isNeetcode&&!error&&<RandomQuestion questions={data?visible.filter(q=>classifyQuestionTier(q)==='prioritized'):null} renderQuestion={q=>renderQuestion(q,{idPrefix:'random-',showTopic:false})}/>}
+ {error?<div className="error" role="alert">Your progress couldn’t load. <button onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:visible.length===0?<p className="empty">{view==='practice'?'All questions are completed. Visit Repeat to practice again.':view==='repeat'?'No completed questions to repeat yet. Check Should repeat before submitting an attempt.':'No questions here yet. Uncheck Should repeat and submit a completed attempt.'}</p>:isNeetcode?studyTiers.map(tier=>{const list=shownSections.filter(section=>section.tier===tier.id);return list.length>0&&<section className={'study-tier tier-'+tier.id} key={tier.id} aria-labelledby={'tier-'+tier.id}><div className="tier-heading"><h2 id={'tier-'+tier.id}>{tier.title}</h2><p>{tier.description}</p></div>{list.map(renderGroup)}</section>;}):shownSections.map(renderGroup)}
  <footer>Practice the explanation as well as the code. Write your own tests before submitting.</footer></main></div></div></QuestionProgressProvider>;
 }
 
