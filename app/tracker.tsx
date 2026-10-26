@@ -8,6 +8,7 @@ import BinarySearchGuide from './binary-search-guide';
 import StudyHeader from './study-header';
 const notPrioritizedTopics=new Set(['1-D Dynamic Programming','2-D Dynamic Programming','Bit Manipulation','Math & Geometry']);
 const isNotPrioritized=(q:StudyQuestion)=>notPrioritizedTopics.has(q.theme)
+  || q.slug==='lru-cache'
   || (q.difficulty==='Hard'&&(q.theme==='Linked List'||q.theme==='Trees'));
 const prioritizedQuestions=dashboardQuestions.filter(q=>!isNotPrioritized(q));
 const prioritizedDifficulties=(['Easy','Medium','Hard'] as const).map(name=>({name,total:prioritizedQuestions.filter(q=>q.difficulty===name).length}));
@@ -31,7 +32,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
  const laterGroups=isNeetcode?groups.map((_,i)=>i).filter(i=>eligible.some(q=>q.bucket===i&&isNotPrioritized(q))):[];
  const inGroup=(q:StudyQuestion,i:number,later:boolean)=>q.bucket===i&&(!isNeetcode||isNotPrioritized(q)===later);
  const groupId=(i:number,later:boolean)=>'bucket-'+i+(later&&priorityGroups.includes(i)?'-not-prioritized':'');
- const groupTitle=(i:number,later:boolean)=>groups[i].title+(later&&priorityGroups.includes(i)?' · Hard':'');
+ const groupTitle=(i:number,later:boolean)=>groups[i].title+(later&&priorityGroups.includes(i)?(eligible.filter(q=>inGroup(q,i,later)).every(q=>q.difficulty==='Hard')?' · Hard':' · Low priority'):'');
  const groupNumber=(i:number,later:boolean)=>String((later?priorityGroups.length+laterGroups.indexOf(i):priorityGroups.indexOf(i))+1).padStart(2,'0');
  const hasLaterQuestions=visible.some(q=>isNeetcode&&isNotPrioritized(q));
  const topicLinks=(indexes:number[],later=false)=>indexes.map(i=>(!data||visible.some(q=>inGroup(q,i,later)))&&<a key={i} href={'#'+groupId(i,later)}><span>{groupNumber(i,later)}</span>{groupTitle(i,later)}</a>);
