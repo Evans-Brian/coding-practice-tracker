@@ -7,7 +7,13 @@ type RecognitionNotes={
   pitfalls:readonly string[];
   references?:readonly {label:string;href:string}[];
 };
-export type StrategyNotes=RecognitionNotes|{kind:'checklist';steps:readonly {label:string;text:string}[]};
+export type StrategyNotes=RecognitionNotes|{
+  kind:'checklist';
+  steps:readonly {label:string;text:string}[];
+  clues:readonly string[];
+  caveat:string;
+  comparisons:readonly {label:string;text:string}[];
+};
 
 // Recognition clues suggest candidates. The constraints and a correctness
 // argument determine whether a technique actually fits a particular problem.
@@ -156,6 +162,16 @@ export const strategyNotes:Record<string,StrategyNotes>={
       {label:'Choose implementation',text:'recursive/top-down or iterative/bottom-up?'},
       {label:'Store results',text:'how will you avoid recalculating states?'},
       {label:'Analyze complexity',text:'number of states × work per state.'},
+    ],
+    clues:[
+      'You’re counting ways, checking feasibility, or finding a minimum/maximum over a sequence or amount.',
+      'You repeatedly face choices such as take or skip, or build an answer from earlier positions.',
+      'The relevant history can be summarized by one main index, position, or remaining amount.',
+    ],
+    caveat:'These are clues rather than guarantees. A minimum/maximum question alone does not establish that DP is appropriate.',
+    comparisons:[
+      {label:'Greedy',text:'consider it when you can prove a local choice is always safe.'},
+      {label:'Backtracking',text:'consider it when you must construct and return every valid solution. DP cannot eliminate the work of producing that output.'},
     ],
   },
   '2-D Dynamic Programming':{

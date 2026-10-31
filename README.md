@@ -24,7 +24,8 @@ and a daily points dashboard.
 - Trees sections include a reference for inorder, preorder, and postorder traversal.
 - Topic strategy notes have visible clues and expandable approach, tradeoff,
   and pitfall notes, with focused guidance for hard tree/list sections. 1-D DP
-  uses a seven-step checklist. Other practice, Bit Manipulation, and LRU Cache
+  leads with a seven-step checklist, followed by common clues and Greedy/Backtracking
+  comparisons. Other practice, Bit Manipulation, and LRU Cache
   omit section guides. Notes appear in practice, Repeat, and Done; the original
   binary-search template and boundary instructions remain available.
 

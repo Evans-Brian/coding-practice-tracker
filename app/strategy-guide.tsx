@@ -4,8 +4,15 @@ export default function StrategyGuide({theme,title=theme}:{theme:string;title?:s
   const notes=notesForSection(theme,title);
   if(!notes)return null;
   if(notes.kind==='checklist')return <aside className="strategy-guide" aria-label={title+' strategy notes'}>
-    <div className="strategy-recognition"><strong>Dynamic programming checklist</strong></div>
+    <div className="strategy-recognition"><strong>The process</strong></div>
     <ol className="strategy-checklist">{notes.steps.map(step=><li key={step.label}><strong>{step.label}:</strong> {step.text}</li>)}</ol>
+    <div className="strategy-checklist-context">
+      <p className="strategy-subheading">Common clues</p>
+      <ul className="strategy-clues">{notes.clues.map(clue=><li key={clue}>{clue}</li>)}</ul>
+      <p className="strategy-caveat">{notes.caveat}</p>
+      <p className="strategy-subheading">Choosing between strategies</p>
+      <ul className="strategy-clues">{notes.comparisons.map(comparison=><li key={comparison.label}><strong>{comparison.label}:</strong> {comparison.text}</li>)}</ul>
+    </div>
   </aside>;
   return <aside className="strategy-guide" aria-label={title+' strategy notes'}>
     <div className="strategy-recognition"><strong>When to use this strategy</strong><p>{notes.recognize}</p></div>
