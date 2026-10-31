@@ -5,6 +5,7 @@ import {blankProgress as blank, isCompleted, type Progress} from './progress-sta
 import Question, {QuestionProgressProvider} from './question-card';
 import RandomQuestion from './random-question';
 import BinarySearchGuide from './binary-search-guide';
+import StrategyGuide from './strategy-guide';
 import StudyHeader from './study-header';
 import {classifyQuestionTier,sectionsForPracticePage,studyTiers,type StudyTier,type PracticePage} from './study-priorities';
 import {RelevanceGuide} from './question-relevance-label';
@@ -44,6 +45,7 @@ export default function Tracker({view='practice',catalog=view==='practice'?'neet
    const TopicHeading=isNeetcode?'h3':'h2';
    return <section id={section.id} key={section.id} data-study-tier={section.tier}>
      <div className="section-heading"><span className="bucket-no">{groupNumber(section)}</span><div className="section-title"><TopicHeading>{section.title}</TopicHeading>{section.description&&<p>{section.description}</p>}</div>{section.relevance!==undefined&&<span className="section-relevance">Relevance <strong>{section.relevance}/100</strong></span>}<span className="total">{isNeetcode?groupCompleted+' / '+allGroupQuestions.length+' completed':groupQuestions.length+' questions'}</span></div>
+     <StrategyGuide theme={section.theme} title={section.title}/>
      {section.theme==='Binary Search'&&<BinarySearchGuide/>}
      {section.theme==='Trees'&&<p className="tree-traversal-reference">Study reference: <a href="https://www.geeksforgeeks.org/dsa/tree-traversals-inorder-preorder-and-postorder/" target="_blank" rel="noopener noreferrer">Tree traversals: inorder, preorder &amp; postorder</a></p>}
      {section.theme==='Intervals'&&<p className="topic-study-note"><strong>Tip:</strong> Interval problems can often be combined with heaps as they get more complex.</p>}

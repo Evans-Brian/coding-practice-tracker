@@ -264,3 +264,25 @@ footer { color: var(--muted); border-color: var(--border); font-size: 12px; }
   .section-heading p { font-size: 11px; }
 }
 .tree-traversal-reference,.topic-study-note { margin: 0 0 18px; padding: 14px 18px; border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--muted); font-size: 13px; line-height: 1.6; }
+.strategy-guide { padding: 17px 20px 0; border: 1px solid var(--border); border-bottom: 0; background: var(--panel); color: #c8c8d0; font-size: 13px; line-height: 1.7; }
+.strategy-recognition>strong { color: var(--accent-soft); font-size: 14px; font-weight: 650; }
+.strategy-recognition p { max-width: 80ch; margin: 4px 0 12px; color: #dedee6; }
+.strategy-clues { margin: 0 0 15px; padding-left: 19px; max-width: 83ch; }
+.strategy-clues li+li { margin-top: 7px; }
+.strategy-clues strong { color: var(--text); font-weight: 550; }
+.strategy-details { border-top: 1px solid var(--border); }
+.strategy-details>summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; color: var(--accent-soft); font-size: 12px; font-weight: 550; cursor: pointer; list-style: none; }
+.strategy-details>summary::-webkit-details-marker { display: none; }
+.strategy-details>summary:hover { color: var(--text); }
+.strategy-details-toggle { font-size: 18px; line-height: 1; }
+.strategy-details[open] .strategy-details-toggle { transform: rotate(180deg); }
+.strategy-detail-body { padding: 3px 0 18px; max-width: 83ch; }
+.strategy-detail-body dl { margin: 0; }
+.strategy-detail-body dl>div+div { margin-top: 13px; }
+.strategy-detail-body dt,.strategy-pitfalls-label { color: var(--text); font-size: 12px; font-weight: 600; }
+.strategy-detail-body dd { margin: 3px 0 0; }
+.strategy-pitfalls-label { margin: 13px 0 3px; }
+.strategy-detail-body ul { margin: 0; padding-left: 19px; }
+.strategy-detail-body li+li { margin-top: 6px; }
+.strategy-references { margin: 13px 0 0; color: var(--muted); font-size: 11px; }
+@media(max-width:760px) { .strategy-guide { padding: 14px 14px 0; } }
