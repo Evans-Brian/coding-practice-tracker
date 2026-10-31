@@ -3,6 +3,10 @@ import {notesForSection} from './strategy-notes';
 export default function StrategyGuide({theme,title=theme}:{theme:string;title?:string}){
   const notes=notesForSection(theme,title);
   if(!notes)return null;
+  if(notes.kind==='checklist')return <aside className="strategy-guide" aria-label={title+' strategy notes'}>
+    <div className="strategy-recognition"><strong>Dynamic programming checklist</strong></div>
+    <ol className="strategy-checklist">{notes.steps.map(step=><li key={step.label}><strong>{step.label}:</strong> {step.text}</li>)}</ol>
+  </aside>;
   return <aside className="strategy-guide" aria-label={title+' strategy notes'}>
     <div className="strategy-recognition"><strong>When to use this strategy</strong><p>{notes.recognize}</p></div>
     <ul className="strategy-clues">{notes.clues.map(clue=><li key={clue.signal}><strong>{clue.signal}.</strong> {clue.why}</li>)}</ul>

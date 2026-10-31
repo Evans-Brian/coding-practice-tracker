@@ -270,6 +270,9 @@ footer { color: var(--muted); border-color: var(--border); font-size: 12px; }
 .strategy-clues { margin: 0 0 15px; padding-left: 19px; max-width: 83ch; }
 .strategy-clues li+li { margin-top: 7px; }
 .strategy-clues strong { color: var(--text); font-weight: 550; }
+.strategy-checklist { margin: 10px 0 18px; padding-left: 23px; max-width: 83ch; }
+.strategy-checklist li+li { margin-top: 8px; }
+.strategy-checklist strong { color: var(--text); font-weight: 600; }
 .strategy-details { border-top: 1px solid var(--border); }
 .strategy-details>summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; color: var(--accent-soft); font-size: 12px; font-weight: 550; cursor: pointer; list-style: none; }
 .strategy-details>summary::-webkit-details-marker { display: none; }

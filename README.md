@@ -22,9 +22,11 @@ and a daily points dashboard.
 - Extra study entries add 0.5 or 1 point for today, with an optional note. They
   appear in daily totals and can be removed without changing problem progress.
 - Trees sections include a reference for inorder, preorder, and postorder traversal.
-- Every topic has strategy-recognition notes with visible clues and expandable
-  approach, tradeoff, and pitfall notes. LRU Cache and hard tree/list sections
-  have focused guidance; the same notes appear in practice, Repeat, and Done.
+- Topic strategy notes have visible clues and expandable approach, tradeoff,
+  and pitfall notes, with focused guidance for hard tree/list sections. 1-D DP
+  uses a seven-step checklist. Other practice, Bit Manipulation, and LRU Cache
+  omit section guides. Notes appear in practice, Repeat, and Done; the original
+  binary-search template and boundary instructions remain available.
 
 Progress and completion events are stored in Cloudflare D1. Local databases,
 environment files, and browser drafts are not included in the repository.

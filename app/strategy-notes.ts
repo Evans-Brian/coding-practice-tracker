@@ -1,4 +1,5 @@
-export type StrategyNotes={
+type RecognitionNotes={
+  kind?:'recognition';
   recognize:string;
   clues:readonly {signal:string;why:string}[];
   start:string;
@@ -6,6 +7,7 @@ export type StrategyNotes={
   pitfalls:readonly string[];
   references?:readonly {label:string;href:string}[];
 };
+export type StrategyNotes=RecognitionNotes|{kind:'checklist';steps:readonly {label:string;text:string}[]};
 
 // Recognition clues suggest candidates. The constraints and a correctness
 // argument determine whether a technique actually fits a particular problem.
@@ -145,16 +147,16 @@ export const strategyNotes:Record<string,StrategyNotes>={
     references:[{label:'Dijkstra and its assumptions',href:'https://cp-algorithms.com/graph/dijkstra.html'},{label:'0–1 BFS',href:'https://cp-algorithms.com/graph/01_bfs.html'}],
   },
   '1-D Dynamic Programming':{
-    recognize:'Different choices revisit the same remaining problem, and one main index, position, or amount can describe each subproblem.',
-    clues:[
-      {signal:'Count ways, test feasibility, or find a minimum/maximum over a sequence',why:'A result may be built from answers for earlier positions or smaller amounts.'},
-      {signal:'A recursive decision tree repeats the same state',why:'Caching the answer for that state can prevent repeated exploration.'},
-      {signal:'Take/skip choices or a small dependency on earlier results',why:'The past may be summarized without storing every earlier choice.'},
+    kind:'checklist',
+    steps:[
+      {label:'Recognize DP',text:'can the problem be expressed through smaller subproblems whose results repeat?'},
+      {label:'Define the state',text:'which changing variables uniquely identify a subproblem?'},
+      {label:'Define the recurrence',text:'what choices can you make, and how do their results combine?'},
+      {label:'Set base cases',text:'which states have answers you know directly?'},
+      {label:'Choose implementation',text:'recursive/top-down or iterative/bottom-up?'},
+      {label:'Store results',text:'how will you avoid recalculating states?'},
+      {label:'Analyze complexity',text:'number of states × work per state.'},
     ],
-    start:'Define the state in one sentence, list the valid transitions, and establish base cases. Write a recurrence before choosing memoization or a bottom-up order.',
-    distinguish:'A best-value question alone does not imply DP. You need reusable subproblems and sufficient state. If a local choice can be proved safe, greedy may be simpler; if every full solution must be listed, consider backtracking.',
-    pitfalls:['Include every fact that affects future choices in the state. Add a dimension if the index alone is insufficient.','Counting and optimization have different base cases. Estimate states × work per state, and only compress storage after understanding dependencies.'],
-    references:[{label:'Introduction to dynamic programming',href:'https://cp-algorithms.com/dynamic_programming/intro-to-dp.html'}],
   },
   '2-D Dynamic Programming':{
     recognize:'The remaining work depends on two coordinates, such as two string positions, a grid cell, or an item index and a budget.',
@@ -201,40 +203,6 @@ export const strategyNotes:Record<string,StrategyNotes>={
     distinguish:'A matrix is not automatically a geometry problem; paths and connectivity may need graph traversal. A numeric pattern seen in a few examples is a hypothesis, not a proof of a formula.',
     pitfalls:['Prefer exact integer comparisons when possible; floating-point equality can be fragile.','Check zero, negatives, boundaries, and division by zero. For repeated-state simulations, verify both how the state is recorded and why repetition determines the future.'],
   },
-  'Bit Manipulation':{
-    recognize:'The useful information is in individual bits, a compact set of flags, or an operation with a cancellation property.',
-    clues:[
-      {signal:'Pairs cancel and one value remains',why:'XOR can remove equal pairs when the occurrence assumptions match the problem.'},
-      {signal:'Small subsets, membership flags, or visited-state combinations',why:'A bitmask can represent a set and make updates or comparisons compact.'},
-      {signal:'Count, test, set, clear, or reverse binary digits',why:'Bit operations directly express the requested transformation.'},
-    ],
-    start:'Identify the needed property of XOR, AND, OR, or shifting, and check its assumptions. Decide whether the task uses a fixed bit width or mathematical integers.',
-    distinguish:'Bitmasks are a representation, not necessarily the whole algorithm: subset DP or backtracking may use them. XOR does not solve an arbitrary duplicate-counting problem.',
-    pitfalls:['Python integers do not have a fixed 32-bit width. Shifts of negative numbers and bitwise complements need care when a problem expects fixed-width behavior.','Validate how often each value appears and whether signed versus unsigned interpretation matters.'],
-  },
-  'Other practice':{
-    recognize:'Start by translating the exact input rules into a small, testable transformation before reaching for a more complex algorithm.',
-    clues:[
-      {signal:'Parsing, formatting, filtering, or explicit step-by-step rules',why:'A careful scan or simulation may already match the intended work.'},
-      {signal:'Repeated lookup, grouping, or frequency checks',why:'A map or set can support a straightforward implementation of the rules.'},
-      {signal:'Ordering or repeated computation becomes expensive',why:'Sorting, cached results, or one of the main topic strategies may become useful after the basic behavior is clear.'},
-    ],
-    start:'Write down the input, output, and one example by hand. Separate parsing from the core transformation, then check each rule with a small test.',
-    distinguish:'A familiar keyword does not force a particular pattern. Let the required behavior and input size determine whether a simple scan is enough.',
-    pitfalls:['Clarify empty values, whitespace, punctuation, duplicates, and whether order must be preserved.','Return the exact required type and shape. Check that your tests exercise the rules, not only the examples.'],
-  },
-};
-
-const lruNotes:StrategyNotes={
-  recognize:'You need both fast lookup by key and constant-time updates to which cached item was used most recently.',
-  clues:[
-    {signal:'Get or update by an arbitrary key',why:'A hash map can find the corresponding cache entry directly.'},
-    {signal:'Access changes recency and capacity forces eviction',why:'A doubly linked list can move a known node to one end and remove the least-recent node from the other.'},
-    {signal:'Both operations require average O(1) time',why:'The map and list solve complementary requirements that neither structure handles efficiently alone.'},
-  ],
-  start:'Define which end means most recent, what the map points to, and what get/update does to ordering. Keep unlinking and inserting a node as small reusable operations.',
-  distinguish:'LRU means least recently used, not least frequently used. A heap usually makes recency updates logarithmic or needs stale entries; repeatedly scanning for the oldest item is linear.',
-  pitfalls:['Updating an existing key must not create a second node. Eviction must remove the item from both structures.','Dummy head/tail nodes simplify edge cases. Check the capacity constraint and repeated access to a single entry.'],
 };
 
 const hardTreeNotes:StrategyNotes={
@@ -262,7 +230,7 @@ const hardLinkedListNotes:StrategyNotes={
 };
 
 export function notesForSection(theme:string,title=theme):StrategyNotes|undefined{
-  if(title==='LRU Cache')return lruNotes;
+  if(title==='LRU Cache')return undefined;
   if(title==='Trees · Hard')return hardTreeNotes;
   if(title==='Linked List · Hard')return hardLinkedListNotes;
   return strategyNotes[theme];
