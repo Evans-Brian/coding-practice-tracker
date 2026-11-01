@@ -8,8 +8,10 @@ and a daily points dashboard.
 
 - Problems grouped by topic and difficulty, with links to LeetCode.
 - An unfinished-question picker that respects study priorities.
+- A random picker on Repeat, with difficulty filters and the same inline question
+  card and shared notes as the topic list. It draws from questions marked to repeat.
 - Three study tiers, with LRU Cache first in Medium Priority and only the
-  Prioritized tier included in the random picker and prioritized progress.
+  Prioritized tier included in the main-page random picker and prioritized progress.
 - Not Prioritized has its own page between Done and Daily points. The main page
   shows Prioritized and Medium Priority; completed problems still use Repeat or Done.
 - Section relevance scores plus question relevance and expandable company-list

@@ -5,18 +5,19 @@ import {type StudyQuestion} from './study-catalog';
 
 type DifficultyFilter = 'easy' | 'easy-medium' | 'medium' | 'hard';
 
-export default function RandomQuestion({questions,renderQuestion}:{questions:StudyQuestion[]|null;renderQuestion:(question:StudyQuestion)=>ReactNode}) {
+export default function RandomQuestion({questions,renderQuestion,mode='practice'}:{questions:StudyQuestion[]|null;renderQuestion:(question:StudyQuestion)=>ReactNode;mode?:'practice'|'repeat'}) {
   const [difficulty,setDifficulty]=useState<DifficultyFilter>('easy-medium');
   const [selectedSlug,setSelectedSlug]=useState<string|null>(null);
   const choices=(questions??[]).filter(q=>difficulty==='easy-medium'
     ? q.difficulty==='Easy'||q.difficulty==='Medium'
     : q.difficulty.toLowerCase()===difficulty);
   const selected=choices.find(q=>q.slug===selectedSlug);
+  const questionLabel=mode==='repeat'?'repeat':'unfinished';
 
   return <section className="random-question" aria-labelledby="random-question-heading">
     <div className="random-question-heading">
       <h2 id="random-question-heading">Random question</h2>
-      <p>Pick an unfinished question from your prioritized practice list.</p>
+      <p>{mode==='repeat'?'Pick a question from your Repeat list.':'Pick an unfinished question from your prioritized practice list.'}</p>
     </div>
     <div className="random-question-controls">
       <label htmlFor="random-difficulty">Difficulty
@@ -33,7 +34,7 @@ export default function RandomQuestion({questions,renderQuestion}:{questions:Stu
     </div>
     <div className="random-question-result">
       {selected?<><span className="random-question-announcement" role="status">Selected {selected.name}.</span><div className="question-list random-question-card">{renderQuestion(selected)}</div></>
-        :questions?<span role="status">{choices.length?choices.length+' unfinished questions available.':'No unfinished questions match this difficulty.'}</span>
+        :questions?<span role="status">{choices.length?choices.length+' '+questionLabel+' questions available.':'No '+questionLabel+' questions match this difficulty.'}</span>
         :<span role="status">Loading your progress…</span>}
     </div>
   </section>;
