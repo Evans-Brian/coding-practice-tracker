@@ -32,6 +32,9 @@ and a daily points dashboard.
   binary-search template and boundary instructions remain available.
 - Greedy notes include recognition prompts, common patterns, implementation steps,
   the coin-choice counterexample, and an expandable, correctly indented Python template.
+- Merge Triplets, Valid Parenthesis String, and Partition Labels are removed from
+  active Greedy practice. Completed history remains in Other practice on Repeat or
+  Done, and official NeetCode membership and daily points remain intact.
 
 Progress and completion events are stored in Cloudflare D1. Local databases,
 environment files, and browser drafts are not included in the repository.

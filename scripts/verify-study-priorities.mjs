@@ -6,7 +6,8 @@ function loadModule(entry) {
   return import('data:text/javascript;base64,' + Buffer.from(result.outputFiles[0].text).toString('base64'));
 }
 
-const {dashboardQuestions, neetcodeTopics} = await loadModule('app/study-catalog.ts');
+const {dashboardQuestions, neetcodeTopics, studyQuestions, eligibleQuestions} = await loadModule('app/study-catalog.ts');
+const {retiredPracticeSlugs} = await loadModule('app/practice-exclusions.ts');
 const {studyTiers, neetcodeSections, sectionForQuestion, classifyQuestionTier} = await loadModule('app/study-priorities.ts');
 
 assert.equal(dashboardQuestions.length, 152);
@@ -17,9 +18,20 @@ assert.equal(new Set(neetcodeSections.map(section => section.id)).size, neetcode
 assert(neetcodeSections.every(section => /^[a-z0-9-]+$/.test(section.id)));
 assert(neetcodeSections.every(section => Number.isInteger(section.relevance) && section.relevance >= 0 && section.relevance <= 100));
 
-// Every question has exactly one section, even where a topic is split by difficulty.
+// Active questions have exactly one section. Removed practice retains its history.
 for (const question of dashboardQuestions) {
   const matches = neetcodeSections.filter(section => section.matches(question));
+  if(retiredPracticeSlugs.has(question.slug)){
+    assert.equal(matches.length, 0, question.slug);
+    assert.equal(sectionForQuestion(question), undefined, question.slug);
+    assert.equal(classifyQuestionTier(question), undefined, question.slug);
+    const historical=studyQuestions('all').find(q=>q.slug===question.slug);
+    assert.equal(historical.bucket, neetcodeTopics.length, question.slug);
+    assert.equal(historical.neetcode150, true, question.slug);
+    const saved={notes:'Keep my notes',completions:2,tries:1,repeat:true,submitted:true,retained:true};
+    assert(eligibleQuestions('all', {[question.slug]:saved}).some(q=>q.slug===question.slug));
+    continue;
+  }
   assert.equal(matches.length, 1, question.slug);
   assert.equal(sectionForQuestion(question)?.id, matches[0].id, question.slug);
   assert.equal(classifyQuestionTier(question), matches[0].tier, question.slug);
@@ -27,7 +39,7 @@ for (const question of dashboardQuestions) {
 }
 
 const expectedCounts = {
-  prioritized: {total: 112, difficulties: [21, 82, 9]},
+  prioritized: {total: 109, difficulties: [21, 79, 9]},
   medium: {total: 20, difficulties: [0, 11, 9]},
   'not-prioritized': {total: 20, difficulties: [7, 10, 3]},
 };
@@ -74,4 +86,4 @@ const outsideCatalog = {...lru, slug: 'custom-drill', theme: 'Other practice'};
 assert.equal(sectionForQuestion(outsideCatalog), undefined);
 assert.equal(classifyQuestionTier(outsideCatalog), undefined);
 
-console.log('Verified: 152 unique questions in three ordered tiers (112 / 20 / 20), stable topic buckets and anchors, split hard sections, and LRU Cache first in Medium Priority.');
+console.log('Verified: 152 preserved catalog questions, three ordered tiers (109 / 20 / 20), three removed from active practice with retained history, stable anchors, split hard sections, and LRU Cache first in Medium Priority.');

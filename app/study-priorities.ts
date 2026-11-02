@@ -1,4 +1,5 @@
 import type {StudyQuestion} from './study-catalog';
+import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyTier = 'prioritized' | 'medium' | 'not-prioritized';
 
@@ -50,7 +51,9 @@ export const neetcodeSections: readonly NeetcodeSection[] = [
   section('bucket-7', 'Heap / Priority Queue', 'prioritized', 89),
   section('bucket-15', 'Intervals', 'prioritized', 88),
   section('bucket-12', '1-D Dynamic Programming', 'prioritized', 78),
-  section('bucket-14', 'Greedy', 'prioritized', 77),
+  section('bucket-14', 'Greedy', 'prioritized', 77, {
+    matches: question => question.theme === 'Greedy' && !retiredPracticeSlugs.has(question.slug),
+  }),
   section('bucket-5', 'Linked List', 'prioritized', 75, {
     matches: question => question.theme === 'Linked List'
       && question.difficulty !== 'Hard' && question.slug !== 'lru-cache',

@@ -1,6 +1,7 @@
 import source from './neetcode150-source.json' with {type: 'json'};
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
+import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyCatalog = 'neetcode' | 'all';
 export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean};
@@ -45,7 +46,7 @@ export const allowedQuestionSlugs = new Set([
 ]);
 
 const allQuestions: StudyQuestion[] = [
-  ...dashboardQuestions,
+  ...dashboardQuestions.map(q=>retiredPracticeSlugs.has(q.slug)?{...q,bucket:neetcodeTopics.length}:q),
   ...questions.filter(q => !dashboardSlugs.has(q.slug)).map((q, index) => ({
     ...q, bucket: neetcodeTopics.length, order: dashboardQuestions.length + index + 1,
   })),
@@ -59,7 +60,7 @@ export function studyGroups(catalog: StudyCatalog) {
   const topics = neetcodeTopics.map(title => ({title, description: ''}));
   return catalog === 'neetcode' ? topics : [...topics, {
     title: 'Other practice',
-    description: 'Your custom drills and completed questions outside NeetCode 150.',
+    description: 'Your custom drills and completed questions outside your active practice list.',
   }];
 }
 
