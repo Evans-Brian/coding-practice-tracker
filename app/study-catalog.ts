@@ -29,12 +29,17 @@ export const neetcodeQuestions: StudyQuestion[] = source
   .map((question, index) => ({...question, order: index + 1}));
 
 export const extraPracticeQuestions: StudyQuestion[] = [
-  {name:'Find First and Last Position of Element in Sorted Array',slug:'find-first-and-last-position-of-element-in-sorted-array'},
-  {name:'Find Peak Element',slug:'find-peak-element'},
+  {name:'Find First and Last Position of Element in Sorted Array',slug:'find-first-and-last-position-of-element-in-sorted-array',difficulty:'Medium' as const,theme:'Binary Search'},
+  {name:'Find Peak Element',slug:'find-peak-element',difficulty:'Medium' as const,theme:'Binary Search'},
+  // Highest-frequency new matches in Google's three-month Greedy list, checked Nov 2, 2026.
+  // Existing tracker questions were skipped; these appeared at ranks 2, 5, and 6.
+  {name:'Split Array Largest Sum',slug:'split-array-largest-sum',difficulty:'Hard' as const,theme:'Greedy'},
+  {name:'Minimum Sum of Squared Difference',slug:'minimum-sum-of-squared-difference',difficulty:'Medium' as const,theme:'Greedy'},
+  {name:'Largest Number',slug:'largest-number',difficulty:'Medium' as const,theme:'Greedy'},
 ].map((question,index)=>({
-  ...question,difficulty:'Medium' as const,theme:'Binary Search',
+  ...question,
   kind:'leetcode' as const,grind75:false,
-  bucket:neetcodeTopics.indexOf('Binary Search'),order:neetcodeQuestions.length+index+1,
+  bucket:neetcodeTopics.indexOf(question.theme),order:neetcodeQuestions.length+index+1,
   dashboardExtra:true,
 }));
 

@@ -10,8 +10,8 @@ const {dashboardQuestions, neetcodeTopics, studyQuestions, eligibleQuestions} = 
 const {retiredPracticeSlugs} = await loadModule('app/practice-exclusions.ts');
 const {studyTiers, neetcodeSections, sectionForQuestion, classifyQuestionTier} = await loadModule('app/study-priorities.ts');
 
-assert.equal(dashboardQuestions.length, 152);
-assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 152);
+assert.equal(dashboardQuestions.length, 155);
+assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 155);
 assert.deepEqual(studyTiers.map(tier => tier.id), ['prioritized', 'medium', 'not-prioritized']);
 assert.equal(neetcodeSections.length, 21);
 assert.equal(new Set(neetcodeSections.map(section => section.id)).size, neetcodeSections.length);
@@ -39,7 +39,7 @@ for (const question of dashboardQuestions) {
 }
 
 const expectedCounts = {
-  prioritized: {total: 109, difficulties: [21, 79, 9]},
+  prioritized: {total: 112, difficulties: [21, 81, 10]},
   medium: {total: 20, difficulties: [0, 11, 9]},
   'not-prioritized': {total: 20, difficulties: [7, 10, 3]},
 };
@@ -86,4 +86,12 @@ const outsideCatalog = {...lru, slug: 'custom-drill', theme: 'Other practice'};
 assert.equal(sectionForQuestion(outsideCatalog), undefined);
 assert.equal(classifyQuestionTier(outsideCatalog), undefined);
 
-console.log('Verified: 152 preserved catalog questions, three ordered tiers (109 / 20 / 20), three removed from active practice with retained history, stable anchors, split hard sections, and LRU Cache first in Medium Priority.');
+for(const [slug,difficulty] of [['split-array-largest-sum','Hard'],['minimum-sum-of-squared-difference','Medium'],['largest-number','Medium']]){
+  const question=dashboardQuestions.find(q=>q.slug===slug);
+  assert.equal(question?.difficulty, difficulty, slug);
+  assert.equal(question?.dashboardExtra, true, slug);
+  assert.equal(sectionForQuestion(question).theme, 'Greedy', slug);
+  assert.equal(classifyQuestionTier(question), 'prioritized', slug);
+}
+
+console.log('Verified: 155 unique catalog questions, three ordered tiers (112 / 20 / 20), three removed from active practice with retained history, three new Greedy replacements, stable anchors, split hard sections, and LRU Cache first in Medium Priority.');

@@ -11,6 +11,7 @@ function loadModule(entry) {
 
 const data = JSON.parse(await readFile('app/question-relevance-data.json', 'utf8'));
 const {dashboardQuestions} = await loadModule('app/study-catalog.ts');
+const {retiredPracticeSlugs} = await loadModule('app/practice-exclusions.ts');
 const {neetcodeSections, sectionForQuestion, classifyQuestionTier} = await loadModule('app/study-priorities.ts');
 const {questionRelevance, relevanceMetadata, relevanceCompanies} = await loadModule('app/question-relevance.ts');
 const {default: QuestionRelevanceLabel, RelevanceGuide} = await loadModule('app/question-relevance-label.tsx');
@@ -19,11 +20,12 @@ const inRange = (value, label, minimum = 0, maximum = 100) => {
   assert(Number.isFinite(value) && value >= minimum && value <= maximum, `${label}: ${value}`);
 };
 
-assert.equal(dashboardQuestions.length, 152);
+assert.equal(dashboardQuestions.length, 155);
 assert.equal(relevanceMetadata.trackedQuestionCount, 152);
 assert.deepEqual(relevanceMetadata, data.metadata);
 assert.deepEqual(relevanceCompanies, data.companies);
-assert.deepEqual(Object.keys(data.questions).sort(), dashboardQuestions.map(question => question.slug).sort());
+assert.equal(Object.keys(data.questions).length, relevanceMetadata.trackedQuestionCount);
+assert(Object.keys(data.questions).every(slug=>dashboardQuestions.some(question=>question.slug===slug)));
 assert.equal(relevanceCompanies.length, 25);
 assert.equal(relevanceMetadata.sampleCompanyCount, 25);
 const companyNames = new Set(relevanceCompanies.map(company => company.name));
@@ -34,13 +36,26 @@ assert(relevanceMetadata.commitUrl.endsWith('/' + relevanceMetadata.commit));
 
 let withEvidence = 0;
 let withoutEvidence = 0;
+let outsideSnapshot = 0;
 for (const question of dashboardQuestions) {
   const evidence = data.questions[question.slug];
   const result = questionRelevance(question);
+  if(retiredPracticeSlugs.has(question.slug)){
+    assert.equal(result, null, question.slug);
+    continue;
+  }
   assert(result, question.slug);
   inRange(result.score, question.slug);
   assert(Number.isInteger(result.score), question.slug);
   assert(result.score > 0, `Missing or sparse evidence must not erase study value: ${question.slug}`);
+  if(!evidence){
+    outsideSnapshot++;
+    assert.equal(result.companyCount, 0, question.slug);
+    assert.equal(result.recentWeight, 0, question.slug);
+    assert.equal(result.recentScore, null, question.slug);
+    assert.equal(result.coverage, 'unlisted', question.slug);
+    continue;
+  }
   assert(Number.isInteger(evidence.companyCount) && evidence.companyCount >= 0 && evidence.companyCount <= 25, question.slug);
   assert.equal(evidence.companyCount, evidence.companies.length, question.slug);
   assert.equal(new Set(evidence.companies.map(company => company.name)).size, evidence.companyCount, question.slug);
@@ -82,9 +97,10 @@ for (const question of dashboardQuestions) {
     }
   }
 }
-assert.equal(withEvidence, 147);
-assert.equal(withoutEvidence, 5);
-assert.equal(relevanceMetadata.trackedQuestionsWithEvidence, withEvidence);
+assert.equal(outsideSnapshot, 3);
+assert.equal(withEvidence+withoutEvidence+outsideSnapshot, dashboardQuestions.length-retiredPracticeSlugs.size);
+assert.equal(Object.values(data.questions).filter(evidence=>evidence.companyCount>0).length, 147);
+assert.equal(relevanceMetadata.trackedQuestionsWithEvidence, 147);
 
 const lru = dashboardQuestions.find(question => question.slug === 'lru-cache');
 assert(lru);
@@ -117,6 +133,7 @@ assert.equal(questionRelevance({...absent, theme: 'Other practice'}), null);
 
 // More curated coverage cannot lower an otherwise identical question's score.
 for (const question of dashboardQuestions) {
+  if(retiredPracticeSlugs.has(question.slug))continue;
   const withoutGrind = questionRelevance({...question, grind75: false});
   const withGrind = questionRelevance({...question, grind75: true});
   assert(withGrind.score >= withoutGrind.score, `${question.slug}: curation monotonicity`);
@@ -165,4 +182,4 @@ for (const company of questionRelevance(lru).companies) {
 assert.match(relevanceMetadata.sourceFrequencyMeaning, /not an interview probability/);
 assert.match(relevanceMetadata.coverageMeaning, /neither a count of interview reports/);
 
-console.log('Verified: 152 bounded question scores, 147 recent matches and 5 positive fallbacks, 25 unique company lists, sparse-evidence weighting, parent-topic hard baselines, LRU placement, monotonic inputs, and non-probability explanations with source links.');
+console.log('Verified: bounded active-question scores, preserved 152-question evidence snapshot, three new questions with honest fallbacks, retired practice omitted, 25 company lists, sparse-evidence weighting, monotonic inputs, and source explanations.');

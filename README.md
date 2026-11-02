@@ -35,6 +35,12 @@ and a daily points dashboard.
 - Merge Triplets, Valid Parenthesis String, and Partition Labels are removed from
   active Greedy practice. Completed history remains in Other practice on Repeat or
   Done, and official NeetCode membership and daily points remain intact.
+- Three new Google Greedy replacements: Split Array Largest Sum (Hard), Minimum
+  Sum of Squared Difference (Medium), and Largest Number (Medium). Checked on
+  Nov 2, 2026 in Google's three-month company list, filtered to Greedy and sorted
+  by Frequency descending. Already tracked questions were skipped; the new
+  selections appeared at ranks 2, 5, and 6. Source:
+  https://leetcode.com/company/google/?favoriteSlug=google-three-months
 
 Progress and completion events are stored in Cloudflare D1. Local databases,
 environment files, and browser drafts are not included in the repository.
