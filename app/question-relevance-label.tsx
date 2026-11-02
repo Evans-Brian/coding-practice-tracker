@@ -6,7 +6,7 @@ export default function QuestionRelevanceLabel({question}:{question:StudyQuestio
   if(!relevance)return null;
   return <details className="question-relevance">
     <summary><span className="relevance-badge">Relevance <strong>{relevance.score}/100</strong></span>
-      <span className="company-coverage">{relevance.companyCount?relevance.companyCount+' company '+(relevance.companyCount===1?'list':'lists'):'No matching recent listing'}</span>
+      <span className="company-coverage">{relevance.companyCount?relevance.companyCount+' company '+(relevance.companyCount===1?'list':'lists'):'No match in Oct 20 snapshot'}</span>
     </summary>
     <div className="relevance-detail">
       <p>Six-month company-list snapshot: approximately Apr 20–Oct 20, 2026. Checked Oct 26.</p>
