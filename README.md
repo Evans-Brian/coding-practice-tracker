@@ -30,6 +30,8 @@ and a daily points dashboard.
   comparisons. Other practice, Bit Manipulation, and LRU Cache
   omit section guides. Notes appear in practice, Repeat, and Done; the original
   binary-search template and boundary instructions remain available.
+- Greedy notes include recognition prompts, common patterns, implementation steps,
+  the coin-choice counterexample, and an expandable, correctly indented Python template.
 
 Progress and completion events are stored in Cloudflare D1. Local databases,
 environment files, and browser drafts are not included in the repository.

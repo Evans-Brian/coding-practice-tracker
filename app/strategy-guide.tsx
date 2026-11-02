@@ -16,13 +16,16 @@ export default function StrategyGuide({theme,title=theme}:{theme:string;title?:s
   </aside>;
   return <aside className="strategy-guide" aria-label={title+' strategy notes'}>
     <div className="strategy-recognition"><strong>When to use this strategy</strong><p>{notes.recognize}</p></div>
-    <ul className="strategy-clues">{notes.clues.map(clue=><li key={clue.signal}><strong>{clue.signal}.</strong> {clue.why}</li>)}</ul>
+    {notes.cluesHeading&&<p className="strategy-subheading">{notes.cluesHeading}</p>}
+    <ul className="strategy-clues">{notes.clues.map(clue=>typeof clue==='string'?<li key={clue}>{clue}</li>:<li key={clue.signal}><strong>{clue.signal}.</strong> {clue.why}</li>)}</ul>
     <details className="strategy-details">
-      <summary><span>Approach &amp; pitfalls</span><span className="strategy-details-toggle" aria-hidden="true">⌄</span></summary>
+      <summary><span>{notes.template?'Patterns, approach & Python template':'Approach & pitfalls'}</span><span className="strategy-details-toggle" aria-hidden="true">⌄</span></summary>
       <div className="strategy-detail-body">
-        <dl><div><dt>Start here</dt><dd>{notes.start}</dd></div><div><dt>Choose carefully</dt><dd>{notes.distinguish}</dd></div></dl>
+        {notes.patterns&&<><p className="strategy-subheading">Common patterns</p><ul>{notes.patterns.map(pattern=><li key={pattern}>{pattern}</li>)}</ul></>}
+        <dl><div><dt>{notes.startHeading??'Start here'}</dt><dd>{typeof notes.start==='string'?notes.start:<ul>{notes.start.map(step=><li key={step}>{step}</li>)}</ul>}</dd></div><div><dt>Choose carefully</dt><dd>{notes.distinguish}</dd></div></dl>
         <p className="strategy-pitfalls-label">Watch out for</p>
         <ul>{notes.pitfalls.map(pitfall=><li key={pitfall}>{pitfall}</li>)}</ul>
+        {notes.template&&<div className="strategy-template"><p className="strategy-subheading">Generic Python template</p><p>{notes.template.introduction}</p><pre tabIndex={0} aria-label={title+' Python template'}><code>{notes.template.code}</code></pre><p>{notes.template.caveat}</p></div>}
         {notes.references&&<p className="strategy-references">Further reading: {notes.references.map((reference,i)=><span key={reference.href}>{i>0?' · ':''}<a href={reference.href} target="_blank" rel="noopener noreferrer">{reference.label}</a></span>)}</p>}
       </div>
     </details>

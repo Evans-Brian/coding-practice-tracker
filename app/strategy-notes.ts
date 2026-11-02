@@ -1,11 +1,15 @@
 type RecognitionNotes={
   kind?:'recognition';
   recognize:string;
-  clues:readonly {signal:string;why:string}[];
-  start:string;
+  cluesHeading?:string;
+  clues:readonly (string|{signal:string;why:string})[];
+  patterns?:readonly string[];
+  startHeading?:string;
+  start:string|readonly string[];
   distinguish:string;
   pitfalls:readonly string[];
   references?:readonly {label:string;href:string}[];
+  template?:{introduction:string;code:string;caveat:string};
 };
 export type StrategyNotes=RecognitionNotes|{
   kind:'checklist';
@@ -187,15 +191,44 @@ export const strategyNotes:Record<string,StrategyNotes>={
     references:[{label:'Knapsack states and update order',href:'https://cp-algorithms.com/dynamic_programming/knapsack.html'}],
   },
   'Greedy':{
-    recognize:'A local choice may be final because you can prove it leaves an equally good or better path to the global objective.',
+    recognize:'Greedy means making a choice now that you can safely commit to without losing the best overall solution.',
+    cluesHeading:'How to identify it',
     clues:[
-      {signal:'Sorting exposes a useful order',why:'Processing by a deadline, finishing time, or another justified key may prevent future choices from being harmed.'},
-      {signal:'One candidate dominates another',why:'You may be able to discard the worse candidate without losing an optimal solution.'},
-      {signal:'A frontier or best reachable boundary summarizes progress',why:'You may only need the strongest state so far rather than every possible history.'},
+      'Look for a useful ordering: smallest value, earliest finish, highest benefit.',
+      'Ask: “Why does this choice leave the remaining problem at least as easy?”',
+      'Try to break your rule with a small example.',
+      'Justify it: could you replace another solution’s choice with yours without making the answer worse?',
     ],
-    start:'Name the local rule and justify it with an exchange argument, a stays-ahead argument, or a dominance invariant. Try a small counterexample before implementing it.',
-    distinguish:'Minimum/maximum wording does not establish a greedy solution. If choosing locally sacrifices a future tradeoff you cannot summarize or rule out, DP or search may be required. A greedy feasibility check can also sit inside binary search.',
-    pitfalls:['“Take the largest” is not a proof: with coins 1, 3, 4 and target 6, taking 4 first uses more coins than 3 + 3.','Check ties, impossible states, and exactly what quantity is being optimized before copying a familiar sorting rule.'],
+    patterns:[
+      'Nonoverlapping meetings → choose earliest finish.',
+      'Match resources to requirements → use the smallest sufficient resource.',
+      'Minimum jumps → track farthest reach within the current jump.',
+      'Changing set of available choices → consider a heap.',
+    ],
+    startHeading:'How to code it',
+    start:[
+      'Sort if needed.',
+      'Track minimal state: last endpoint, remaining capacity, farthest reach, etc.',
+      'Scan and apply your rule.',
+      'Check ties, equality, and boundary cases.',
+    ],
+    distinguish:'If you can’t safely eliminate competing choices, consider DP.',
+    pitfalls:['“Take the biggest” isn’t automatically correct. Coins [1, 3, 4], target 6: greedy takes 4+1+1; optimal is 3+3.'],
+    template:{
+      introduction:'This is a template for greedy problems that select a subset of items. Supply the problem-specific priority, feasibility check, and state update functions.',
+      code:`def greedy(items, priority, initial_state, can_take, update_state):
+    state = initial_state
+    chosen = []
+
+    # Process the most promising choices first.
+    for item in sorted(items, key=priority):
+        if can_take(item, state):
+            chosen.append(item)
+            state = update_state(state, item)
+
+    return chosen`,
+      caveat:'The priority and acceptance rule must be justified for your problem; sorting alone does not guarantee an optimal result.',
+    },
   },
   'Intervals':{
     recognize:'The input consists of ranges, occupied times, or start/end pairs, and the answer depends on how those ranges interact.',
