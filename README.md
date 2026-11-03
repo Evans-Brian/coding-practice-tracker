@@ -17,6 +17,8 @@ and a daily points dashboard.
 - Section relevance scores plus question relevance and expandable company-list
   evidence, with the reporting window and limitations shown in the interface.
 - Shared notes, completion counts, and Repeat and Done lists.
+- Extra Binary Search practice includes Capacity To Ship Packages Within D Days
+  (Medium), with the same shared progress and completion history as other questions.
 - Custom Python exercises with examples, runnable tests, and downloadable packs.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
   per New York calendar day; completing it on another day earns points again.

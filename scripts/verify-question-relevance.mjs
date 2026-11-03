@@ -20,7 +20,7 @@ const inRange = (value, label, minimum = 0, maximum = 100) => {
   assert(Number.isFinite(value) && value >= minimum && value <= maximum, `${label}: ${value}`);
 };
 
-assert.equal(dashboardQuestions.length, 155);
+assert.equal(dashboardQuestions.length, 156);
 assert.equal(relevanceMetadata.trackedQuestionCount, 152);
 assert.deepEqual(relevanceMetadata, data.metadata);
 assert.deepEqual(relevanceCompanies, data.companies);
@@ -97,7 +97,7 @@ for (const question of dashboardQuestions) {
     }
   }
 }
-assert.equal(outsideSnapshot, 3);
+assert.equal(outsideSnapshot, 4);
 assert.equal(withEvidence+withoutEvidence+outsideSnapshot, dashboardQuestions.length-retiredPracticeSlugs.size);
 assert.equal(Object.values(data.questions).filter(evidence=>evidence.companyCount>0).length, 147);
 assert.equal(relevanceMetadata.trackedQuestionsWithEvidence, 147);
@@ -182,4 +182,4 @@ for (const company of questionRelevance(lru).companies) {
 assert.match(relevanceMetadata.sourceFrequencyMeaning, /not an interview probability/);
 assert.match(relevanceMetadata.coverageMeaning, /neither a count of interview reports/);
 
-console.log('Verified: bounded active-question scores, preserved 152-question evidence snapshot, three new questions with honest fallbacks, retired practice omitted, 25 company lists, sparse-evidence weighting, monotonic inputs, and source explanations.');
+console.log('Verified: bounded active-question scores, preserved 152-question evidence snapshot, four later additions with honest fallbacks, retired practice omitted, 25 company lists, sparse-evidence weighting, monotonic inputs, and source explanations.');

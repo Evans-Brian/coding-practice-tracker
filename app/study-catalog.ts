@@ -36,6 +36,8 @@ export const extraPracticeQuestions: StudyQuestion[] = [
   {name:'Split Array Largest Sum',slug:'split-array-largest-sum',difficulty:'Hard' as const,theme:'Greedy'},
   {name:'Minimum Sum of Squared Difference',slug:'minimum-sum-of-squared-difference',difficulty:'Medium' as const,theme:'Greedy'},
   {name:'Largest Number',slug:'largest-number',difficulty:'Medium' as const,theme:'Greedy'},
+  // Additional practice completed outside the original lists.
+  {name:'Capacity To Ship Packages Within D Days',slug:'capacity-to-ship-packages-within-d-days',difficulty:'Medium' as const,theme:'Binary Search'},
 ].map((question,index)=>({
   ...question,
   kind:'leetcode' as const,grind75:false,

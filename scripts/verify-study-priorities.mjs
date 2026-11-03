@@ -10,8 +10,8 @@ const {dashboardQuestions, neetcodeTopics, studyQuestions, eligibleQuestions} = 
 const {retiredPracticeSlugs} = await loadModule('app/practice-exclusions.ts');
 const {studyTiers, neetcodeSections, sectionForQuestion, classifyQuestionTier} = await loadModule('app/study-priorities.ts');
 
-assert.equal(dashboardQuestions.length, 155);
-assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 155);
+assert.equal(dashboardQuestions.length, 156);
+assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 156);
 assert.deepEqual(studyTiers.map(tier => tier.id), ['prioritized', 'medium', 'not-prioritized']);
 assert.equal(neetcodeSections.length, 21);
 assert.equal(new Set(neetcodeSections.map(section => section.id)).size, neetcodeSections.length);
@@ -39,7 +39,7 @@ for (const question of dashboardQuestions) {
 }
 
 const expectedCounts = {
-  prioritized: {total: 112, difficulties: [21, 81, 10]},
+  prioritized: {total: 113, difficulties: [21, 82, 10]},
   medium: {total: 20, difficulties: [0, 11, 9]},
   'not-prioritized': {total: 20, difficulties: [7, 10, 3]},
 };
@@ -94,4 +94,10 @@ for(const [slug,difficulty] of [['split-array-largest-sum','Hard'],['minimum-sum
   assert.equal(classifyQuestionTier(question), 'prioritized', slug);
 }
 
-console.log('Verified: 155 unique catalog questions, three ordered tiers (112 / 20 / 20), three removed from active practice with retained history, three new Greedy replacements, stable anchors, split hard sections, and LRU Cache first in Medium Priority.');
+const shipping=dashboardQuestions.find(q=>q.slug==='capacity-to-ship-packages-within-d-days');
+assert.equal(shipping?.difficulty, 'Medium');
+assert.equal(shipping?.dashboardExtra, true);
+assert.equal(sectionForQuestion(shipping).theme, 'Binary Search');
+assert.equal(studyQuestions('all').filter(q=>q.slug===shipping.slug).length, 1);
+
+console.log('Verified: 156 unique catalog questions, three ordered tiers (113 / 20 / 20), preserved retired history, Greedy replacements, shipping in Binary Search, stable anchors, and LRU Cache first in Medium Priority.');
