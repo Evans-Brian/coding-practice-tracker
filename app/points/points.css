@@ -70,3 +70,80 @@
 .points-extra-history b { color: var(--accent-soft); font-size: 15px; }
 .points-extra-history button { font-size: 12px; }
 @media(max-width:800px) { .points-extra-form { grid-template-columns: minmax(0,1fr); } .points-extra-form>button { justify-self: start; } }
+
+.points-import-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 17px 20px; margin: 0 0 22px; border: 1px solid #4b426e; border-radius: 8px; background: #282532; font-size: 12px; line-height: 1.65; }
+.points-import-note.is-partial { border-color: #69582e; background: #2a2821; }
+.points-import-note strong { color: var(--text); font-size: 13px; font-weight: 600; }
+.points-import-note p { margin: 4px 0 0; color: #c0bdca; max-width: 80ch; }
+.points-import-note a { color: var(--accent-soft); white-space: nowrap; }
+.points-import-note>div:last-child { flex-shrink: 0; text-align: right; }
+.points-import-note>div:last-child>span { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; }
+.points-panel-heading>div>p { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 5px 0 0; }
+.points-select-label { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 12px; }
+.points-select-label select { color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 8px 28px 8px 10px; font: inherit; }
+.points-calendar-scroll { overflow-x: auto; padding: 24px 22px 16px; }
+.points-calendar-months { display: grid; gap: 4px; margin: 0 0 8px 36px; width: max-content; height: 16px; color: var(--muted); font-size: 10px; }
+.points-calendar-months>span { white-space: nowrap; }
+.points-calendar-body { display: flex; gap: 8px; align-items: flex-start; width: max-content; }
+.points-calendar-weekdays { display: grid; grid-template-rows: repeat(7,14px); gap: 4px; width: 28px; flex-shrink: 0; font-size: 9px; line-height: 14px; color: var(--muted); }
+.points-calendar-weekdays>span:nth-child(odd) { visibility: hidden; }
+.points-calendar-grid { display: grid; grid-template-rows: repeat(7,14px); grid-auto-flow: column; gap: 4px; }
+.points-calendar-day { box-sizing: border-box; width: 14px; height: 14px; padding: 0; border: 1px solid #ffffff08; border-radius: 3px; cursor: pointer; }
+.points-calendar-day:disabled { opacity: .3; cursor: default; }
+.points-calendar-day[aria-pressed="true"] { outline: 2px solid #e1dcff; outline-offset: 2px; position: relative; z-index: 1; }
+.points-calendar-day.is-today { box-shadow: inset 0 0 0 1px #c7c0ff; }
+.points-calendar-day:not(:disabled):hover { outline: 1px solid var(--accent-soft); outline-offset: 1px; }
+.heat-0 { background: #35353e; }
+.heat-1 { background: #443879; }
+.heat-2 { background: #6655b1; }
+.heat-3 { background: #8172ff; }
+.heat-4 { background: #b3a8ff; }
+.points-calendar-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 11px; padding: 0 22px 20px; }
+.points-heat-legend { display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.points-heat-legend>span { padding: 0 3px; }
+.points-heat-legend i { width: 12px; height: 12px; border-radius: 2px; }
+.points-selected-total { font-size: 23px; font-weight: 650; white-space: nowrap; color: var(--accent-soft); }
+.points-selected-total>span { color: var(--muted); font-size: 12px; font-weight: 400; }
+.points-problems,.points-day-extras { list-style: none; margin: 0; padding: 0; }
+.points-problems>li { display: flex; align-items: center; gap: 20px; padding: 14px 22px; border-bottom: 1px solid var(--border); }
+.points-problems>li:last-child { border-bottom: 0; }
+.points-problems>li>div { flex: 1; min-width: 0; }
+.points-problems a { color: var(--text); text-decoration: none; font-size: 13px; line-height: 1.6; }
+.points-problems a:hover { color: var(--accent-soft); text-decoration: underline; }
+.points-problem-meta { display: flex; align-items: center; gap: 8px; font-size: 11px; margin-top: 4px; color: var(--muted); }
+.points-problem-meta>.difficulty { margin-right: 0; }
+.points-problems>li>strong,.points-day-extras strong { color: var(--text); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.points-day-extras { border-top: 1px solid var(--border); }
+.points-day-extras>li { display: flex; justify-content: space-between; gap: 20px; padding: 12px 22px; color: var(--muted); font-size: 12px; }
+.points-range { display: flex; flex-wrap: wrap; gap: 4px; padding: 3px; background: var(--surface); border: 1px solid var(--border); border-radius: 7px; }
+.points-range button { border: 0; border-radius: 4px; background: transparent; color: var(--muted); font: inherit; font-size: 11px; padding: 7px 10px; cursor: pointer; white-space: nowrap; }
+.points-range button[aria-pressed="true"] { background: #4d426c; color: #f0edff; }
+.points-trend-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 22px 0; color: var(--muted); font-size: 11px; }
+.points-trend-toolbar label,.points-active-filter { display: flex; align-items: center; gap: 7px; color: #c8c5d3; font-size: 12px; cursor: pointer; }
+.points-trend-toolbar input,.points-active-filter input { accent-color: #8172ff; margin: 0; }
+.points-chart-column { max-width: none; flex-basis: 36px; }
+.points-stacked-bar { display: flex; flex-direction: column-reverse; width: min(100%,24px); border-radius: 4px 4px 0 0; overflow: hidden; min-height: 3px; }
+.points-segment { display: block; min-height: 1px; }
+.points-segment.zero { height: 3px; width: 100%; background: #4a4a54; }
+.points-segment.easy,.points-trend-legend i.easy { background: #34d3a4; }
+.points-segment.medium,.points-trend-legend i.medium { background: #f5bb43; }
+.points-segment.hard,.points-trend-legend i.hard { background: #f07782; }
+.points-segment.extra,.points-trend-legend i.extra { background: #8172ff; }
+.points-trend-legend { display: flex; flex-wrap: wrap; gap: 18px; padding: 0 22px 20px; color: var(--muted); font-size: 11px; }
+.points-trend-legend>span { display: flex; align-items: center; gap: 6px; }
+.points-trend-legend i { width: 8px; height: 8px; border-radius: 2px; }
+.points-line-chart { padding: 18px 22px 12px; }
+.points-line-chart svg { width: 100%; height: auto; display: block; overflow: visible; }
+.points-line-chart text { fill: #a8a5b5; font: 11px sans-serif; }
+.points-line-chart circle { fill: #b3a8ff; }
+.points-line-grid { stroke: #3a3844; stroke-width: 1; }
+.points-line { fill: none; stroke: #9d8fff; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.points-table tbody th>button { border: 0; background: transparent; padding: 0; margin: 0; color: inherit; font: inherit; text-align: left; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #686277; }
+.points-table tbody th>button:hover,.points-table tbody th>button[aria-pressed="true"] { color: var(--accent-soft); }
+.points-table tbody tr.is-selected { background: #8172ff0a; }
+.points-pagination { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 22px 0; color: var(--muted); font-size: 11px; }
+.points-pagination>div { display: flex; gap: 8px; }
+.points-pagination button { font-size: 11px; padding: 7px 10px; }
+.points-main button:focus-visible,.points-main select:focus-visible,.points-main input:focus-visible,.points-calendar-scroll:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 3px; }
+@media(max-width:800px) { .points-import-note { align-items: flex-start; flex-direction: column; gap: 10px; } .points-import-note>div:last-child { text-align: left; } .points-trend-panel .points-panel-heading { align-items: flex-start; flex-direction: column; gap: 12px; } }
+@media(max-width:540px) { .points-calendar-scroll { padding-left: 16px; padding-right: 16px; } .points-calendar-footer { align-items: flex-start; flex-direction: column; gap: 12px; padding: 0 16px 18px; } .points-calendar-panel .points-panel-heading { align-items: flex-start; } .points-select-label { gap: 6px; } .points-problems>li,.points-day-extras>li { padding-left: 16px; padding-right: 16px; } .points-trend-toolbar { padding-left: 16px; padding-right: 16px; align-items: flex-start; gap: 12px; } .points-trend-legend { padding-left: 16px; padding-right: 16px; gap: 12px; } .points-day-detail .points-panel-heading { align-items: flex-start; } .points-selected-total { font-size: 20px; } .points-day-detail h2 { font-size: 14px; } .points-range button { font-size: 10px; padding: 7px 8px; } .points-pagination { padding-left: 16px; padding-right: 16px; } .points-line-chart { padding-left: 10px; padding-right: 12px; } }

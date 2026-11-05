@@ -24,6 +24,12 @@ and a daily points dashboard.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
   per New York calendar day; completing it on another day earns points again.
 - Earlier completions without dates remain in the tracker as undated history.
+- Daily points includes a year-by-year activity calendar, selectable daily details,
+  difficulty-stacked trends, cumulative points, and a paginated daily breakdown.
+- Accepted LeetCode problem-days can be imported into private D1 storage. Matching
+  tracker and LeetCode records earn one score per problem per day; importing history
+  leaves notes, completion counts, and Repeat/Done unchanged. The dashboard shows
+  the imported date range and whether the source review is complete.
 - Extra study entries add 0.5 or 1 point for today, with an optional note. They
   appear in daily totals and can be removed without changing problem progress.
 - Trees sections include a reference for inorder, preorder, and postorder traversal.

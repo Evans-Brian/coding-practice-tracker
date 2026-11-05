@@ -1,16 +1,19 @@
 import {storage} from '../../../db/storage';
 import {studyQuestions} from '../../study-catalog';
-import {buildPointsDashboard,localDay,type CompletionEvent,type PointProgress,type StudyCredit} from '../../points-model';
+import {buildPointsDashboard,localDay,type CompletionEvent,type PointProgress,type StudyCredit,type LeetcodeDailyCompletion,type LeetcodeImportMetadata} from '../../points-model';
 import {parseStudyCredit,validCreditId} from '../../study-credit-input';
 
 async function dashboard(){
   const db=storage();
-  const [events,progress,credits]=await db.batch([
+  const [events,progress,credits,history,historyImport]=await db.batch([
     db.prepare('SELECT question_id AS questionId,difficulty,point_units AS pointUnits,completed_at AS completedAt,completed_day AS completedDay FROM completion_events ORDER BY completed_at'),
     db.prepare('SELECT id,completions,submitted,repeat FROM progress'),
     db.prepare('SELECT id,point_units AS pointUnits,note,earned_day AS earnedDay,created_at AS createdAt FROM study_credits ORDER BY created_at'),
+    db.prepare('SELECT question_id AS questionId,name,difficulty,point_units AS pointUnits,completed_day AS completedDay,imported_at AS importedAt FROM leetcode_daily_completions ORDER BY completed_day,question_id'),
+    db.prepare("SELECT first_day AS firstDay,last_day AS lastDay,reviewed_problems AS reviewedProblems,expected_problems AS expectedProblems,complete,imported_at AS importedAt,source_url AS sourceUrl FROM leetcode_history_import WHERE id='leetcode'"),
   ]);
-  return Response.json(buildPointsDashboard(events.results as CompletionEvent[],progress.results as PointProgress[],studyQuestions('all'),new Date(),credits.results as StudyCredit[]),{headers:{'Cache-Control':'no-store'}});
+  return Response.json(buildPointsDashboard(events.results as CompletionEvent[],progress.results as PointProgress[],studyQuestions('all'),new Date(),credits.results as StudyCredit[],
+    {entries:history.results as LeetcodeDailyCompletion[],import:(historyImport.results[0] as LeetcodeImportMetadata|undefined)??null}),{headers:{'Cache-Control':'no-store'}});
 }
 
 export async function GET() {
