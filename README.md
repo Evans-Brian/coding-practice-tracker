@@ -23,6 +23,9 @@ and a daily points dashboard.
 - Custom Python exercises with examples, runnable tests, and downloadable packs.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
   per New York calendar day; completing it on another day earns points again.
+  SQL questions earn half of these values: Easy = 0.25, Medium = 0.5, Hard = 1.
+  This rule applies to both past and future recorded completions. Charts use each
+  problem's credited score, while difficulty columns continue to count problems.
 - Earlier completions without dates remain in the tracker as undated history.
 - Daily points includes a year-by-year activity calendar, selectable daily details,
   difficulty-stacked trends, cumulative points, and a paginated daily breakdown.

@@ -1,5 +1,66 @@
 export const pointsTimeZone='America/New_York';
 export const difficultyPointUnits:Record<string,number>={Easy:1,Medium:2,Hard:4};
+// SQL classification verified from the official question descriptions (SQL Schema),
+// November 5, 2026. This is public problem metadata, never completion history.
+export const sqlQuestionSlugs:ReadonlySet<string>=new Set([
+  'article-views-i',
+  'average-selling-price',
+  'average-time-of-process-per-machine',
+  'big-countries',
+  'biggest-single-number',
+  'classes-with-at-least-5-students',
+  'combine-two-tables',
+  'confirmation-rate',
+  'consecutive-numbers',
+  'count-salary-categories',
+  'customer-who-visited-but-did-not-make-any-transactions',
+  'customers-who-bought-all-products',
+  'customers-who-never-order',
+  'department-top-three-salaries',
+  'duplicate-emails',
+  'employee-bonus',
+  'employees-earning-more-than-their-managers',
+  'employees-whose-manager-left-the-company',
+  'exchange-seats',
+  'find-customer-referee',
+  'find-followers-count',
+  'friend-requests-ii-who-has-the-most-friends',
+  'game-play-analysis-iv',
+  'group-sold-products-by-the-date',
+  'immediate-food-delivery-ii',
+  'invalid-tweets',
+  'investments-in-2016',
+  'last-person-to-fit-in-the-bus',
+  'list-the-products-ordered-in-a-period',
+  'managers-with-at-least-5-direct-reports',
+  'monthly-transactions-i',
+  'movie-rating',
+  'not-boring-movies',
+  'nth-highest-salary',
+  'number-of-unique-subjects-taught-by-each-teacher',
+  'patients-with-a-condition',
+  'percentage-of-users-attended-a-contest',
+  'primary-department-for-each-employee',
+  'product-price-at-a-given-date',
+  'product-sales-analysis-i',
+  'product-sales-analysis-iii',
+  'project-employees-i',
+  'queries-quality-and-percentage',
+  'recyclable-and-low-fat-products',
+  'replace-employee-id-with-the-unique-identifier',
+  'restaurant-growth',
+  'rising-temperature',
+  'second-highest-salary',
+  'students-and-examinations',
+  'the-number-of-employees-which-report-to-each-employee',
+  'triangle-judgement',
+  'user-activity-for-the-past-30-days-i',
+]);
+// Stored units retain the original difficulty value; the scoring policy is applied
+// when reading, so historical SQL scores change without rewriting source records.
+export function questionPoints(questionId:string,pointUnits:number){
+  return pointUnits/(sqlQuestionSlugs.has(questionId)?4:2);
+}
 export type CompletionEvent={questionId:string;difficulty:string;pointUnits:number;completedAt:string;completedDay:string};
 export type PointProgress={id:string;completions:number;submitted:number|boolean;repeat:number|boolean};
 export type PointQuestion={slug:string;name:string;difficulty:string;neetcode150?:boolean;exercisePath?:string};
@@ -28,7 +89,7 @@ export function buildPointsDashboard(events:CompletionEvent[],progress:PointProg
     let day=groups.get(event.completedDay);if(!day){day=new Map();groups.set(event.completedDay,day);}
     const existing=day.get(event.questionId);if(existing){existing.attempts++;continue;}
     const question=lookup.get(event.questionId);
-    day.set(event.questionId,{id:event.questionId,name:question?.name??event.questionId,difficulty:event.difficulty,points:event.pointUnits/2,attempts:1,sources:['tracker'],
+    day.set(event.questionId,{id:event.questionId,name:question?.name??event.questionId,difficulty:event.difficulty,points:questionPoints(event.questionId,event.pointUnits),attempts:1,sources:['tracker'],
       href:question?.exercisePath??(event.questionId==='upstart-anagram-sentence'?'/practice/anagram-sentence':'https://leetcode.com/problems/'+event.questionId+'/')});
   }
   // An external accepted submission can describe the same work as a tracker
@@ -42,7 +103,7 @@ export function buildPointsDashboard(events:CompletionEvent[],progress:PointProg
     const existing=day.get(entry.questionId);
     if(existing){existing.sources.push('leetcode');overlapProblemDays++;continue;}
     const question=lookup.get(entry.questionId);
-    day.set(entry.questionId,{id:entry.questionId,name:question?.name??entry.name,difficulty:entry.difficulty,points:entry.pointUnits/2,attempts:0,sources:['leetcode'],href:'https://leetcode.com/problems/'+entry.questionId+'/'});
+    day.set(entry.questionId,{id:entry.questionId,name:question?.name??entry.name,difficulty:entry.difficulty,points:questionPoints(entry.questionId,entry.pointUnits),attempts:0,sources:['leetcode'],href:'https://leetcode.com/problems/'+entry.questionId+'/'});
   }
   const creditsByDay=new Map<string,StudyCredit[]>();
   for(const credit of credits){const list=creditsByDay.get(credit.earnedDay)??[];list.push(credit);creditsByDay.set(credit.earnedDay,list);if(!groups.has(credit.earnedDay))groups.set(credit.earnedDay,new Map());}

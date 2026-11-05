@@ -5,7 +5,7 @@ import DifficultyLabel from '../difficulty-label';
 import {shiftDay,type DayPoints,type PointsDashboardData} from '../points-model';
 import type {StudyCreditInput} from '../study-credit-input';
 
-const number=(value:number)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(value);
+const number=(value:number)=>new Intl.NumberFormat('en-US',{maximumFractionDigits:2}).format(value);
 function dateLabel(day:string,short=false){return new Intl.DateTimeFormat('en-US',{month:short?'short':'long',day:'numeric',...(short?{}:{year:'numeric'}),timeZone:'UTC'}).format(new Date(day+'T12:00:00Z'));}
 function monthLabel(month:string){return new Intl.DateTimeFormat('en-US',{month:'short',year:'numeric',timeZone:'UTC'}).format(new Date(month+'-01T12:00:00Z'));}
 const emptyDay=(day:string):DayPoints=>({day,points:0,extraPoints:0,extras:[],questions:0,attempts:0,easy:0,medium:0,hard:0,problems:[],leetcodeQuestions:0,trackerQuestions:0,overlapQuestions:0});
@@ -39,7 +39,13 @@ function HistoryViews({data}:{data:PointsDashboardData}){
     for(const day of days){
       const key=monthly?day.day.slice(0,7):day.day;
       const group=groups.get(key)??{key,label:monthly?monthLabel(key):dateLabel(key,true),points:0,easy:0,medium:0,hard:0,extra:0,cumulative:0};
-      group.points+=day.points;group.easy+=day.easy*.5;group.medium+=day.medium;group.hard+=day.hard*2;group.extra+=day.extraPoints;groups.set(key,group);
+      group.points+=day.points;
+      for(const problem of day.problems){
+        if(problem.difficulty==='Easy')group.easy+=problem.points;
+        else if(problem.difficulty==='Medium')group.medium+=problem.points;
+        else if(problem.difficulty==='Hard')group.hard+=problem.points;
+      }
+      group.extra+=day.extraPoints;groups.set(key,group);
     }
     let total=0;return {monthly,points:[...groups.values()].map(point=>({...point,cumulative:total+=point.points})),days};
   },[data.days,data.today,range]);
@@ -60,7 +66,7 @@ function HistoryViews({data}:{data:PointsDashboardData}){
           return <button type="button" key={day} disabled={disabled} className={'points-calendar-day heat-'+level+(day===data.today?' is-today':'')} aria-label={description} title={description} aria-pressed={selectedDay===day} onClick={()=>setSelectedDay(day)}/>;
         })}</div></div>
       </div>
-      <div className="points-calendar-footer"><span>{data.days.filter(day=>day.points>0).length} active days in your recorded history</span><div className="points-heat-legend" aria-label="Daily points intensity: 0, under 3, 3 to 5.5, 6 to 9.5, 10 or more"><span>Fewer points</span>{[0,1,2,3,4].map(level=><i key={level} className={'heat-'+level}/>)}<span>More</span></div></div>
+      <div className="points-calendar-footer"><span>{data.days.filter(day=>day.points>0).length} active days in your recorded history</span><div className="points-heat-legend" aria-label="Daily points intensity: 0, above 0 and under 3, 3 to under 6, 6 to under 10, 10 or more"><span>Fewer points</span>{[0,1,2,3,4].map(level=><i key={level} className={'heat-'+level}/>)}<span>More</span></div></div>
     </section>
     <section className="points-panel points-day-detail" aria-labelledby="points-day-heading">
       <div className="points-panel-heading"><div><h2 id="points-day-heading">{dateLabel(selectedDay)}{selectedDay===data.today?' · Today':''}</h2><p>Select a calendar day or a date in the breakdown to see its work.</p></div><strong className="points-selected-total">{number(selection.points)} <span>points</span></strong></div>
@@ -104,7 +110,7 @@ export default function PointsDashboard(){
   }
   return <div className="study-app"><StudyHeader active="points" counts={data?.navigation??null}/><main className="points-main">
     <header className="points-heading"><div><h1>Daily points</h1><p>Your coding practice over time, from LeetCode and this notebook.</p></div><div className="points-weights" aria-label="Points by difficulty"><span><DifficultyLabel difficulty="Easy"/>0.5 points</span><span><DifficultyLabel difficulty="Medium"/>1 point</span><span><DifficultyLabel difficulty="Hard"/>2 points</span></div></header>
-    <p className="points-rule">One score per problem per day. Repeat it on a later day to earn points again. Tracker dates use New York time; imported history uses the dates shown by LeetCode.</p>
+    <p className="points-rule">One score per problem per day. Repeat it on a later day to earn points again. SQL questions earn half: Easy 0.25, Medium 0.5, Hard 1 point. Tracker dates use New York time; imported history uses the dates shown by LeetCode.</p>
     {error?<div className="error" role="alert">Your points couldn’t load. <button className="save" onClick={load}>Try again</button></div>:!data?<p role="status">Loading your points…</p>:<>
       {data.history&&<aside className={'points-import-note'+(data.history.complete?'':' is-partial')} aria-label="LeetCode import coverage"><div><strong>{data.history.complete?'LeetCode history imported':'LeetCode history · partial import'}</strong><p>{number(data.history.importedProblems)} problems across {number(data.history.importedDays)} days{data.history.firstDay&&data.history.lastDay?' · '+dateLabel(data.history.firstDay)+' to '+dateLabel(data.history.lastDay):''}.</p><p>{data.history.reviewedProblems} of {data.history.expectedProblems} practice histories reviewed.{data.history.overlapProblemDays>0?' '+data.history.overlapProblemDays+' overlapping problem-days credited once.':''}</p></div><div><a href={data.history.sourceUrl} target="_blank" rel="noopener noreferrer">LeetCode progress</a>{data.history.importedAt&&<span>Imported {dateLabel(data.history.importedAt.slice(0,10))}</span>}</div></aside>}
       {!data.history&&<aside className="points-import-note is-partial" aria-label="LeetCode import coverage"><div><strong>LeetCode history has not been imported yet</strong><p>These totals show recorded tracker activity and extra study only. Earlier LeetCode practice will appear here after its accepted submission dates are imported.</p></div><a href="https://leetcode.com/progress/" target="_blank" rel="noopener noreferrer">LeetCode progress</a></aside>}

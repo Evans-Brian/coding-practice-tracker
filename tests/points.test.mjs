@@ -12,6 +12,30 @@ test('scores each difficulty and credits a problem only once per day, but again 
   assert.equal(data.days[1].hard,1);assert.equal(data.todayPoints,2);assert.equal(data.totalPoints,5.5);assert.equal(data.weekPoints,5.5);
 });
 
+test('SQL earns half at every difficulty while algorithm questions and extra study keep their full value',()=>{
+  const day='2026-10-25',now=new Date(day+'T20:00:00Z');
+  const events=[event('combine-two-tables','Easy',1,day),event('second-highest-salary','Medium',2,day),event('department-top-three-salaries','Hard',4,day),event('easy','Easy',1,day),event('medium','Medium',2,day),event('hard','Hard',4,day)];
+  const original=structuredClone(events);
+  const data=buildPointsDashboard(events,[],questions,now,[credit('study',1,day)]);
+  assert.deepEqual(data.days[0].problems.map(p=>p.points),[.25,.5,1,.5,1,2]);
+  assert.equal(data.todayPoints,5.75);assert.equal(data.weekPoints,5.75);assert.equal(data.totalPoints,5.75);
+  assert.deepEqual([data.days[0].easy,data.days[0].medium,data.days[0].hard],[2,2,2]);
+  assert.equal(data.days[0].extraPoints,.5);assert.deepEqual(events,original);
+});
+
+test('SQL is halved once across tracker/import overlap, once per day, and again on a later day',()=>{
+  const questionId='combine-two-tables',day='2026-10-24';
+  const events=[event(questionId,'Easy',1,day),event(questionId,'Easy',1,day,15)];
+  const history={entries:[day,day,'2026-10-25'].map(completedDay=>({questionId,name:'Combine Two Tables',difficulty:'Easy',pointUnits:1,completedDay,importedAt:'2026-10-25T20:00:00Z'}))};
+  const progress=[{id:questionId,completions:3,submitted:1,repeat:1}];
+  const data=buildPointsDashboard(events,progress,[],new Date('2026-10-25T20:00:00Z'),[],history);
+  assert.equal(data.totalPoints,.5);assert.equal(data.todayPoints,.25);
+  assert.equal(data.days[1].points,.25);assert.equal(data.days[1].attempts,2);assert.equal(data.days[1].questions,1);
+  assert.deepEqual(data.days[1].problems[0].sources,['tracker','leetcode']);
+  assert.equal(data.history.overlapProblemDays,1);assert.deepEqual(data.undated,{attempts:1,questions:1});
+  assert.deepEqual(data.navigation,{neetcode:0,repeat:1,done:0});
+});
+
 const credit=(id,pointUnits,earnedDay,note='Watched a video')=>({id,pointUnits,earnedDay,note,createdAt:earnedDay+'T18:00:00Z'});
 test('extra study credits add to daily, weekly and all-time totals without changing problem history',()=>{
   const progress=[{id:'medium',completions:2,submitted:1,repeat:1}];
