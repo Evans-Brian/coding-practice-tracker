@@ -3,14 +3,14 @@
 import {useState,type ReactNode} from 'react';
 import {type StudyQuestion} from './study-catalog';
 
-type DifficultyFilter = 'easy' | 'easy-medium' | 'medium' | 'hard';
+type DifficultyFilter = 'any' | 'easy' | 'easy-medium' | 'medium' | 'hard';
 
 export default function RandomQuestion({questions,renderQuestion,mode='practice'}:{questions:StudyQuestion[]|null;renderQuestion:(question:StudyQuestion)=>ReactNode;mode?:'practice'|'repeat'}) {
   const [difficulty,setDifficulty]=useState<DifficultyFilter>('easy-medium');
   const [selectedSlug,setSelectedSlug]=useState<string|null>(null);
-  const choices=(questions??[]).filter(q=>difficulty==='easy-medium'
+  const choices=(questions??[]).filter(q=>difficulty==='any'||(difficulty==='easy-medium'
     ? q.difficulty==='Easy'||q.difficulty==='Medium'
-    : q.difficulty.toLowerCase()===difficulty);
+    : q.difficulty.toLowerCase()===difficulty));
   const selected=choices.find(q=>q.slug===selectedSlug);
   const questionLabel=mode==='repeat'?'repeat':'unfinished';
 
@@ -23,6 +23,7 @@ export default function RandomQuestion({questions,renderQuestion,mode='practice'
       <label htmlFor="random-difficulty">Difficulty
         <select id="random-difficulty" value={difficulty} disabled={!questions}
           onChange={event=>{setDifficulty(event.target.value as DifficultyFilter);setSelectedSlug(null);}}>
+          <option value="any">Any difficulty</option>
           <option value="easy">Easy</option>
           <option value="easy-medium">Easy–Medium</option>
           <option value="medium">Medium</option>

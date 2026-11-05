@@ -10,6 +10,7 @@ and a daily points dashboard.
 - An unfinished-question picker that respects study priorities.
 - A random picker on Repeat, with difficulty filters and the same inline question
   card and shared notes as the topic list. It draws from questions marked to repeat.
+- Both random pickers offer Any difficulty to draw from their full eligible list.
 - Three study tiers, with LRU Cache first in Medium Priority and only the
   Prioritized tier included in the main-page random picker and prioritized progress.
 - Not Prioritized has its own page between Done and Daily points. The main page
