@@ -20,6 +20,10 @@ and a daily points dashboard.
 - Shared notes, completion counts, and Repeat and Done lists.
 - Extra Binary Search practice includes Capacity To Ship Packages Within D Days
   (Medium), with the same shared progress and completion history as other questions.
+- 4Sum (Medium) is extra prioritized practice in Two Pointers. Advanced Graphs
+  is prioritized. The three highest 2-D DP scores in the existing relevance index
+  (Unique Paths, Distinct Subsequences, Burst Balloons) are prioritized; the other
+  eight stay in Medium Priority. Canonical NeetCode 150 membership stays unchanged.
 - Custom Python exercises with examples, runnable tests, and downloadable packs.
 - Daily points: Easy = 0.5, Medium = 1, Hard = 2. Each problem scores at most once
   per New York calendar day; completing it on another day earns points again.
@@ -89,7 +93,7 @@ Site identity when publishing a separate copy.
 
 `app/study-priorities.ts` keeps display tiers and relevance separate from the
 original catalog buckets and saved question IDs. The current dashboard contains
-112 prioritized, 20 medium-priority, and 20 not-prioritized questions. Hard trees
+123 prioritized, 11 medium-priority, and 20 not-prioritized questions. Hard trees
 are in the middle tier; hard linked lists remain in the last tier. LRU Cache has
 its own first section in Medium Priority.
 

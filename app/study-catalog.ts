@@ -38,6 +38,7 @@ export const extraPracticeQuestions: StudyQuestion[] = [
   {name:'Largest Number',slug:'largest-number',difficulty:'Medium' as const,theme:'Greedy'},
   // Additional practice completed outside the original lists.
   {name:'Capacity To Ship Packages Within D Days',slug:'capacity-to-ship-packages-within-d-days',difficulty:'Medium' as const,theme:'Binary Search'},
+  {name:'4Sum',slug:'4sum',difficulty:'Medium' as const,theme:'Two Pointers'},
 ].map((question,index)=>({
   ...question,
   kind:'leetcode' as const,grind75:false,

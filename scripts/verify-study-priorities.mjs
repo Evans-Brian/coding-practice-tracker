@@ -10,10 +10,10 @@ const {dashboardQuestions, neetcodeTopics, studyQuestions, eligibleQuestions} = 
 const {retiredPracticeSlugs} = await loadModule('app/practice-exclusions.ts');
 const {studyTiers, neetcodeSections, sectionForQuestion, classifyQuestionTier} = await loadModule('app/study-priorities.ts');
 
-assert.equal(dashboardQuestions.length, 156);
-assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 156);
+assert.equal(dashboardQuestions.length, 157);
+assert.equal(new Set(dashboardQuestions.map(question => question.slug)).size, 157);
 assert.deepEqual(studyTiers.map(tier => tier.id), ['prioritized', 'medium', 'not-prioritized']);
-assert.equal(neetcodeSections.length, 21);
+assert.equal(neetcodeSections.length, 22);
 assert.equal(new Set(neetcodeSections.map(section => section.id)).size, neetcodeSections.length);
 assert(neetcodeSections.every(section => /^[a-z0-9-]+$/.test(section.id)));
 assert(neetcodeSections.every(section => Number.isInteger(section.relevance) && section.relevance >= 0 && section.relevance <= 100));
@@ -39,8 +39,8 @@ for (const question of dashboardQuestions) {
 }
 
 const expectedCounts = {
-  prioritized: {total: 113, difficulties: [21, 82, 10]},
-  medium: {total: 20, difficulties: [0, 11, 9]},
+  prioritized: {total: 123, difficulties: [21, 87, 15]},
+  medium: {total: 11, difficulties: [0, 7, 4]},
   'not-prioritized': {total: 20, difficulties: [7, 10, 3]},
 };
 for (const tier of studyTiers) {
@@ -51,11 +51,11 @@ for (const tier of studyTiers) {
 
 assert.deepEqual(neetcodeSections.filter(section => section.tier === 'prioritized').map(section => section.title), [
   'Arrays & Hashing', 'Two Pointers', 'Sliding Window', 'Stack', 'Binary Search',
-  'Trees', 'Graphs', 'Heap / Priority Queue', 'Intervals', '1-D Dynamic Programming',
+  'Trees', 'Graphs', 'Advanced Graphs', 'Heap / Priority Queue', 'Intervals', '1-D Dynamic Programming', '2-D Dynamic Programming',
   'Greedy', 'Linked List', 'Backtracking',
 ]);
 assert.deepEqual(neetcodeSections.filter(section => section.tier === 'medium').map(section => section.title), [
-  'LRU Cache', '2-D Dynamic Programming', 'Trees · Hard', 'Advanced Graphs',
+  'LRU Cache', '2-D Dynamic Programming · More practice', 'Trees · Hard',
 ]);
 assert.deepEqual(neetcodeSections.filter(section => section.tier === 'not-prioritized').map(section => section.title), [
   'Math & Geometry', 'Tries', 'Bit Manipulation', 'Linked List · Hard',
@@ -100,4 +100,22 @@ assert.equal(shipping?.dashboardExtra, true);
 assert.equal(sectionForQuestion(shipping).theme, 'Binary Search');
 assert.equal(studyQuestions('all').filter(q=>q.slug===shipping.slug).length, 1);
 
-console.log('Verified: 156 unique catalog questions, three ordered tiers (113 / 20 / 20), preserved retired history, Greedy replacements, shipping in Binary Search, stable anchors, and LRU Cache first in Medium Priority.');
+const fourSum=dashboardQuestions.find(q=>q.slug==='4sum');
+assert.equal(fourSum?.difficulty, 'Medium');
+assert.equal(fourSum?.dashboardExtra, true);
+assert.equal(fourSum?.order, 157);
+assert.equal(!!fourSum?.neetcode150, false);
+assert.equal(sectionForQuestion(fourSum).theme, 'Two Pointers');
+assert.equal(classifyQuestionTier(fourSum), 'prioritized');
+assert.equal(studyQuestions('all').filter(q=>q.slug==='4sum').length, 1);
+for(const question of dashboardQuestions.filter(q=>q.theme==='Advanced Graphs')){
+  assert.equal(classifyQuestionTier(question), 'prioritized', question.slug);
+  assert.equal(sectionForQuestion(question).id, 'bucket-11');
+}
+const highDp=['unique-paths','distinct-subsequences','burst-balloons'];
+for(const question of dashboardQuestions.filter(q=>q.theme==='2-D Dynamic Programming')){
+  assert.equal(classifyQuestionTier(question), highDp.includes(question.slug)?'prioritized':'medium', question.slug);
+  assert.equal(sectionForQuestion(question).relevance, 59);
+}
+
+console.log('Verified: 157 unique catalog questions, ordered tiers (123 / 11 / 20), 4Sum in Two Pointers, Advanced Graphs and three selected 2-D DP problems prioritized, preserved retired history, stable anchors, and LRU Cache first in Medium Priority.');

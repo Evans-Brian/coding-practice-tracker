@@ -3,6 +3,12 @@ import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyTier = 'prioritized' | 'medium' | 'not-prioritized';
 
+// The three highest 2-D DP scores in the existing relevance index, selected
+// November 7, 2026. Moving tiers does not change their underlying scores.
+export const prioritized2DDpSlugs:ReadonlySet<string>=new Set([
+  'unique-paths', 'distinct-subsequences', 'burst-balloons',
+]);
+
 export const studyTiers = [
   {id: 'prioritized', title: 'Prioritized', description: 'Build fluency in these core topics first.'},
   {id: 'medium', title: 'Medium Priority', description: 'Add these after the core patterns are comfortable.'},
@@ -48,9 +54,13 @@ export const neetcodeSections: readonly NeetcodeSection[] = [
     matches: question => question.theme === 'Trees' && question.difficulty !== 'Hard',
   }),
   section('bucket-10', 'Graphs', 'prioritized', 94),
+  section('bucket-11', 'Advanced Graphs', 'prioritized', 52),
   section('bucket-7', 'Heap / Priority Queue', 'prioritized', 89),
   section('bucket-15', 'Intervals', 'prioritized', 88),
   section('bucket-12', '1-D Dynamic Programming', 'prioritized', 78),
+  section('bucket-13', '2-D Dynamic Programming', 'prioritized', 59, {
+    matches: question => question.theme === '2-D Dynamic Programming' && prioritized2DDpSlugs.has(question.slug),
+  }),
   section('bucket-14', 'Greedy', 'prioritized', 77, {
     matches: question => question.theme === 'Greedy' && !retiredPracticeSlugs.has(question.slug),
   }),
@@ -65,12 +75,14 @@ export const neetcodeSections: readonly NeetcodeSection[] = [
     title: 'LRU Cache',
     matches: question => question.slug === 'lru-cache',
   }),
-  section('bucket-13', '2-D Dynamic Programming', 'medium', 59),
+  section('bucket-13-medium-priority', '2-D Dynamic Programming', 'medium', 59, {
+    title: '2-D Dynamic Programming · More practice',
+    matches: question => question.theme === '2-D Dynamic Programming' && !prioritized2DDpSlugs.has(question.slug),
+  }),
   section('bucket-6-medium-priority', 'Trees', 'medium', 54, {
     title: 'Trees · Hard',
     matches: question => question.theme === 'Trees' && question.difficulty === 'Hard',
   }),
-  section('bucket-11', 'Advanced Graphs', 'medium', 52),
 
   section('bucket-16', 'Math & Geometry', 'not-prioritized', 49),
   section('bucket-9', 'Tries', 'not-prioritized', 40),
