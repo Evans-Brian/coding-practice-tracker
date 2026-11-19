@@ -42,6 +42,12 @@ and a daily points dashboard.
   tracker and LeetCode records earn one score per problem per day; importing history
   leaves notes, completion counts, and Repeat/Done unchanged. The dashboard shows
   the imported date range and whether the source review is complete.
+- Explicit recent-completion reconciliation checks accepted LeetCode work from
+  the past seven New York calendar days. A manual tracker completion on the same
+  day or either neighboring day prevents a duplicate. Missing work receives one
+  dated completion per problem/day, preserving notes, tries, and repeat settings.
+  Date-only browser evidence retains its date precision; a read-only dry run and
+  stable reconciliation IDs make review and retries safe. No automatic sync runs.
 - Extra study entries add 0.5 or 1 point for today, with an optional note. They
   appear in daily totals and can be removed without changing problem progress.
 - Trees sections include a reference for inorder, preorder, and postorder traversal.

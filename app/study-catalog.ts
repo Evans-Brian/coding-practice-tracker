@@ -1,5 +1,6 @@
 import source from './neetcode150-source.json' with {type: 'json'};
 import googleSource from './google-top50-data.json' with {type: 'json'};
+import historySource from './history-practice-source.json' with {type:'json'};
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 import {retiredPracticeSlugs} from './practice-exclusions';
@@ -61,12 +62,20 @@ const existingQuestions: StudyQuestion[] = [
   })),
 ];
 const existingSlugs=new Set(existingQuestions.map(q=>q.slug));
+const googleOnlyQuestions=googleSource.questions.filter(q=>!existingSlugs.has(q.slug));
 const allQuestions:StudyQuestion[]=[
   ...existingQuestions.map(q=>googleSlugs.has(q.slug)?{...q,googleTop50:true}:q),
-  ...googleSource.questions.filter(q=>!existingSlugs.has(q.slug)).map((q,index)=>({
+  ...googleOnlyQuestions.map((q,index)=>({
     name:q.name,slug:q.slug,difficulty:q.difficulty as StudyQuestion['difficulty'],
     theme:'Other practice',kind:'leetcode' as const,grind75:false,googleTop50:true,
     bucket:neetcodeTopics.length,order:existingQuestions.length+index+1,
+  })),
+  // Public metadata makes completed outside-list questions available in Repeat
+  // and Done. Personal completion dates, notes, and counts remain in private D1.
+  ...historySource.filter(q=>!existingSlugs.has(q.slug)&&!googleSlugs.has(q.slug)).map((q,index)=>({
+    ...q,difficulty:q.difficulty as StudyQuestion['difficulty'],theme:'Other practice',
+    kind:'leetcode' as const,grind75:false,bucket:neetcodeTopics.length,
+    order:existingQuestions.length+googleOnlyQuestions.length+index+1,
   })),
 ];
 export const allowedQuestionSlugs = new Set(allQuestions.map(q=>q.slug));
