@@ -12,6 +12,9 @@ and a daily points dashboard.
   without topic or strategy hints. Frequency is LeetCode's relative score, not a
   count of interview reports or an interview probability. All 50 retain shared
   notes and completion history; the canonical NeetCode 150 list is unchanged.
+- Google 30 Days contains all 97 questions in Google's separate 30-day filter,
+  captured November 18, 2026, with its own frequency percentages. It shares the
+  same progress and hint-free format while preserving the three-month Top 50.
 - An unfinished-question picker that respects study priorities.
 - A random picker on Repeat, with difficulty filters and the same inline question
   card and shared notes as the topic list. It draws from questions marked to repeat.
@@ -91,6 +94,7 @@ node --experimental-strip-types --test tests/*.test.mjs
 npx tsc --noEmit
 node scripts/verify-neetcode150.mjs
 node scripts/verify-google-top50.mjs
+node scripts/verify-google-last-month.mjs
 node scripts/verify-study-priorities.mjs
 node scripts/verify-question-relevance.mjs
 python scripts/verify-variation-practice.py

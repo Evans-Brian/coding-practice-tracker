@@ -1,12 +1,13 @@
 import source from './neetcode150-source.json' with {type: 'json'};
 import googleSource from './google-top50-data.json' with {type: 'json'};
+import googleLastMonthSource from './google-last-month-data.json' with {type:'json'};
 import historySource from './history-practice-source.json' with {type:'json'};
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyCatalog = 'neetcode' | 'all';
-export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean;googleTop50?: boolean};
+export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean;googleTop50?: boolean;googleLastMonth?: boolean};
 
 // Membership, titles, difficulty and within-topic order come from NeetCode's
 // official neetcode-gh/leetcode .problemSiteData.json (retrieved Oct 13, 2026).
@@ -52,6 +53,7 @@ export const dashboardQuestions:StudyQuestion[]=[...neetcodeQuestions,...extraPr
   .sort((a,b)=>a.bucket-b.bucket);
 const dashboardSlugs = new Set(dashboardQuestions.map(q => q.slug));
 const googleSlugs = new Set(googleSource.questions.map(q => q.slug));
+const googleLastMonthSlugs=new Set(googleLastMonthSource.questions.map(q=>q.slug));
 
 // Keep all existing question IDs, metadata, and display orders stable. Google-only
 // additions live in Other practice and do not enlarge the main NeetCode catalog.
@@ -63,7 +65,7 @@ const existingQuestions: StudyQuestion[] = [
 ];
 const existingSlugs=new Set(existingQuestions.map(q=>q.slug));
 const googleOnlyQuestions=googleSource.questions.filter(q=>!existingSlugs.has(q.slug));
-const allQuestions:StudyQuestion[]=[
+const priorQuestions:StudyQuestion[]=[
   ...existingQuestions.map(q=>googleSlugs.has(q.slug)?{...q,googleTop50:true}:q),
   ...googleOnlyQuestions.map((q,index)=>({
     name:q.name,slug:q.slug,difficulty:q.difficulty as StudyQuestion['difficulty'],
@@ -76,6 +78,17 @@ const allQuestions:StudyQuestion[]=[
     ...q,difficulty:q.difficulty as StudyQuestion['difficulty'],theme:'Other practice',
     kind:'leetcode' as const,grind75:false,bucket:neetcodeTopics.length,
     order:existingQuestions.length+googleOnlyQuestions.length+index+1,
+  })),
+];
+// Keep the complete older catalog (including Top 50 and history-only additions)
+// in place, then append only new questions from the full 30-day company list.
+const priorSlugs=new Set(priorQuestions.map(q=>q.slug));
+const allQuestions:StudyQuestion[]=[
+  ...priorQuestions.map(q=>googleLastMonthSlugs.has(q.slug)?{...q,googleLastMonth:true}:q),
+  ...googleLastMonthSource.questions.filter(q=>!priorSlugs.has(q.slug)).map((q,index)=>({
+    name:q.name,slug:q.slug,difficulty:q.difficulty as StudyQuestion['difficulty'],
+    theme:'Other practice',kind:'leetcode' as const,grind75:false,googleLastMonth:true,
+    bucket:neetcodeTopics.length,order:priorQuestions.length+index+1,
   })),
 ];
 export const allowedQuestionSlugs = new Set(allQuestions.map(q=>q.slug));
@@ -93,6 +106,6 @@ export function studyGroups(catalog: StudyCatalog) {
 }
 
 export function eligibleQuestions(catalog: StudyCatalog, data: Record<string, Progress> | null) {
-  return studyQuestions(catalog).filter(q => q.neetcode150 || q.dashboardExtra || q.googleTop50 || isCurrentQuestion(q.slug)
+  return studyQuestions(catalog).filter(q => q.neetcode150 || q.dashboardExtra || q.googleTop50 || q.googleLastMonth || isCurrentQuestion(q.slug)
     || data?.[q.slug]?.retained || data?.[q.slug]?.submitted || (data?.[q.slug]?.completions ?? 0) > 0);
 }

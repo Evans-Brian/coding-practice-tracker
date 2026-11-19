@@ -54,7 +54,7 @@ const priorAll=[
   ...originalQuestions.filter(q=>!dashboardSlugs.has(q.slug)).map((q,index)=>({...q,bucket:neetcodeTopics.length,order:dashboardQuestions.length+index+1})),
 ];
 for(const expected of priorAll){
-  const {googleTop50,...actual}=lookup.get(expected.slug);
+  const {googleTop50,googleLastMonth,...actual}=lookup.get(expected.slug);
   assert.deepEqual(actual,expected,expected.slug);
 }
 for(const entry of snapshot.questions.filter(q=>!priorAll.some(prior=>prior.slug===q.slug))){
