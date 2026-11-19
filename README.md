@@ -7,6 +7,11 @@ and a daily points dashboard.
 ## Features
 
 - Problems grouped by topic and difficulty, with links to LeetCode.
+- Google Top 50 is a separate page ranked by Google's three-month LeetCode list,
+  captured November 18, 2026. It shows source frequency percentages and difficulty,
+  without topic or strategy hints. Frequency is LeetCode's relative score, not a
+  count of interview reports or an interview probability. All 50 retain shared
+  notes and completion history; the canonical NeetCode 150 list is unchanged.
 - An unfinished-question picker that respects study priorities.
 - A random picker on Repeat, with difficulty filters and the same inline question
   card and shared notes as the topic list. It draws from questions marked to repeat.
@@ -79,6 +84,7 @@ in filename order.
 node --experimental-strip-types --test tests/*.test.mjs
 npx tsc --noEmit
 node scripts/verify-neetcode150.mjs
+node scripts/verify-google-top50.mjs
 node scripts/verify-study-priorities.mjs
 node scripts/verify-question-relevance.mjs
 python scripts/verify-variation-practice.py

@@ -1,10 +1,11 @@
 import source from './neetcode150-source.json' with {type: 'json'};
+import googleSource from './google-top50-data.json' with {type: 'json'};
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyCatalog = 'neetcode' | 'all';
-export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean};
+export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean;googleTop50?: boolean};
 
 // Membership, titles, difficulty and within-topic order come from NeetCode's
 // official neetcode-gh/leetcode .problemSiteData.json (retrieved Oct 13, 2026).
@@ -49,16 +50,26 @@ export const extraPracticeQuestions: StudyQuestion[] = [
 export const dashboardQuestions:StudyQuestion[]=[...neetcodeQuestions,...extraPracticeQuestions]
   .sort((a,b)=>a.bucket-b.bucket);
 const dashboardSlugs = new Set(dashboardQuestions.map(q => q.slug));
-export const allowedQuestionSlugs = new Set([
-  ...questions.map(q => q.slug), ...dashboardSlugs,
-]);
+const googleSlugs = new Set(googleSource.questions.map(q => q.slug));
 
-const allQuestions: StudyQuestion[] = [
+// Keep all existing question IDs, metadata, and display orders stable. Google-only
+// additions live in Other practice and do not enlarge the main NeetCode catalog.
+const existingQuestions: StudyQuestion[] = [
   ...dashboardQuestions.map(q=>retiredPracticeSlugs.has(q.slug)?{...q,bucket:neetcodeTopics.length}:q),
   ...questions.filter(q => !dashboardSlugs.has(q.slug)).map((q, index) => ({
     ...q, bucket: neetcodeTopics.length, order: dashboardQuestions.length + index + 1,
   })),
 ];
+const existingSlugs=new Set(existingQuestions.map(q=>q.slug));
+const allQuestions:StudyQuestion[]=[
+  ...existingQuestions.map(q=>googleSlugs.has(q.slug)?{...q,googleTop50:true}:q),
+  ...googleSource.questions.filter(q=>!existingSlugs.has(q.slug)).map((q,index)=>({
+    name:q.name,slug:q.slug,difficulty:q.difficulty as StudyQuestion['difficulty'],
+    theme:'Other practice',kind:'leetcode' as const,grind75:false,googleTop50:true,
+    bucket:neetcodeTopics.length,order:existingQuestions.length+index+1,
+  })),
+];
+export const allowedQuestionSlugs = new Set(allQuestions.map(q=>q.slug));
 
 export function studyQuestions(catalog: StudyCatalog): StudyQuestion[] {
   return catalog === 'neetcode' ? dashboardQuestions : allQuestions;
@@ -73,6 +84,6 @@ export function studyGroups(catalog: StudyCatalog) {
 }
 
 export function eligibleQuestions(catalog: StudyCatalog, data: Record<string, Progress> | null) {
-  return studyQuestions(catalog).filter(q => q.neetcode150 || q.dashboardExtra || isCurrentQuestion(q.slug)
+  return studyQuestions(catalog).filter(q => q.neetcode150 || q.dashboardExtra || q.googleTop50 || isCurrentQuestion(q.slug)
     || data?.[q.slug]?.retained || data?.[q.slug]?.submitted || (data?.[q.slug]?.completions ?? 0) > 0);
 }

@@ -1,0 +1,410 @@
+{
+  "company": "Google",
+  "period": "3 months",
+  "retrievedOn": "2026-11-18",
+  "sourceUrl": "https://leetcode.com/company/google/?favoriteSlug=google-three-months",
+  "sort": "Frequency descending",
+  "frequencyMeaning": "LeetCode's displayed relative frequency score. This is not a raw interview-report count or the probability that a Google interview asks this question.",
+  "questions": [
+    {
+      "rank": 1,
+      "leetcodeId": 1,
+      "slug": "two-sum",
+      "name": "Two Sum",
+      "difficulty": "Easy",
+      "frequency": 100
+    },
+    {
+      "rank": 2,
+      "leetcodeId": 2,
+      "slug": "add-two-numbers",
+      "name": "Add Two Numbers",
+      "difficulty": "Medium",
+      "frequency": 71.2
+    },
+    {
+      "rank": 3,
+      "leetcodeId": 9,
+      "slug": "palindrome-number",
+      "name": "Palindrome Number",
+      "difficulty": "Easy",
+      "frequency": 69.4
+    },
+    {
+      "rank": 4,
+      "leetcodeId": 4,
+      "slug": "median-of-two-sorted-arrays",
+      "name": "Median of Two Sorted Arrays",
+      "difficulty": "Hard",
+      "frequency": 67
+    },
+    {
+      "rank": 5,
+      "leetcodeId": 3,
+      "slug": "longest-substring-without-repeating-characters",
+      "name": "Longest Substring Without Repeating Characters",
+      "difficulty": "Medium",
+      "frequency": 64.7
+    },
+    {
+      "rank": 6,
+      "leetcodeId": 1929,
+      "slug": "concatenation-of-array",
+      "name": "Concatenation of Array",
+      "difficulty": "Easy",
+      "frequency": 63.5
+    },
+    {
+      "rank": 7,
+      "leetcodeId": 15,
+      "slug": "3sum",
+      "name": "3Sum",
+      "difficulty": "Medium",
+      "frequency": 63.4
+    },
+    {
+      "rank": 8,
+      "leetcodeId": 20,
+      "slug": "valid-parentheses",
+      "name": "Valid Parentheses",
+      "difficulty": "Easy",
+      "frequency": 63
+    },
+    {
+      "rank": 9,
+      "leetcodeId": 128,
+      "slug": "longest-consecutive-sequence",
+      "name": "Longest Consecutive Sequence",
+      "difficulty": "Medium",
+      "frequency": 61.5
+    },
+    {
+      "rank": 10,
+      "leetcodeId": 121,
+      "slug": "best-time-to-buy-and-sell-stock",
+      "name": "Best Time to Buy and Sell Stock",
+      "difficulty": "Easy",
+      "frequency": 61.4
+    },
+    {
+      "rank": 11,
+      "leetcodeId": 175,
+      "slug": "combine-two-tables",
+      "name": "Combine Two Tables",
+      "difficulty": "Easy",
+      "frequency": 61.4
+    },
+    {
+      "rank": 12,
+      "leetcodeId": 5,
+      "slug": "longest-palindromic-substring",
+      "name": "Longest Palindromic Substring",
+      "difficulty": "Medium",
+      "frequency": 60.5
+    },
+    {
+      "rank": 13,
+      "leetcodeId": 14,
+      "slug": "longest-common-prefix",
+      "name": "Longest Common Prefix",
+      "difficulty": "Easy",
+      "frequency": 60.3
+    },
+    {
+      "rank": 14,
+      "leetcodeId": 11,
+      "slug": "container-with-most-water",
+      "name": "Container With Most Water",
+      "difficulty": "Medium",
+      "frequency": 58.4
+    },
+    {
+      "rank": 15,
+      "leetcodeId": 49,
+      "slug": "group-anagrams",
+      "name": "Group Anagrams",
+      "difficulty": "Medium",
+      "frequency": 58
+    },
+    {
+      "rank": 16,
+      "leetcodeId": 42,
+      "slug": "trapping-rain-water",
+      "name": "Trapping Rain Water",
+      "difficulty": "Hard",
+      "frequency": 57.4
+    },
+    {
+      "rank": 17,
+      "leetcodeId": 70,
+      "slug": "climbing-stairs",
+      "name": "Climbing Stairs",
+      "difficulty": "Easy",
+      "frequency": 57.2
+    },
+    {
+      "rank": 18,
+      "leetcodeId": 7,
+      "slug": "reverse-integer",
+      "name": "Reverse Integer",
+      "difficulty": "Medium",
+      "frequency": 55.9
+    },
+    {
+      "rank": 19,
+      "leetcodeId": 217,
+      "slug": "contains-duplicate",
+      "name": "Contains Duplicate",
+      "difficulty": "Easy",
+      "frequency": 55.9
+    },
+    {
+      "rank": 20,
+      "leetcodeId": 485,
+      "slug": "max-consecutive-ones",
+      "name": "Max Consecutive Ones",
+      "difficulty": "Easy",
+      "frequency": 55
+    },
+    {
+      "rank": 21,
+      "leetcodeId": 875,
+      "slug": "koko-eating-bananas",
+      "name": "Koko Eating Bananas",
+      "difficulty": "Medium",
+      "frequency": 54.9
+    },
+    {
+      "rank": 22,
+      "leetcodeId": 53,
+      "slug": "maximum-subarray",
+      "name": "Maximum Subarray",
+      "difficulty": "Medium",
+      "frequency": 54.7
+    },
+    {
+      "rank": 23,
+      "leetcodeId": 2235,
+      "slug": "add-two-integers",
+      "name": "Add Two Integers",
+      "difficulty": "Easy",
+      "frequency": 54.6
+    },
+    {
+      "rank": 24,
+      "leetcodeId": 28,
+      "slug": "find-the-index-of-the-first-occurrence-in-a-string",
+      "name": "Find the Index of the First Occurrence in a String",
+      "difficulty": "Easy",
+      "frequency": 54.5
+    },
+    {
+      "rank": 25,
+      "leetcodeId": 88,
+      "slug": "merge-sorted-array",
+      "name": "Merge Sorted Array",
+      "difficulty": "Easy",
+      "frequency": 53.3
+    },
+    {
+      "rank": 26,
+      "leetcodeId": 118,
+      "slug": "pascals-triangle",
+      "name": "Pascal's Triangle",
+      "difficulty": "Easy",
+      "frequency": 53.3
+    },
+    {
+      "rank": 27,
+      "leetcodeId": 13,
+      "slug": "roman-to-integer",
+      "name": "Roman to Integer",
+      "difficulty": "Easy",
+      "frequency": 52.1
+    },
+    {
+      "rank": 28,
+      "leetcodeId": 6,
+      "slug": "zigzag-conversion",
+      "name": "Zigzag Conversion",
+      "difficulty": "Medium",
+      "frequency": 52
+    },
+    {
+      "rank": 29,
+      "leetcodeId": 347,
+      "slug": "top-k-frequent-elements",
+      "name": "Top K Frequent Elements",
+      "difficulty": "Medium",
+      "frequency": 52
+    },
+    {
+      "rank": 30,
+      "leetcodeId": 242,
+      "slug": "valid-anagram",
+      "name": "Valid Anagram",
+      "difficulty": "Easy",
+      "frequency": 51.9
+    },
+    {
+      "rank": 31,
+      "leetcodeId": 169,
+      "slug": "majority-element",
+      "name": "Majority Element",
+      "difficulty": "Easy",
+      "frequency": 50.2
+    },
+    {
+      "rank": 32,
+      "leetcodeId": 3871,
+      "slug": "count-commas-in-range-ii",
+      "name": "Count Commas in Range II",
+      "difficulty": "Medium",
+      "frequency": 49.9
+    },
+    {
+      "rank": 33,
+      "leetcodeId": 26,
+      "slug": "remove-duplicates-from-sorted-array",
+      "name": "Remove Duplicates from Sorted Array",
+      "difficulty": "Easy",
+      "frequency": 49.8
+    },
+    {
+      "rank": 34,
+      "leetcodeId": 560,
+      "slug": "subarray-sum-equals-k",
+      "name": "Subarray Sum Equals K",
+      "difficulty": "Medium",
+      "frequency": 48.6
+    },
+    {
+      "rank": 35,
+      "leetcodeId": 410,
+      "slug": "split-array-largest-sum",
+      "name": "Split Array Largest Sum",
+      "difficulty": "Hard",
+      "frequency": 48.5
+    },
+    {
+      "rank": 36,
+      "leetcodeId": 200,
+      "slug": "number-of-islands",
+      "name": "Number of Islands",
+      "difficulty": "Medium",
+      "frequency": 46.8
+    },
+    {
+      "rank": 37,
+      "leetcodeId": 283,
+      "slug": "move-zeroes",
+      "name": "Move Zeroes",
+      "difficulty": "Easy",
+      "frequency": 46.8
+    },
+    {
+      "rank": 38,
+      "leetcodeId": 739,
+      "slug": "daily-temperatures",
+      "name": "Daily Temperatures",
+      "difficulty": "Medium",
+      "frequency": 46.6
+    },
+    {
+      "rank": 39,
+      "leetcodeId": 17,
+      "slug": "letter-combinations-of-a-phone-number",
+      "name": "Letter Combinations of a Phone Number",
+      "difficulty": "Medium",
+      "frequency": 46.3
+    },
+    {
+      "rank": 40,
+      "leetcodeId": 35,
+      "slug": "search-insert-position",
+      "name": "Search Insert Position",
+      "difficulty": "Easy",
+      "frequency": 46.3
+    },
+    {
+      "rank": 41,
+      "leetcodeId": 496,
+      "slug": "next-greater-element-i",
+      "name": "Next Greater Element I",
+      "difficulty": "Easy",
+      "frequency": 46.2
+    },
+    {
+      "rank": 42,
+      "leetcodeId": 1502,
+      "slug": "can-make-arithmetic-progression-from-sequence",
+      "name": "Can Make Arithmetic Progression From Sequence",
+      "difficulty": "Easy",
+      "frequency": 46.2
+    },
+    {
+      "rank": 43,
+      "leetcodeId": 56,
+      "slug": "merge-intervals",
+      "name": "Merge Intervals",
+      "difficulty": "Medium",
+      "frequency": 45.2
+    },
+    {
+      "rank": 44,
+      "leetcodeId": 55,
+      "slug": "jump-game",
+      "name": "Jump Game",
+      "difficulty": "Medium",
+      "frequency": 44.8
+    },
+    {
+      "rank": 45,
+      "leetcodeId": 253,
+      "slug": "meeting-rooms-ii",
+      "name": "Meeting Rooms II",
+      "difficulty": "Medium",
+      "frequency": 44.8
+    },
+    {
+      "rank": 46,
+      "leetcodeId": 349,
+      "slug": "intersection-of-two-arrays",
+      "name": "Intersection of Two Arrays",
+      "difficulty": "Easy",
+      "frequency": 44.7
+    },
+    {
+      "rank": 47,
+      "leetcodeId": 21,
+      "slug": "merge-two-sorted-lists",
+      "name": "Merge Two Sorted Lists",
+      "difficulty": "Easy",
+      "frequency": 44.6
+    },
+    {
+      "rank": 48,
+      "leetcodeId": 1757,
+      "slug": "recyclable-and-low-fat-products",
+      "name": "Recyclable and Low Fat Products",
+      "difficulty": "Easy",
+      "frequency": 44.6
+    },
+    {
+      "rank": 49,
+      "leetcodeId": 34,
+      "slug": "find-first-and-last-position-of-element-in-sorted-array",
+      "name": "Find First and Last Position of Element in Sorted Array",
+      "difficulty": "Medium",
+      "frequency": 44.5
+    },
+    {
+      "rank": 50,
+      "leetcodeId": 84,
+      "slug": "largest-rectangle-in-histogram",
+      "name": "Largest Rectangle in Histogram",
+      "difficulty": "Hard",
+      "frequency": 44.5
+    }
+  ]
+}
