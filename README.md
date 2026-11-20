@@ -15,9 +15,13 @@ and a daily points dashboard.
 - Google 30 Days contains all 97 questions in Google's separate 30-day filter,
   captured November 18, 2026, with its own frequency percentages. It shares the
   same progress and hint-free format while preserving the three-month Top 50.
-- Both Google pages include suggested follow-up links beneath Best Time to Buy
+- Both Google pages include nested, trackable follow-ups beneath Best Time to Buy
   and Sell Stock: Stock II, Cooldown, Transaction Fee, Stock III, and Stock IV,
   with difficulty labels and requirement variations, without strategy hints.
+  Each uses the standard notes, tries, repeat, and completion controls, sharing
+  canonical progress and daily points with Repeat, Done, and existing copies.
+  Follow-ups remain nested after completion and do not change Google rankings
+  or the main NeetCode catalog.
 - An unfinished-question picker that respects study priorities.
 - A random picker on Repeat, with difficulty filters and the same inline question
   card and shared notes as the topic list. It draws from questions marked to repeat.

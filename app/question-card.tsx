@@ -17,12 +17,13 @@ export function QuestionProgressProvider({children}:{children:ReactNode}) {
   return <ProgressRegistry.Provider value={registry.current}>{children}</ProgressRegistry.Provider>;
 }
 
-export default function Question({q,initial,onSubmitted,onSaved,variationHref,idPrefix='',showTopic=true,showBinarySearchTips=false,showRelevance=true}:{
+export default function Question({q,initial,onSubmitted,onSaved,variationHref,description,idPrefix='',showTopic=true,showBinarySearchTips=false,showRelevance=true}:{
   q:StudyQuestion;
   initial:Progress;
   onSubmitted:(progress:Progress)=>void;
   onSaved:(progress:Progress)=>void;
   variationHref?:string;
+  description?:string;
   idPrefix?:string;
   showTopic?:boolean;
   showBinarySearchTips?:boolean;
@@ -42,12 +43,13 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,id
     <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>
       {q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}
       <p><DifficultyLabel difficulty={q.difficulty} estimated={q.kind==='custom'}/>{showTopic&&<> {q.theme}</>}</p>
+      {description&&<p className="question-description">{description}</p>}
       {showRelevance&&<QuestionRelevanceLabel question={q}/>}
       {showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
-      <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.googleTop50?'Google Top 50':q.googleLastMonth?'Google · Last 30 Days':q.kind==='custom'?'Custom drill':'Extra'}</span>
+      <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.googleTop50?'Google Top 50':q.googleLastMonth?'Google · Last 30 Days':q.stockFollowUp?'Stock follow-up':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
         </p>
-      {!q.neetcode150&&!q.dashboardExtra&&!q.googleTop50&&!q.googleLastMonth&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
+      {!q.neetcode150&&!q.dashboardExtra&&!q.googleTop50&&!q.googleLastMonth&&!q.stockFollowUp&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
     </div></div>
     <div className="fields"><div><label>Completions</label><div className="counter"><output aria-label={'Completion count for '+q.name}>{value.completions}</output></div></div>
       <div><label htmlFor={triesId}>Tries on last attempt</label><input id={triesId} type="number" disabled={submitting} min="0" step="1" placeholder="—" value={value.tries??''}

@@ -52,6 +52,11 @@ export default function GoogleTop50Dashboard({
   function updateProgress(slug:string,progress:Progress){
     setData(previous=>({...previous,[slug]:progress}));
   }
+  function submitProgress(slug:string,progress:Progress){
+    updateProgress(slug,progress);
+    const question=allQuestions.find(question=>question.slug===slug);
+    setNotice((question?.name??'Question')+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');
+  }
   const completed=allQuestions.filter(question=>isCompleted(data?.[question.slug]??blankProgress));
   const counts=data?{
     neetcode:neetcodeQuestions.filter(question=>isCompleted(data[question.slug]??blankProgress)).length,
@@ -100,8 +105,8 @@ export default function GoogleTop50Dashboard({
           </div>
           <div className="question-list"><Question q={{...question,order:source.rank}} initial={data[question.slug]??blankProgress} showTopic={false} showRelevance={false} showBinarySearchTips={false}
             onSaved={progress=>updateProgress(question.slug,progress)}
-            onSubmitted={progress=>{updateProgress(question.slug,progress);setNotice(question.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/></div>
-          {question.slug==='best-time-to-buy-and-sell-stock'&&<StockFollowUps/>}
+            onSubmitted={progress=>submitProgress(question.slug,progress)}/></div>
+          {question.slug==='best-time-to-buy-and-sell-stock'&&<StockFollowUps data={data} onSaved={updateProgress} onSubmitted={submitProgress}/>}
         </li>;
       })}</ol>}
       <footer>Practice the explanation as well as the code. Write your own tests before submitting.</footer>

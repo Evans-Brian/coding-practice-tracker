@@ -1,20 +1,29 @@
-import DifficultyLabel from './difficulty-label';
+'use client';
 
-const followUps=[
-  {id:122,name:'Best Time to Buy and Sell Stock II',slug:'best-time-to-buy-and-sell-stock-ii',difficulty:'Medium',variation:'Complete unlimited transactions while holding at most one share.'},
-  {id:309,name:'Best Time to Buy and Sell Stock with Cooldown',slug:'best-time-to-buy-and-sell-stock-with-cooldown',difficulty:'Medium',variation:'After selling, wait one day before buying again.'},
-  {id:714,name:'Best Time to Buy and Sell Stock with Transaction Fee',slug:'best-time-to-buy-and-sell-stock-with-transaction-fee',difficulty:'Medium',variation:'Pay a fee for each completed purchase-and-sale transaction.'},
-  {id:123,name:'Best Time to Buy and Sell Stock III',slug:'best-time-to-buy-and-sell-stock-iii',difficulty:'Hard',variation:'Complete at most two transactions.'},
-  {id:188,name:'Best Time to Buy and Sell Stock IV',slug:'best-time-to-buy-and-sell-stock-iv',difficulty:'Hard',variation:'Complete at most k transactions.'},
-] as const;
+import Question from './question-card';
+import {blankProgress,type Progress} from './progress-state';
+import {studyQuestions} from './study-catalog';
+import {stockFollowUps} from './stock-follow-ups-data';
 
-export default function StockFollowUps(){
+const catalog=new Map(studyQuestions('all').map(question=>[question.slug,question]));
+
+export default function StockFollowUps({data,onSaved,onSubmitted}:{
+  data:Record<string,Progress>;
+  onSaved:(slug:string,progress:Progress)=>void;
+  onSubmitted:(slug:string,progress:Progress)=>void;
+}){
   return <section id="stock-follow-ups" className="stock-follow-ups" aria-labelledby="stock-follow-ups-heading">
     <h2 id="stock-follow-ups-heading">Suggested follow-ups</h2>
-    <p className="stock-follow-ups-intro">More variations of Best Time to Buy and Sell Stock to practice.</p>
-    <ul>{followUps.map(question=><li key={question.slug}>
-      <div className="stock-follow-up-title"><a href={'https://leetcode.com/problems/'+question.slug+'/'} target="_blank" rel="noopener noreferrer">{question.id}. {question.name}</a><DifficultyLabel difficulty={question.difficulty}/></div>
-      <p>{question.variation}</p>
-    </li>)}</ul>
+    <p className="stock-follow-ups-intro">Variations of Best Time to Buy and Sell Stock. Track each separately here; your progress is shared with Repeat, Done, and Daily points.</p>
+    <ul aria-label="Stock follow-up problems">{stockFollowUps.map((followUp,index)=>{
+      const question=catalog.get(followUp.slug)!;
+      return <li key={question.slug}><div className="question-list">
+        <Question q={{...question,order:index+1}} initial={data[question.slug]??blankProgress}
+          idPrefix="stock-follow-up-" description={followUp.variation}
+          showTopic={false} showRelevance={false} showBinarySearchTips={false}
+          onSaved={progress=>onSaved(question.slug,progress)}
+          onSubmitted={progress=>onSubmitted(question.slug,progress)}/>
+      </div></li>;
+    })}</ul>
   </section>;
 }
