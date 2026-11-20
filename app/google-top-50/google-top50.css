@@ -37,6 +37,14 @@
 .google-top50-page .submit-hint { font-size: .8125rem; }
 .google-top50-page .submit-hint { max-width: 310px; }
 .google-top50-page footer { font-size: .875rem; }
+.stock-follow-ups { margin-top: 12px; padding: 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--panel); scroll-margin-top: 88px; }
+.stock-follow-ups h2 { margin: 0 0 6px; color: var(--text); font-size: 1rem; }
+.stock-follow-ups-intro { margin: 0 0 16px; color: var(--muted); font-size: .875rem; line-height: 1.6; }
+.stock-follow-ups ul { margin: 0; padding: 0; list-style: none; }
+.stock-follow-ups li+li { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
+.stock-follow-up-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.stock-follow-up-title a { font-size: 1rem; font-weight: 600; }
+.stock-follow-ups li p { margin: 5px 0 0; color: var(--muted); font-size: .875rem; line-height: 1.6; }
 @media(max-width:1000px) {
   .google-top50-source { align-items: flex-start; flex-direction: column; gap: 12px; }
   .google-top50-source-meta { flex-direction: row; flex-wrap: wrap; gap: 8px 20px; }
@@ -57,4 +65,5 @@
   .google-top50-page .question { padding: 16px 14px; }
   .google-top50-page .fields { gap: 14px; }
   .google-top50-page .save-line { flex-wrap: wrap; }
+  .stock-follow-ups { padding: 16px 14px; }
 }

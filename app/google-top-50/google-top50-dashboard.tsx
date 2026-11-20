@@ -6,6 +6,7 @@ import Question,{QuestionProgressProvider} from '../question-card';
 import {blankProgress,isCompleted,type Progress} from '../progress-state';
 import {neetcodeQuestions,studyQuestions,type StudyQuestion} from '../study-catalog';
 import {googleTop50Questions,googleTop50Snapshot} from '../google-top50';
+import StockFollowUps from '../stock-follow-ups';
 
 const allQuestions=studyQuestions('all');
 const frequencyLabel=(frequency:number)=>frequency.toFixed(1)+'%';
@@ -100,6 +101,7 @@ export default function GoogleTop50Dashboard({
           <div className="question-list"><Question q={{...question,order:source.rank}} initial={data[question.slug]??blankProgress} showTopic={false} showRelevance={false} showBinarySearchTips={false}
             onSaved={progress=>updateProgress(question.slug,progress)}
             onSubmitted={progress=>{updateProgress(question.slug,progress);setNotice(question.name+' submitted to '+(progress.repeat?'Repeat':'Done')+'. You are still on this page.');}}/></div>
+          {question.slug==='best-time-to-buy-and-sell-stock'&&<StockFollowUps/>}
         </li>;
       })}</ol>}
       <footer>Practice the explanation as well as the code. Write your own tests before submitting.</footer>
