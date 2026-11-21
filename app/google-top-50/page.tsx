@@ -4,7 +4,7 @@ import './google-top50.css';
 
 export const metadata:Metadata={
   title:'Google Top 50 | Coding Practice',
-  description:'Google’s 50 most frequent LeetCode problems from the three-month company list, with shared notes and completion tracking.',
+  description:'Non-SQL problems from Google’s three-month Top 50, with shared notes and completion tracking.',
 };
 
 export default function Page(){return <GoogleTop50Dashboard/>;}

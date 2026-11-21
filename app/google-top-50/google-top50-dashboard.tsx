@@ -6,6 +6,7 @@ import Question,{QuestionProgressProvider} from '../question-card';
 import {blankProgress,isCompleted,type Progress} from '../progress-state';
 import {neetcodeQuestions,studyQuestions,type StudyQuestion} from '../study-catalog';
 import {googleTop50Questions,googleTop50Snapshot} from '../google-top50';
+import {sqlQuestionSlugs} from '../points-model';
 import StockFollowUps from '../stock-follow-ups';
 
 const allQuestions=studyQuestions('all');
@@ -31,11 +32,13 @@ export default function GoogleTop50Dashboard({
   snapshot=googleTop50Snapshot,
   title='Google Top 50',
   active='google',
-  description='The 50 highest-frequency problems in Google’s three-month LeetCode list, kept in frequency order.',
+  description='Non-SQL problems from Google’s three-month Top 50, kept in frequency order.',
   sourceLinkLabel='View the three-month source',
 }:GooglePracticeProps={}){
   const [data,setData]=useState<Record<string,Progress>|null>(null);
   const [error,setError]=useState(false),[notice,setNotice]=useState('');
+  const visibleQuestions=questions.filter(question=>!sqlQuestionSlugs.has(question.slug));
+  const sourceBySlug=new Map(snapshot.questions.map(entry=>[entry.slug,entry]));
   const checkedOn=new Intl.DateTimeFormat('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'UTC'})
     .format(new Date(snapshot.retrievedOn+'T12:00:00Z'));
 
@@ -63,7 +66,7 @@ export default function GoogleTop50Dashboard({
     repeat:completed.filter(question=>data[question.slug].repeat).length,
     done:completed.filter(question=>!data[question.slug].repeat).length,
   }:null;
-  const listCompleted=questions.filter(question=>isCompleted(data?.[question.slug]??blankProgress)).length;
+  const listCompleted=visibleQuestions.filter(question=>isCompleted(data?.[question.slug]??blankProgress)).length;
 
   return <QuestionProgressProvider><div className="study-app google-top50-page">
     <StudyHeader active={active} counts={counts}/>
@@ -82,9 +85,9 @@ export default function GoogleTop50Dashboard({
         </div>
         <div className="catalog-summary" aria-label={title+' progress'}>
           <span className="summary-label">{title}</span>
-          <strong>{data?listCompleted+' / '+questions.length:questions.length}</strong>
+          <strong>{data?listCompleted+' / '+visibleQuestions.length:visibleQuestions.length}</strong>
           <span className="summary-caption">{data?'Completed':'Questions'}</span>
-          <div className="summary-difficulties">{(['Easy','Medium','Hard'] as const).map(difficulty=><span key={difficulty} className={difficulty.toLowerCase()}>{questions.filter(question=>question.difficulty===difficulty).length} {difficulty}</span>)}</div>
+          <div className="summary-difficulties">{(['Easy','Medium','Hard'] as const).map(difficulty=><span key={difficulty} className={difficulty.toLowerCase()}>{visibleQuestions.filter(question=>question.difficulty===difficulty).length} {difficulty}</span>)}</div>
         </div>
       </header>
 
@@ -92,11 +95,11 @@ export default function GoogleTop50Dashboard({
         <div><strong>LeetCode frequency</strong><p>The percentages are LeetCode’s relative frequency scores. They are not interview counts or the percentage of Google interviews that ask a problem.</p></div>
         <div className="google-top50-source-meta"><a href={snapshot.sourceUrl} target="_blank" rel="noopener noreferrer">{sourceLinkLabel}</a><span>Snapshot: {checkedOn}</span></div>
       </aside>
-      <p className="google-top50-instructions">All {questions.length} problems stay in this list so you can review their frequency and completion status. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</p>
+      <p className="google-top50-instructions">SQL questions are excluded. All {visibleQuestions.length} remaining problems stay in this list after completion, with their original source ranks and frequency scores. Notes and tries save when you leave the field. Submit adds one completion, updates Repeat or Done, and keeps you on this page.</p>
       {notice&&<p className="google-top50-notice" role="status">{notice}</p>}
 
-      {error?<div className="error" role="alert">Your progress couldn’t load. <button className="save" onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:<ol className="google-top50-list" aria-label="Google problems ranked by LeetCode frequency">{questions.map((question,index)=>{
-        const source=snapshot.questions[index];
+      {error?<div className="error" role="alert">Your progress couldn’t load. <button className="save" onClick={load}>Try again</button></div>:!data?<p role="status">Loading your notebook…</p>:<ol className="google-top50-list" aria-label="Google problems ranked by LeetCode frequency">{visibleQuestions.map(question=>{
+        const source=sourceBySlug.get(question.slug)!;
         return <li key={question.slug} className="google-top50-entry">
           <div className="google-top50-frequency">
             <span>LeetCode frequency</span>

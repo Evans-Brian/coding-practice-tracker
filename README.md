@@ -10,11 +10,13 @@ and a daily points dashboard.
 - Google Top 50 is a separate page ranked by Google's three-month LeetCode list,
   captured November 18, 2026. It shows source frequency percentages and difficulty,
   without topic or strategy hints. Frequency is LeetCode's relative score, not a
-  count of interview reports or an interview probability. All 50 retain shared
-  notes and completion history; the canonical NeetCode 150 list is unchanged.
-- Google 30 Days contains all 97 questions in Google's separate 30-day filter,
+  count of interview reports or an interview probability. SQL is excluded from
+  the page, leaving 48 problems with their original source ranks and scores.
+- Google 30 Days shows 92 non-SQL questions from Google's 97-question 30-day filter,
   captured November 18, 2026, with its own frequency percentages. It shares the
   same progress and hint-free format while preserving the three-month Top 50.
+  SQL questions remain in the shared catalog, completion history, and points;
+  only their visibility and aggregate counts on these two pages change.
 - Both Google pages include nested, trackable follow-ups beneath Best Time to Buy
   and Sell Stock: Stock II, Cooldown, Transaction Fee, Stock III, and Stock IV,
   with difficulty labels and requirement variations, without strategy hints.
