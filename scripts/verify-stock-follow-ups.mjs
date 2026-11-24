@@ -8,6 +8,8 @@ async function loadModule(entry){
 }
 
 const {stockFollowUps}=await loadModule('app/stock-follow-ups-data.ts');
+const {supplementalPracticeQuestions}=await loadModule('app/supplemental-practice-data.ts');
+const supplementalSlugs=new Set(supplementalPracticeQuestions.map(q=>q.slug));
 const {studyQuestions,neetcodeQuestions,dashboardQuestions,neetcodeTopics,allowedQuestionSlugs,eligibleQuestions}=await loadModule('app/study-catalog.ts');
 const {questions:originalQuestions}=await loadModule('app/questions.ts');
 const {retiredPracticeSlugs}=await loadModule('app/practice-exclusions.ts');
@@ -51,7 +53,7 @@ for(const expected of before)assert.deepEqual(lookup.get(expected.slug),expected
 const beforeSlugs=new Set(before.map(q=>q.slug));
 const additions=stockFollowUps.filter(q=>!beforeSlugs.has(q.slug));
 assert.equal(additions.length,4);
-assert.equal(all.length,before.length+additions.length);
+assert.equal(all.filter(q=>!supplementalSlugs.has(q.slug)).length,before.length+additions.length);
 for(const [index,entry] of additions.entries()){
   const q=lookup.get(entry.slug);
   assert.equal(q.order,before.length+index+1,entry.slug);

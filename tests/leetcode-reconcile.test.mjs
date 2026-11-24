@@ -68,7 +68,7 @@ test('rejects unknown questions, failed submissions, conflicting source IDs, and
   assert.equal(parseRecentCompletions(null,questions,now,localDay,difficultyPointUnits),null);
 });
 
-test('dry-run skips manual completions on the day and either neighbor, without changing records',async()=>{
+test('dry-run accounts for same/previous-day stored and planned completions without changing records',async()=>{
   const {sqlite,db}=setup();manual(sqlite,'question','2026-11-15');
   sqlite.prepare('INSERT INTO progress (id,notes,completions,tries,repeat,submitted,last_submission) VALUES (?,?,7,3,1,1,?)').run('question','Keep my notes','manual-attempt');
   const beforeEvents=sqlite.prepare('SELECT * FROM completion_events').all(),beforeProgress=sqlite.prepare('SELECT * FROM progress').all();
@@ -77,7 +77,10 @@ test('dry-run skips manual completions on the day and either neighbor, without c
   assert.equal(result.dryRun,true);assert.deepEqual(result.added,[]);
   assert.deepEqual(result.wouldAdd.map(e=>e.completedDay),['2026-11-13','2026-11-17']);
   assert.deepEqual(result.skipped.map(e=>e.completedDay),['2026-11-14','2026-11-15','2026-11-16']);
-  assert(result.skipped.every(e=>e.reason==='nearby-tracker-completion'&&e.matchedDay==='2026-11-15'));
+  assert(result.skipped.every(e=>e.reason==='same-or-previous-day-completion'));
+  assert.deepEqual(result.skipped.map(e=>[e.matchedDay,e.matchedSource]),[
+    ['2026-11-13','reconciliation'],['2026-11-15','tracker'],['2026-11-15','tracker'],
+  ]);
   assert.deepEqual(sqlite.prepare('SELECT * FROM completion_events').all(),beforeEvents);
   assert.deepEqual(sqlite.prepare('SELECT * FROM progress').all(),beforeProgress);sqlite.close();
 });
@@ -85,24 +88,77 @@ test('dry-run skips manual completions on the day and either neighbor, without c
 test('the authoritative write guard catches a manual completion recorded after dry-run',async()=>{
   const {sqlite,db}=setup(),input=parse([row()]);
   assert.equal((await reconcileLeetcodeCompletions(db,{...input,dryRun:true})).wouldAdd.length,1);
-  manual(sqlite,'question','2026-11-16');
+  manual(sqlite,'question','2026-11-14');
   const result=await reconcileLeetcodeCompletions(db,input);
-  assert.equal(result.added.length,0);assert.equal(result.skipped[0].reason,'nearby-tracker-completion');
+  assert.equal(result.added.length,0);assert.equal(result.skipped[0].reason,'same-or-previous-day-completion');
   assert.equal(sqlite.prepare('SELECT COUNT(*) AS count FROM completion_events').get().count,1);
   assert.equal(sqlite.prepare('SELECT COUNT(*) AS count FROM progress').get().count,0);sqlite.close();
 });
 
-test('reconciliation is idempotent while legitimate accepted repeats on adjacent days each count once',async()=>{
-  const {sqlite,db}=setup(),input=parse([row('question','2026-11-14',1),row('question','2026-11-15',2),{...row('question','2026-11-15',3),completedAt:'2026-11-15T19:00:00.000Z'}]);
+test('adjacent candidates are not imported twice, and retries preserve the chronological same/previous-day plan',async()=>{
+  const {sqlite,db}=setup(),input=parse([row('question','2026-11-16',4),row('question','2026-11-14',1),row('question','2026-11-15',2),{...row('question','2026-11-15',3),completedAt:'2026-11-15T19:00:00.000Z'}]);
+  const dry=await reconcileLeetcodeCompletions(db,{...input,dryRun:true});
+  assert.deepEqual(dry.wouldAdd.map(e=>e.completedDay),['2026-11-14','2026-11-16']);
+  assert.deepEqual(dry.skipped.map(e=>e.completedDay),['2026-11-15']);
   const first=await reconcileLeetcodeCompletions(db,input);
-  assert.equal(first.added.length,2);assert.equal(first.duplicates,1);assert.equal(first.skipped.length,0);
+  assert.deepEqual(first.added,dry.wouldAdd);assert.equal(first.duplicates,1);assert.deepEqual(first.skipped,dry.skipped);
   const retried=await reconcileLeetcodeCompletions(db,input);
-  assert.equal(retried.added.length,0);assert.equal(retried.skipped.length,2);assert(retried.skipped.every(e=>e.reason==='already-reconciled'));
+  assert.equal(retried.added.length,0);assert.equal(retried.skipped.length,3);
+  assert.equal(retried.skipped.filter(e=>e.reason==='already-reconciled').length,2);
   assert.equal(sqlite.prepare('SELECT completions FROM progress').get().completions,2);
   const events=sqlite.prepare('SELECT * FROM completion_events ORDER BY completed_day').all();assert.equal(events.length,2);
   assert.equal(events[0].completed_at,'2026-11-14T18:00:00.000Z');
   assert.equal(events[0].submission_id,'leetcode-reconcile:question:2026-11-14');
-  assert.equal(events[1].completed_at,'2026-11-15T18:00:00.000Z');sqlite.close();
+  assert.equal(events[1].completed_at,'2026-11-16T18:00:00.000Z');sqlite.close();
+});
+
+test('manual, reconciled, and imported history all block the same or previous day, while next-day-only records do not',async()=>{
+  for(const source of ['tracker','reconciliation','leetcode-history']){
+    for(const storedDay of ['2026-11-14','2026-11-15','2026-11-16']){
+      const {sqlite,db}=setup(),input=parse([row()]);
+      if(source==='leetcode-history')sqlite.prepare('INSERT INTO leetcode_daily_completions (question_id,completed_day,name,difficulty,point_units,imported_at) VALUES (?,?,?,?,?,?)').run('question',storedDay,'Question','Medium',2,now.toISOString());
+      else manual(sqlite,'question',storedDay,source==='reconciliation'?reconciliationId({questionId:'question',completedDay:storedDay}):'manual-'+storedDay);
+      const historyBefore=sqlite.prepare('SELECT * FROM leetcode_daily_completions').all();
+      const dry=await reconcileLeetcodeCompletions(db,{...input,dryRun:true});
+      const result=await reconcileLeetcodeCompletions(db,input),blocked=storedDay<='2026-11-15';
+      assert.equal(dry.wouldAdd.length,blocked?0:1,source+' '+storedDay);
+      assert.deepEqual(result.added,dry.wouldAdd,source+' '+storedDay);
+      assert.deepEqual(result.skipped,dry.skipped,source+' '+storedDay);
+      if(blocked){assert.equal(result.skipped[0].matchedDay,storedDay);assert.equal(result.skipped[0].matchedSource,source);}
+      assert.equal(sqlite.prepare('SELECT COUNT(*) AS count FROM completion_events').get().count,(source==='leetcode-history'?0:1)+(blocked?0:1));
+      assert.deepEqual(sqlite.prepare('SELECT * FROM leetcode_daily_completions').all(),historyBefore);sqlite.close();
+    }
+  }
+});
+
+test('mixed UTC timestamps and date-only evidence are considered in New York calendar-day order',async()=>{
+  const {sqlite,db}=setup(),input=parse([
+    {questionId:'question',completedDay:'2026-11-18',status:'Accepted'},
+    {...row(),completedAt:'2026-11-18T04:30:00.000Z'},
+  ]);
+  assert.deepEqual(input.entries.map(e=>e.completedDay),['2026-11-17','2026-11-18']);
+  const dry=await reconcileLeetcodeCompletions(db,{...input,dryRun:true});
+  const actual=await reconcileLeetcodeCompletions(db,input);
+  assert.deepEqual(actual.added,dry.wouldAdd);assert.deepEqual(actual.skipped,dry.skipped);
+  assert.equal(actual.added[0].completedDay,'2026-11-17');assert.equal(actual.skipped[0].completedDay,'2026-11-18');
+  assert.equal(sqlite.prepare('SELECT completions FROM progress').get().completions,1);sqlite.close();
+});
+
+test('dry-run carries planned dates across its read batches and matches bounded sequential writes',async()=>{
+  const {sqlite,db,batchSizes}=setup();
+  const catalog=Array.from({length:100},(_,i)=>({slug:'question-'+String(i).padStart(3,'0'),difficulty:'Medium'}));
+  const input=parse([
+    row('question-000','2026-11-16',102),
+    ...catalog.map((q,i)=>row(q.slug,'2026-11-14',i+1)),
+    row('question-000','2026-11-15',101),
+  ],false,catalog);
+  const dry=await reconcileLeetcodeCompletions(db,{...input,dryRun:true});
+  assert.equal(dry.wouldAdd.length,101);assert.equal(dry.skipped.length,1);
+  assert.equal(sqlite.prepare('SELECT COUNT(*) AS count FROM completion_events').get().count,0);
+  const result=await reconcileLeetcodeCompletions(db,input);
+  assert.deepEqual(result.added,dry.wouldAdd);assert.deepEqual(result.skipped,dry.skipped);
+  assert.equal(sqlite.prepare('SELECT completions FROM progress WHERE id=?').get('question-000').completions,2);
+  assert(batchSizes.every(size=>size<=100));sqlite.close();
 });
 
 test('preserves notes, tries, repeat selection and last manual submission while incrementing completion history',async()=>{

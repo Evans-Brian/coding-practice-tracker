@@ -3,6 +3,7 @@ import googleSource from './google-top50-data.json' with {type: 'json'};
 import googleLastMonthSource from './google-last-month-data.json' with {type:'json'};
 import historySource from './history-practice-source.json' with {type:'json'};
 import {stockFollowUps} from './stock-follow-ups-data';
+import {supplementalPracticeQuestions} from './supplemental-practice-data';
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 import {retiredPracticeSlugs} from './practice-exclusions';
@@ -95,12 +96,24 @@ const priorPracticeQuestions:StudyQuestion[]=[
 // Follow-up controls reuse canonical question IDs. Keep every existing question
 // (including Cooldown) intact and append only variations not already tracked.
 const priorPracticeSlugs=new Set(priorPracticeQuestions.map(q=>q.slug));
-const allQuestions:StudyQuestion[]=[
+const previousQuestions:StudyQuestion[]=[
   ...priorPracticeQuestions,
   ...stockFollowUps.filter(q=>!priorPracticeSlugs.has(q.slug)).map((q,index)=>({
     name:q.name,slug:q.slug,difficulty:q.difficulty,theme:'Other practice',
     kind:'leetcode' as const,grind75:false,stockFollowUp:true,
     bucket:neetcodeTopics.length,order:priorPracticeQuestions.length+index+1,
+  })),
+];
+// Append supplemental public definitions after every earlier catalog entry.
+// These are available to the completion API, and appear in Repeat/Done only
+// when there is saved progress; they do not become new main-page practice.
+const previousSlugs=new Set(previousQuestions.map(q=>q.slug));
+const allQuestions:StudyQuestion[]=[
+  ...previousQuestions,
+  ...supplementalPracticeQuestions.filter(q=>!previousSlugs.has(q.slug)).map((q,index)=>({
+    name:q.name,slug:q.slug,difficulty:q.difficulty,theme:'Other practice',
+    kind:'leetcode' as const,grind75:false,bucket:neetcodeTopics.length,
+    order:previousQuestions.length+index+1,
   })),
 ];
 export const allowedQuestionSlugs = new Set(allQuestions.map(q=>q.slug));

@@ -77,6 +77,8 @@ export function parseRecentCompletions(
     if(!previous||timed&&!previousTimed||timed===previousTimed&&(entry.completedAt<previous.completedAt
       ||entry.completedAt===previous.completedAt&&(entry.submissionId??Infinity)<(previous.submissionId??Infinity)))byProblemDay.set(key,entry);
   }
-  const entries=[...byProblemDay.values()].sort((a,b)=>a.completedAt.localeCompare(b.completedAt)||a.questionId.localeCompare(b.questionId));
+  // Calendar-day order matters when date-only evidence is mixed with UTC
+  // timestamps whose calendar date can be the following day in New York.
+  const entries=[...byProblemDay.values()].sort((a,b)=>a.completedDay.localeCompare(b.completedDay)||a.completedAt.localeCompare(b.completedAt)||a.questionId.localeCompare(b.questionId));
   return {entries,dryRun:value.dryRun===true,receivedEntries:value.entries.length,duplicateEntries:value.entries.length-entries.length,firstDay,lastDay};
 }

@@ -13,6 +13,8 @@ const {dashboardQuestions,neetcodeQuestions,neetcodeTopics,studyQuestions,allowe
 const {questions:originalQuestions}=await loadModule('app/questions.ts');
 const {retiredPracticeSlugs}=await loadModule('app/practice-exclusions.ts');
 const {blankProgress,isCompleted}=await loadModule('app/progress-state.ts');
+const {supplementalPracticeQuestions}=await loadModule('app/supplemental-practice-data.ts');
+const supplementalSlugs=new Set(supplementalPracticeQuestions.map(q=>q.slug));
 const historySource=JSON.parse(await readFile('app/history-practice-source.json','utf8'));
 
 assert.equal(snapshot.company,'Google');
@@ -68,7 +70,7 @@ for(const expected of prior){
 }
 const priorSlugs=new Set(prior.map(q=>q.slug));
 const additions=snapshot.questions.filter(q=>!priorSlugs.has(q.slug));
-assert.equal(all.filter(q=>!q.stockFollowUp).length,prior.length+additions.length);
+assert.equal(all.filter(q=>!q.stockFollowUp&&!supplementalSlugs.has(q.slug)).length,prior.length+additions.length);
 for(const [index,entry] of additions.entries()){
   const q=lookup.get(entry.slug);
   assert.equal(q.order,prior.length+index+1,entry.slug);
