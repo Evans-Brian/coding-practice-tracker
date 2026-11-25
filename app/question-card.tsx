@@ -17,7 +17,7 @@ export function QuestionProgressProvider({children}:{children:ReactNode}) {
   return <ProgressRegistry.Provider value={registry.current}>{children}</ProgressRegistry.Provider>;
 }
 
-export default function Question({q,initial,onSubmitted,onSaved,variationHref,description,idPrefix='',showTopic=true,showBinarySearchTips=false,showRelevance=true}:{
+export default function Question({q,initial,onSubmitted,onSaved,variationHref,description,idPrefix='',showTopic=true,showBinarySearchTips=false,showRelevance=true,presentation='standard'}:{
   q:StudyQuestion;
   initial:Progress;
   onSubmitted:(progress:Progress)=>void;
@@ -28,6 +28,7 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,de
   showTopic?:boolean;
   showBinarySearchTips?:boolean;
   showRelevance?:boolean;
+  presentation?:'standard'|'common';
 }) {
   const registry=useContext(ProgressRegistry);
   if(!registry)throw Error('Question progress provider is missing');
@@ -38,27 +39,28 @@ export default function Question({q,initial,onSubmitted,onSaved,variationHref,de
   const current=()=>controller.getSnapshot().value;
   const save=()=>controller.save(current());
   const triesId=idPrefix+'tries-'+q.slug,notesId=idPrefix+'notes-'+q.slug;
+  const commonMode=presentation==='common';
 
   return <article id={idPrefix+'question-'+q.slug} data-question-slug={q.slug} className={isCompleted(value)?'question completed':'question'}>
     <div className="question-title"><span className="question-id">{String(q.order).padStart(2,'0')}</span><div>
       {q.kind==='custom'?<span className="custom-title">{q.name}</span>:<a href={'https://leetcode.com/problems/'+q.slug+'/'} target="_blank" rel="noopener noreferrer">{q.name}</a>}
-      <p><DifficultyLabel difficulty={q.difficulty} estimated={q.kind==='custom'}/>{showTopic&&<> {q.theme}</>}</p>
-      {description&&<p className="question-description">{description}</p>}
-      {showRelevance&&<QuestionRelevanceLabel question={q}/>}
-      {showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
-      <p className="question-source"><span>{q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.googleTop50?'Google Top 50':q.googleLastMonth?'Google · Last 30 Days':q.stockFollowUp?'Stock follow-up':q.kind==='custom'?'Custom drill':'Extra'}</span>
+      <p><DifficultyLabel difficulty={q.difficulty} estimated={q.kind==='custom'}/>{showTopic&&!commonMode&&<> {q.theme}</>}</p>
+      {!commonMode&&description&&<p className="question-description">{description}</p>}
+      {!commonMode&&showRelevance&&<QuestionRelevanceLabel question={q}/>}
+      {!commonMode&&showTopic&&showBinarySearchTips&&<p className="evidence"><BinarySearchTips/></p>}
+      <p className="question-source"><span>{commonMode?'Common 50':q.dashboardExtra?'Extra practice':q.neetcode150?'NeetCode 150':q.grind75?'Grind 75':q.googleTop50?'Google Top 50':q.googleLastMonth?'Google · Last 30 Days':q.stockFollowUp?'Stock follow-up':q.kind==='custom'?'Custom drill':'Extra'}</span>
         {isCompleted(value)&&<span className="completion-badge">Completed{value.repeat?' · repeat':''}</span>}
         </p>
-      {!q.neetcode150&&!q.dashboardExtra&&!q.googleTop50&&!q.googleLastMonth&&!q.stockFollowUp&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
+      {!commonMode&&!q.neetcode150&&!q.dashboardExtra&&!q.googleTop50&&!q.googleLastMonth&&!q.stockFollowUp&&!isCurrentQuestion(q.slug)&&<p className="retained">Kept because you completed it</p>}
     </div></div>
     <div className="fields"><div><label>Completions</label><div className="counter"><output aria-label={'Completion count for '+q.name}>{value.completions}</output></div></div>
       <div><label htmlFor={triesId}>Tries on last attempt</label><input id={triesId} type="number" disabled={submitting} min="0" step="1" placeholder="—" value={value.tries??''}
         onChange={event=>controller.draft({...current(),tries:event.target.value===''?null:Math.max(0,Math.floor(Number(event.target.value)))})} onBlur={save}/></div>
       <label className="repeat"><input type="checkbox" disabled={submitting} checked={value.repeat} onChange={event=>controller.save({...current(),repeat:event.target.checked})}/> Should repeat</label>
     </div>
-    {variationHref&&<p className="evidence"><a href={variationHref}>Open related practice exercise</a> · tracked separately</p>}
-    {q.leetcodeFoundationSlug&&<p className="evidence"><a href={'https://leetcode.com/problems/'+q.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>}
-    {q.practicePrompt&&<details className="practice-prompt" open={q.kind==='custom'}><summary>{q.kind==='custom'?'Practice prompt':'Practice a variation'}</summary><p>{q.practicePrompt}</p>
+    {!commonMode&&variationHref&&<p className="evidence"><a href={variationHref}>Open related practice exercise</a> · tracked separately</p>}
+    {!commonMode&&q.leetcodeFoundationSlug&&<p className="evidence"><a href={'https://leetcode.com/problems/'+q.leetcodeFoundationSlug+'/'} target="_blank" rel="noopener noreferrer">LeetCode foundation</a></p>}
+    {!commonMode&&q.practicePrompt&&<details className="practice-prompt" open={q.kind==='custom'}><summary>{q.kind==='custom'?'Practice prompt':'Practice a variation'}</summary><p>{q.practicePrompt}</p>
       {(q.exercisePath||q.slug==='upstart-anagram-sentence')&&<p><a className="exercise-start" href={q.exercisePath??'/practice/anagram-sentence'}>{q.exercisePath?'Solve with Python and 20 tests':'Solve with Python and 24 tests'}</a></p>}
     </details>}
     <div className="notes"><label htmlFor={notesId}>Notes</label><textarea id={notesId} disabled={submitting} placeholder="Approach, edge cases, what to revisit…" value={value.notes}

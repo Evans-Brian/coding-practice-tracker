@@ -4,12 +4,13 @@ import googleLastMonthSource from './google-last-month-data.json' with {type:'js
 import historySource from './history-practice-source.json' with {type:'json'};
 import {stockFollowUps} from './stock-follow-ups-data';
 import {supplementalPracticeQuestions} from './supplemental-practice-data';
+import {commonPracticeCandidates} from './common-practice-candidates';
 import {questions, isCurrentQuestion} from './questions';
 import {type Progress} from './progress-state';
 import {retiredPracticeSlugs} from './practice-exclusions';
 
 export type StudyCatalog = 'neetcode' | 'all';
-export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean;googleTop50?: boolean;googleLastMonth?: boolean;stockFollowUp?: boolean};
+export type StudyQuestion = typeof questions[number] & {neetcode150?: boolean;dashboardExtra?: boolean;googleTop50?: boolean;googleLastMonth?: boolean;stockFollowUp?: boolean;commonPractice?:boolean};
 
 // Membership, titles, difficulty and within-topic order come from NeetCode's
 // official neetcode-gh/leetcode .problemSiteData.json (retrieved Oct 13, 2026).
@@ -108,12 +109,23 @@ const previousQuestions:StudyQuestion[]=[
 // These are available to the completion API, and appear in Repeat/Done only
 // when there is saved progress; they do not become new main-page practice.
 const previousSlugs=new Set(previousQuestions.map(q=>q.slug));
-const allQuestions:StudyQuestion[]=[
+const supplementalQuestions:StudyQuestion[]=[
   ...previousQuestions,
   ...supplementalPracticeQuestions.filter(q=>!previousSlugs.has(q.slug)).map((q,index)=>({
     name:q.name,slug:q.slug,difficulty:q.difficulty,theme:'Other practice',
     kind:'leetcode' as const,grind75:false,bucket:neetcodeTopics.length,
     order:previousQuestions.length+index+1,
+  })),
+];
+// Public definitions make any selected Common 50 problem trackable by its
+// canonical ID. Membership stays private; older catalog orders remain intact.
+const supplementalSlugs=new Set(supplementalQuestions.map(question=>question.slug));
+const allQuestions:StudyQuestion[]=[
+  ...supplementalQuestions,
+  ...commonPracticeCandidates.filter(question=>!supplementalSlugs.has(question.slug)).map((question,index)=>({
+    name:question.name,slug:question.slug,difficulty:question.difficulty,theme:'Other practice',
+    kind:'leetcode' as const,grind75:false,commonPractice:true,bucket:neetcodeTopics.length,
+    order:supplementalQuestions.length+index+1,
   })),
 ];
 export const allowedQuestionSlugs = new Set(allQuestions.map(q=>q.slug));

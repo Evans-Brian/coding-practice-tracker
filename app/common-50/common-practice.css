@@ -1,0 +1,48 @@
+.common-practice-page { font-size: 1rem; }
+.common-practice-main { max-width: 1240px; padding: 30px; }
+.common-practice-page .study-topbar .pages a { font-size: .875rem; }
+.common-practice-page .study-topbar .pages a span { font-size: .8125rem; }
+.common-practice-heading .intro { font-size: 1rem; }
+.common-practice-heading .context { font-size: .875rem; }
+.common-practice-page .summary-label,.common-practice-page .summary-caption,.common-practice-page .summary-difficulties { font-size: .875rem; }
+.common-practice-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 14px; }
+.common-practice-nav a { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--muted); font-size: .875rem; font-weight: 550; }
+.common-practice-nav a:hover { background: var(--panel); color: var(--text); }
+.common-practice-nav a[aria-current=page] { border-color: #62548c; background: #302b43; color: #e2dcff; }
+.common-practice-nav a span { color: var(--accent-soft); font-size: .875rem; font-weight: 400; }
+.common-practice-instructions { margin: 0 0 24px; color: var(--muted); font-size: .875rem; line-height: 1.7; }
+.common-practice-notice { margin: 0 0 22px; padding: 12px 16px; border: 1px solid #375f50; border-radius: 8px; background: #20342c; color: #b2e6ce; font-size: .875rem; }
+.common-practice-questions { border-radius: 10px; }
+.common-practice-page .question { padding: 20px; }
+.common-practice-page .question-title a { font-size: 1.0625rem; }
+.common-practice-page .question-id,.common-practice-page .question-title p,.common-practice-page .difficulty { font-size: .875rem; }
+.common-practice-page .question-source span { font-size: .8125rem; }
+.common-practice-page .question-source .completion-badge { font-size: .875rem; }
+.common-practice-page .fields label,.common-practice-page .notes>label,.common-practice-page .fields .repeat { font-size: .875rem; }
+.common-practice-page .counter output,.common-practice-page .fields input[type=number] { font-size: 1rem; }
+.common-practice-page .fields input[type=number] { min-height: 36px; }
+.common-practice-page .notes textarea { font-size: 1rem; min-height: 80px; }
+.common-practice-page .save,.common-practice-page .submit { font-size: .875rem; padding: 8px 12px; }
+.common-practice-page .save-line { max-width: 310px; }
+.common-practice-page .save-line span { font-size: .875rem; }
+.common-practice-page .submit-hint { max-width: 310px; font-size: .8125rem; }
+.common-practice-empty { padding: 20px; font-size: 1rem; }
+.common-practice-empty p { margin: 0 0 10px; }
+.common-practice-empty p:last-child { margin-bottom: 0; }
+.common-practice-page footer { font-size: .875rem; }
+@media(max-width:1000px) {
+  .common-practice-page .question { grid-template-columns: 1fr; }
+  .common-practice-page .fields { justify-content: flex-start; flex-wrap: wrap; }
+  .common-practice-page .notes { grid-template-columns: 1fr; }
+  .common-practice-page .notes textarea { grid-column: 1; grid-row: auto; }
+  .common-practice-page .save-line { grid-column: 1; grid-row: auto; max-width: none; margin-top: 10px; }
+  .common-practice-page .submit-hint { grid-column: 1; grid-row: auto; max-width: none; text-align: right; }
+}
+@media(max-width:640px) {
+  .common-practice-main { padding: 20px 16px; }
+  .common-practice-heading { grid-template-columns: 1fr; gap: 18px; padding: 20px; }
+  .common-practice-nav a { flex: 1; min-width: 150px; }
+  .common-practice-page .question { padding: 16px 14px; }
+  .common-practice-page .fields { gap: 14px; }
+  .common-practice-page .save-line { flex-wrap: wrap; }
+}

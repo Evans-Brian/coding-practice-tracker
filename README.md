@@ -7,6 +7,14 @@ and a daily points dashboard.
 ## Features
 
 - Problems grouped by topic and difficulty, with links to LeetCode.
+- Common 50 is a separate company-neutral queue with a dedicated Common Repeat
+  page. The initial 50 unanswered questions span Easy, Medium, and Hard and share
+  normal notes, tries, completion, repeat, and points tracking. Completed questions
+  leave the unfinished queue; repeat-marked members appear in Common Repeat and
+  the main Repeat list. Cards show difficulty without generated strategy hints.
+  Membership and ordering live only in private D1; the fixed set does not refill.
+  The public candidate catalog comes from NeetCode's pinned practice metadata,
+  rather than a measured company or global interview-frequency ranking.
 - Google Top 50 is a separate page ranked by Google's three-month LeetCode list,
   captured November 18, 2026. It shows source frequency percentages and difficulty,
   without topic or strategy hints. Frequency is LeetCode's relative score, not a
@@ -106,6 +114,7 @@ npx tsc --noEmit
 node scripts/verify-neetcode150.mjs
 node scripts/verify-google-top50.mjs
 node scripts/verify-google-last-month.mjs
+node scripts/verify-common-practice-candidates.mjs
 node scripts/verify-study-priorities.mjs
 node scripts/verify-question-relevance.mjs
 python scripts/verify-variation-practice.py

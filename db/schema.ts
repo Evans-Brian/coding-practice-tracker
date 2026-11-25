@@ -1,4 +1,5 @@
-import { index,integer,primaryKey,sqliteTable,text } from 'drizzle-orm/sqlite-core';
+import {sql} from 'drizzle-orm';
+import {check,index,integer,primaryKey,sqliteTable,text,uniqueIndex} from 'drizzle-orm/sqlite-core';
 export const progress=sqliteTable('progress',{
  id:text('id').primaryKey(),notes:text('notes').notNull().default(''),completions:integer('completions').notNull().default(0),tries:integer('tries'),repeat:integer('repeat').notNull().default(0),submitted:integer('submitted').notNull().default(0),retained:integer('retained').notNull().default(0),lastSubmission:text('last_submission')
 });
@@ -35,3 +36,16 @@ export const leetcodeHistoryImport=sqliteTable('leetcode_history_import',{
  importedAt:text('imported_at').notNull(),
  sourceUrl:text('source_url').notNull(),
 });
+export const commonPracticeQueue=sqliteTable('common_practice_queue',{
+ id:text('id').primaryKey(),
+ createdAt:text('created_at').notNull(),
+});
+export const commonPracticeEntries=sqliteTable('common_practice_entries',{
+ queueId:text('queue_id').notNull().references(()=>commonPracticeQueue.id,{onDelete:'cascade'}),
+ position:integer('position').notNull(),
+ questionId:text('question_id').notNull(),
+},table=>[
+ primaryKey({columns:[table.queueId,table.position]}),
+ uniqueIndex('common_practice_entries_queue_question_idx').on(table.queueId,table.questionId),
+ check('common_practice_entries_position_check',sql`${table.position} BETWEEN 1 AND 50`),
+]);

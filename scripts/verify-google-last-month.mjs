@@ -70,7 +70,7 @@ for(const expected of prior){
 }
 const priorSlugs=new Set(prior.map(q=>q.slug));
 const additions=snapshot.questions.filter(q=>!priorSlugs.has(q.slug));
-assert.equal(all.filter(q=>!q.stockFollowUp&&!supplementalSlugs.has(q.slug)).length,prior.length+additions.length);
+assert.equal(all.filter(q=>!q.stockFollowUp&&!q.commonPractice&&!supplementalSlugs.has(q.slug)).length,prior.length+additions.length);
 for(const [index,entry] of additions.entries()){
   const q=lookup.get(entry.slug);
   assert.equal(q.order,prior.length+index+1,entry.slug);

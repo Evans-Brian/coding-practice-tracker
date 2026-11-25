@@ -53,7 +53,7 @@ for(const expected of before)assert.deepEqual(lookup.get(expected.slug),expected
 const beforeSlugs=new Set(before.map(q=>q.slug));
 const additions=stockFollowUps.filter(q=>!beforeSlugs.has(q.slug));
 assert.equal(additions.length,4);
-assert.equal(all.filter(q=>!supplementalSlugs.has(q.slug)).length,before.length+additions.length);
+assert.equal(all.filter(q=>!q.commonPractice&&!supplementalSlugs.has(q.slug)).length,before.length+additions.length);
 for(const [index,entry] of additions.entries()){
   const q=lookup.get(entry.slug);
   assert.equal(q.order,before.length+index+1,entry.slug);
